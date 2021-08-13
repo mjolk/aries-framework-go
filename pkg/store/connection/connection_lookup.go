@@ -45,21 +45,21 @@ type provider interface {
 
 // Record contain info about did exchange connection.
 type Record struct {
-	ConnectionID      string
-	State             string
-	ThreadID          string
-	ParentThreadID    string
-	TheirLabel        string
-	TheirDID          string
-	MyDID             string
-	ServiceEndPoint   string
-	RecipientKeys     []string
-	RoutingKeys       []string
-	InvitationID      string
-	InvitationDID     string
-	Implicit          bool
-	Namespace         string
-	MediaTypeProfiles []string
+	ConnectionID      string   `json:"connection_id,omitempty"`
+	State             string   `json:"state,omitempty"`
+	ThreadID          string   `json:"thread_id,omitempty"`
+	ParentThreadID    string   `json:"parent_thread_id"`
+	TheirLabel        string   `json:"their_label,omitempty"`
+	TheirDID          string   `json:"their_did,omitempty"`
+	MyDID             string   `json:"my_did,omitempty"`
+	ServiceEndPoint   string   `json:"service_endpoint"`
+	RecipientKeys     []string `json:"recipient_keys,omitempty"`
+	RoutingKeys       []string `json:"routing_keys,omitempty"`
+	InvitationID      string   `json:"invitation_id,omitempty"`
+	InvitationDID     string   `json:"invitation_did,omitempty"`
+	Implicit          bool     `json:"implicit,omitempty"`
+	Namespace         string   `json:"namespace,omitempty"`
+	MediaTypeProfiles []string `json:"media_type_profiles,omitempty"`
 }
 
 // NewLookup returns new connection lookup instance.

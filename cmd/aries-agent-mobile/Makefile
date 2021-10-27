@@ -18,7 +18,7 @@ LDFLAGS ?= '-s -w'
 ANDROID_BUILD_DIR = $(BUILD_DIR)/android
 ANDROID_OUTPUT_FILE_NAME = aries-agent.aar
 ifeq ($(ANDROID_TARGET),)
-	ANDROID_TARGET = android
+	ANDROID_TARGET = android/arm64,android/amd64
 endif
 ANDROID_JAVA_PKG = org.hyperledger.aries
 
@@ -80,7 +80,7 @@ bindings-android:
 	@echo '   gomobile: Creating Android bindings  '
 	@echo '----------------------------------------'
 	@mkdir -p $(ANDROID_BUILD_DIR)
-	$(GOMOBILE_CMD) bind -v -ldflags $(LDFLAGS) -target=$(ANDROID_TARGET) -javapkg=$(ANDROID_JAVA_PKG) -o=$(ANDROID_BUILD_DIR)/$(ANDROID_OUTPUT_FILE_NAME) $(MOBILE_BUILD_PACKAGES)
+	$(GOMOBILE_CMD) bind -v -ldflags=$(LDFLAGS) -target=$(ANDROID_TARGET) -javapkg=$(ANDROID_JAVA_PKG) -o=$(ANDROID_BUILD_DIR)/$(ANDROID_OUTPUT_FILE_NAME) $(MOBILE_BUILD_PACKAGES)
 
 .PHONY: bindings-ios
 bindings-ios:

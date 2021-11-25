@@ -757,6 +757,7 @@ func (ctx *context) getMyDIDDoc(pubDID string, routerConnections []string, servi
 		return nil, fmt.Errorf("create %s did: %w", didMethod, err)
 	}
 
+	logger.Debugf("add router keys %+v", routerConnections)
 	if len(routerConnections) != 0 {
 		err = ctx.addRouterKeys(docResolution.DIDDocument, routerConnections)
 		if err != nil {
@@ -803,6 +804,7 @@ func (ctx *context) addRouterKeys(doc *did.Doc, routerConnections []string) erro
 				// TODO https://github.com/hyperledger/aries-framework-go/issues/1105 Support to Add multiple
 				//  recKeys to the Router
 				if err := mediator.AddKeyToRouter(ctx.routeSvc, connID, recKey); err != nil {
+					logger.Debugf("add recKey to router: %s \n for conn id %s", recKey, connID)
 					return fmt.Errorf("did doc - add key to the router: %w", err)
 				}
 			}

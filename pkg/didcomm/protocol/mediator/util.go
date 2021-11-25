@@ -28,6 +28,7 @@ func GetRouterConfig(routeSvc ProtocolService, connID, endpoint string) (string,
 
 // AddKeyToRouter util to add the recipient keys to the router.
 func AddKeyToRouter(routeSvc ProtocolService, connID, recKey string) error {
+	logger.Debugf("adding key: %s to router for connection %s", recKey, connID)
 	if err := routeSvc.AddKey(connID, recKey); err != nil && !errors.Is(err, ErrRouterNotRegistered) {
 		return fmt.Errorf("addKey: %w", err)
 	}

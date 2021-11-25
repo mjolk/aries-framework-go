@@ -27,7 +27,7 @@ type DIDExchangeController interface {
 	AcceptExchangeRequest(request *models.RequestEnvelope) *models.ResponseEnvelope
 
 	// QueryConnections queries agent to agent connections.
-	QueryConnections(request *models.RequestEnvelope) *models.ResponseEnvelope
+	QueryConnections(request []byte) *models.ResponseEnvelope
 
 	// QueryConnectionByID fetches a single connection record by connection ID.
 	QueryConnectionByID(request *models.RequestEnvelope) *models.ResponseEnvelope

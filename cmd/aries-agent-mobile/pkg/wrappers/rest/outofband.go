@@ -26,8 +26,8 @@ func (oob *OutOfBand) CreateInvitation(request *models.RequestEnvelope) *models.
 }
 
 // AcceptInvitation from another agent and return the ID of the new connection records.
-func (oob *OutOfBand) AcceptInvitation(request *models.RequestEnvelope) *models.ResponseEnvelope {
-	return oob.createRespEnvelope(request, outofband.AcceptInvitation)
+func (oob *OutOfBand) AcceptInvitation(request []byte) *models.ResponseEnvelope {
+	return oob.createRespEnvelope(models.NewRequestEnvelope(request), outofband.AcceptInvitation)
 }
 
 // Actions returns pending actions that have not yet to be executed or canceled.

@@ -20,10 +20,10 @@ type Mediator struct {
 }
 
 // Register registers the agent with the router.
-func (m *Mediator) Register(request *models.RequestEnvelope) *models.ResponseEnvelope {
+func (m *Mediator) Register(request []byte) *models.ResponseEnvelope {
 	args := mediator.RegisterRoute{}
 
-	if err := json.Unmarshal(request.Payload, &args); err != nil {
+	if err := json.Unmarshal(request, &args); err != nil {
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
@@ -72,8 +72,8 @@ func (m *Mediator) Reconnect(request *models.RequestEnvelope) *models.ResponseEn
 }
 
 // ReconnectAll sends noop message to all mediator connections to re-establish a network connections.
-func (m *Mediator) ReconnectAll(request *models.RequestEnvelope) *models.ResponseEnvelope {
-	response, cmdErr := exec(m.handlers[mediator.ReconnectAllCommandMethod], request.Payload)
+func (m *Mediator) ReconnectAll() *models.ResponseEnvelope {
+	response, cmdErr := exec(m.handlers[mediator.ReconnectAllCommandMethod], "")
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}

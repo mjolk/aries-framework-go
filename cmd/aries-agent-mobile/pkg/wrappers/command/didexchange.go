@@ -8,6 +8,7 @@ package command
 
 import (
 	"encoding/json"
+	"fmt"
 
 	"github.com/hyperledger/aries-framework-go/cmd/aries-agent-mobile/pkg/wrappers/models"
 	clientdidexch "github.com/hyperledger/aries-framework-go/pkg/client/didexchange"
@@ -101,16 +102,19 @@ func (de *DIDExchange) AcceptExchangeRequest(request *models.RequestEnvelope) *m
 }
 
 // QueryConnections queries agent to agent connections.
-func (de *DIDExchange) QueryConnections(request *models.RequestEnvelope) *models.ResponseEnvelope {
+func (de *DIDExchange) QueryConnections(request []byte) *models.ResponseEnvelope {
 	args := cmddidexch.QueryConnectionsArgs{}
 
-	if err := json.Unmarshal(request.Payload, &args); err != nil {
-		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
+	if err := json.Unmarshal(request, &args); err != nil {
+		if e, ok := err.(*json.SyntaxError); ok {
+			return &models.ResponseEnvelope{Error: &models.CommandError{Message: fmt.Sprintf("json syntax error at offset %d", e.Offset)}}
+		}
+		return &models.ResponseEnvelope{Error: &models.CommandError{Message: fmt.Sprintf("error query: %s", err.Error())}}
 	}
 
 	response, cmdErr := exec(de.handlers[cmddidexch.QueryConnectionsCommandMethod], args)
 	if cmdErr != nil {
-		return &models.ResponseEnvelope{Error: cmdErr}
+		return &models.ResponseEnvelope{Error: &models.CommandError{Message: fmt.Sprint("error: ERROR , fucked!")}}
 	}
 
 	return &models.ResponseEnvelope{Payload: response}

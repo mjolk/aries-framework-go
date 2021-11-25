@@ -14,11 +14,14 @@ import (
 	"github.com/btcsuite/btcutil/base58"
 	chacha "golang.org/x/crypto/chacha20poly1305"
 
+	"github.com/hyperledger/aries-framework-go/pkg/common/log"
 	"github.com/hyperledger/aries-framework-go/pkg/didcomm/transport"
 	"github.com/hyperledger/aries-framework-go/pkg/internal/cryptoutil"
 	"github.com/hyperledger/aries-framework-go/pkg/kms"
 	"github.com/hyperledger/aries-framework-go/pkg/kms/localkms"
 )
+
+var logger = log.New("aries-framework/transport/packer")
 
 // Unpack will decode the envelope using the legacy format
 // Using (X)Chacha20 encryption algorithm and Poly1035 authenticator.
@@ -50,6 +53,8 @@ func (p *Packer) Unpack(envelope []byte) (*transport.Envelope, error) {
 		// TODO https://github.com/hyperledger/aries-framework-go/issues/41 change this when anoncrypt is introduced
 		return nil, fmt.Errorf("message format %s not supported", protectedData.Alg)
 	}
+
+	logger.Debugf("recipients %+v \n-------------\n", protectedData.Recipients)
 
 	keys, err := getCEK(protectedData.Recipients, p.kms)
 	if err != nil {

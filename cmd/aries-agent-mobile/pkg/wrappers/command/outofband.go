@@ -36,10 +36,10 @@ func (oob *OutOfBand) CreateInvitation(request *models.RequestEnvelope) *models.
 }
 
 // AcceptInvitation from another agent and return the ID of the new connection records.
-func (oob *OutOfBand) AcceptInvitation(request *models.RequestEnvelope) *models.ResponseEnvelope {
+func (oob *OutOfBand) AcceptInvitation(request []byte) *models.ResponseEnvelope {
 	args := outofband.AcceptInvitationArgs{}
 
-	if err := json.Unmarshal(request.Payload, &args); err != nil {
+	if err := json.Unmarshal(request, &args); err != nil {
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 

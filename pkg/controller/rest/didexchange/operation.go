@@ -15,6 +15,7 @@ import (
 
 	"github.com/gorilla/mux"
 
+	"github.com/hyperledger/aries-framework-go/pkg/common/log"
 	"github.com/hyperledger/aries-framework-go/pkg/controller/command"
 	"github.com/hyperledger/aries-framework-go/pkg/controller/command/didexchange"
 	"github.com/hyperledger/aries-framework-go/pkg/controller/internal/cmdutil"
@@ -36,6 +37,8 @@ const (
 	CreateConnection             = OperationID + "/create"
 	RemoveConnection             = OperationID + "/{id}/remove"
 )
+
+var logger = log.New("aries-framework/controller/rest/did-exchange")
 
 // provider contains dependencies for the Exchange protocol and is typically created by using aries.Context().
 type provider interface {
@@ -97,13 +100,14 @@ func (c *Operation) registerHandler() {
 //    default: genericError
 //        200: createInvitationResponse
 func (c *Operation) CreateInvitation(rw http.ResponseWriter, req *http.Request) {
-	reqBytes, err := queryValuesAsJSON(req.URL.Query())
-	if err != nil {
+	//reqBytes, err := queryValuesAsJSON(req.URL.Query())
+	logger.Debugf("create invitation %+v", req.Body)
+	/**if err != nil {
 		rest.SendHTTPStatusError(rw, http.StatusBadRequest, didexchange.InvalidRequestErrorCode, err)
 		return
-	}
+	}*/
 
-	rest.Execute(c.command.CreateInvitation, rw, bytes.NewReader(reqBytes))
+	rest.Execute(c.command.CreateInvitation, rw, req.Body)
 }
 
 // ReceiveInvitation swagger:route POST /connections/receive-invitation did-exchange receiveInvitation

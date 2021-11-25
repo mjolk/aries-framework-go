@@ -46,8 +46,8 @@ func (de *DIDExchange) AcceptExchangeRequest(request *models.RequestEnvelope) *m
 }
 
 // QueryConnections queries agent to agent connections.
-func (de *DIDExchange) QueryConnections(request *models.RequestEnvelope) *models.ResponseEnvelope {
-	return de.createRespEnvelope(request, cmddidexch.QueryConnectionsCommandMethod)
+func (de *DIDExchange) QueryConnections(request []byte) *models.ResponseEnvelope {
+	return de.createRespEnvelope(models.NewRequestEnvelope(request), cmddidexch.QueryConnectionsCommandMethod)
 }
 
 // QueryConnectionByID fetches a single connection record by connection ID.

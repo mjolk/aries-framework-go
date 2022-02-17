@@ -286,9 +286,9 @@ type SendRequestPresentationArgs struct {
 	TheirDID string `json:"their_did"`
 	// ConnectionID ID of connection between sender and receiver.
 	// Optional: if present, is used instead of MyDID + TheirDID.
-	ConnectionID string `json:"connection_id"`
+	ConnectionID string `json:"connection_id,omitempty"`
 	// RequestPresentation describes values that need to be revealed and predicates that need to be fulfilled.
-	RequestPresentation *presentproof.RequestPresentation `json:"request_presentation"`
+	RequestPresentation *presentproof.RequestPresentation `json:"request_presentation,omitempty"`
 }
 
 // SendRequestPresentationV2Args model

@@ -14,5 +14,5 @@ type OutOfBandV2Controller interface {
 	CreateInvitation(request *models.RequestEnvelope) *models.ResponseEnvelope
 
 	// AcceptInvitation from another agent and return the ID of the new connection records.
-	AcceptInvitation(request *models.RequestEnvelope) *models.ResponseEnvelope
+	AcceptInvitation(request []byte) *models.ResponseEnvelope
 }

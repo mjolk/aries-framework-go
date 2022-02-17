@@ -13,7 +13,8 @@ import (
 	"github.com/hyperledger/aries-framework-go/cmd/aries-agent-mobile/pkg/wrappers/command"
 	"github.com/hyperledger/aries-framework-go/cmd/aries-agent-mobile/pkg/wrappers/config"
 	"github.com/hyperledger/aries-framework-go/cmd/aries-agent-mobile/pkg/wrappers/logger"
-	"github.com/hyperledger/aries-framework-go/cmd/aries-agent-mobile/pkg/wrappers/rest"
+
+	//	"github.com/hyperledger/aries-framework-go/cmd/aries-agent-mobile/pkg/wrappers/rest"
 	"github.com/hyperledger/aries-framework-go/pkg/common/log"
 )
 
@@ -27,9 +28,9 @@ func New(opts *config.Options) (api.AriesController, error) {
 		return nil, err
 	}
 
-	if !opts.UseLocalAgent {
-		return rest.NewAries(opts)
-	}
+	//	if !opts.UseLocalAgent {
+	//		return rest.NewAries(opts)
+	//	}
 
 	return command.NewAries(opts)
 }

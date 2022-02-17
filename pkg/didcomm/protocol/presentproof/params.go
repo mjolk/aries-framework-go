@@ -171,17 +171,17 @@ func (r *rawRequest) isV3() bool {
 type RequestPresentationParams struct {
 	// Comment is a field that provides some human readable information about the proposed presentation.
 	// TODO: Should follow DIDComm conventions for l10n. [Issue #1300]
-	Comment string
+	Comment string `json:"comment,omitempty"`
 	// WillConfirm is a field that defaults to "false" to indicate that the verifier will or will not
 	// send a post-presentation confirmation ack message.
-	WillConfirm bool
+	WillConfirm bool `json:"will_confirm,omitempty"`
 	// Formats contains an entry for each request_presentations~attach array entry, providing the the value of the
 	// attachment @id and the verifiable presentation request format and version of the attachment.
-	Formats []Format
+	Formats []Format `json:"formats,omitempty"`
 	// Attachments is an array of attachments containing the acceptable verifiable presentation requests.
-	Attachments []decorator.GenericAttachment
+	Attachments []decorator.GenericAttachment `json:"attachments,omitempty"`
 	// GoalCode is an optional goal code to indicate the desired use of the requested presentation.
-	GoalCode string
+	GoalCode string `json:"goal_code,omitempty"`
 }
 
 // UnmarshalJSON implements json.Unmarshaler.

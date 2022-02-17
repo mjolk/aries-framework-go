@@ -164,10 +164,10 @@ func (md *metaData) GetAddProofFn() func(presentation *verifiable.Presentation) 
 // Action contains helpful information about action.
 type Action struct {
 	// Protocol instance ID
-	PIID     string
-	Msg      service.DIDCommMsgMap
-	MyDID    string
-	TheirDID string
+	PIID     string                `json:"piid"`
+	Msg      service.DIDCommMsgMap `json:"message"`
+	MyDID    string                `json:"my_did"`
+	TheirDID string                `json:"their_did"`
 }
 
 // Opt describes option signature for the Continue function.

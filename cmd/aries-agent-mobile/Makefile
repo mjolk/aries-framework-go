@@ -18,7 +18,7 @@ LDFLAGS ?= '-s -w'
 ANDROID_BUILD_DIR = $(BUILD_DIR)/android
 ANDROID_OUTPUT_FILE_NAME = aries-agent.aar
 ifeq ($(ANDROID_TARGET),)
-	ANDROID_TARGET = android
+	ANDROID_TARGET = android/arm64,android/amd64
 endif
 ANDROID_JAVA_PKG = org.hyperledger.aries
 

@@ -15,6 +15,7 @@ import (
 	"github.com/google/uuid"
 	jsonld "github.com/piprate/json-gold/ld"
 
+	"github.com/hyperledger/aries-framework-go-ext/component/vdr/orb"
 	"github.com/hyperledger/aries-framework-go/cmd/aries-agent-mobile/pkg/api"
 	"github.com/hyperledger/aries-framework-go/cmd/aries-agent-mobile/pkg/wrappers/config"
 	"github.com/hyperledger/aries-framework-go/cmd/aries-agent-mobile/pkg/wrappers/notifier"
@@ -35,13 +36,14 @@ import (
 	"github.com/hyperledger/aries-framework-go/pkg/controller/command/outofbandv2"
 	"github.com/hyperledger/aries-framework-go/pkg/controller/command/presentproof"
 	"github.com/hyperledger/aries-framework-go/pkg/controller/command/vcwallet"
-	"github.com/hyperledger/aries-framework-go/pkg/controller/command/vdr"
+	vdrctrl "github.com/hyperledger/aries-framework-go/pkg/controller/command/vdr"
 	"github.com/hyperledger/aries-framework-go/pkg/controller/command/verifiable"
 	"github.com/hyperledger/aries-framework-go/pkg/didcomm/messaging/msghandler"
 	arieshttp "github.com/hyperledger/aries-framework-go/pkg/didcomm/transport/http"
 	"github.com/hyperledger/aries-framework-go/pkg/didcomm/transport/ws"
 	"github.com/hyperledger/aries-framework-go/pkg/doc/ld"
 	"github.com/hyperledger/aries-framework-go/pkg/framework/aries"
+	"github.com/hyperledger/aries-framework-go/pkg/framework/aries/api/vdr"
 	"github.com/hyperledger/aries-framework-go/pkg/framework/context"
 	ldstore "github.com/hyperledger/aries-framework-go/pkg/store/ld"
 	"github.com/hyperledger/aries-framework-go/pkg/vdr/httpbinding"
@@ -131,12 +133,16 @@ func prepareFrameworkOptions(opts *config.Options) ([]aries.Option, error) {
 	}
 
 	if len(opts.HTTPResolvers) > 0 {
-		rsOpts, err := getResolverOpts(opts.HTTPResolvers)
+
+		VDRs, err := createVDRs(opts.HTTPResolvers, opts.VDRDomain)
 		if err != nil {
-			return nil, fmt.Errorf("failed to prepare http resolver opts : %w", err)
+			return nil, err
 		}
 
-		options = append(options, rsOpts...)
+		for i := range VDRs {
+			options = append(options, aries.WithVDR(VDRs[i]))
+		}
+
 	}
 
 	if opts.DocumentLoader != nil {
@@ -179,29 +185,59 @@ func getOutBoundTransportOpts(transport string, websocketReadLimit int64) ([]ari
 	return opts, nil
 }
 
-func getResolverOpts(httpResolvers []string) ([]aries.Option, error) {
-	var opts []aries.Option
-
+func createVDRs(resolvers []string, trustblocDomain string) ([]vdr.VDR, error) {
 	const numPartsResolverOption = 2
+	// set maps resolver to its methods
+	// e.g the set of ["trustbloc@http://resolver.com", "v1@http://resolver.com"] will be
+	// {"http://resolver.com": {"trustbloc":{}, "v1":{} }}
+	set := make(map[string]map[string]struct{})
+	// order maps URL to its initial index
+	order := make(map[string]int)
 
-	if len(httpResolvers) > 0 {
-		for _, httpResolver := range httpResolvers {
-			r := strings.Split(httpResolver, "@")
-			if len(r) != numPartsResolverOption {
-				return nil, fmt.Errorf("invalid http resolver options found")
-			}
+	idx := -1
 
-			httpVDR, err := httpbinding.New(r[1],
-				httpbinding.WithAccept(func(method string) bool { return method == r[0] }))
-			if err != nil {
-				return nil, fmt.Errorf("failed to setup http resolver :  %w", err)
-			}
-
-			opts = append(opts, aries.WithVDR(httpVDR))
+	for _, resolver := range resolvers {
+		r := strings.Split(resolver, "@")
+		if len(r) != numPartsResolverOption {
+			return nil, fmt.Errorf("invalid http resolver options found: %s", resolver)
 		}
+
+		if set[r[1]] == nil {
+			set[r[1]] = map[string]struct{}{}
+			idx++
+		}
+
+		order[r[1]] = idx
+
+		set[r[1]][r[0]] = struct{}{}
 	}
 
-	return opts, nil
+	VDRs := make([]vdr.VDR, len(set), len(set)+1)
+
+	for url := range set {
+		methods := set[url]
+
+		resolverVDR, err := httpbinding.New(url, httpbinding.WithAccept(func(method string) bool {
+			_, ok := methods[method]
+
+			return ok
+		}))
+		if err != nil {
+			return nil, fmt.Errorf("failed to create new universal resolver vdr: %w", err)
+		}
+
+		VDRs[order[url]] = resolverVDR
+	}
+
+	blocVDR, err := orb.New(nil,
+		orb.WithDomain(trustblocDomain))
+	if err != nil {
+		return nil, err
+	}
+
+	VDRs = append(VDRs, blocVDR)
+
+	return VDRs, nil
 }
 
 func createJSONLdContext(storageProvider storage.Provider) (*context.Provider, error) {
@@ -367,9 +403,9 @@ func (a *Aries) GetPresentProofController() (api.PresentProofController, error) 
 
 // GetVDRController returns a VDR instance.
 func (a *Aries) GetVDRController() (api.VDRController, error) {
-	handlers, ok := a.handlers[vdr.CommandName]
+	handlers, ok := a.handlers[vdrctrl.CommandName]
 	if !ok {
-		return nil, fmt.Errorf("no handlers found for controller [%s]", vdr.CommandName)
+		return nil, fmt.Errorf("no handlers found for controller [%s]", vdrctrl.CommandName)
 	}
 
 	return &VDR{handlers: handlers}, nil

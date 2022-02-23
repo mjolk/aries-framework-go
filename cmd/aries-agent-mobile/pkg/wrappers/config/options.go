@@ -27,6 +27,7 @@ type Options struct {
 	Storage              api.Provider
 	DocumentLoader       ld.DocumentLoader
 	MsgHandler           *msghandler.Registrar
+	VDRDomain            string
 
 	// expected to be ignored by gomobile
 	// not intended to be used by golang code

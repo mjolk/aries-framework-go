@@ -39,12 +39,17 @@ import (
 	vdrctrl "github.com/hyperledger/aries-framework-go/pkg/controller/command/vdr"
 	"github.com/hyperledger/aries-framework-go/pkg/controller/command/verifiable"
 	"github.com/hyperledger/aries-framework-go/pkg/didcomm/messaging/msghandler"
+	"github.com/hyperledger/aries-framework-go/pkg/didcomm/packer"
+	"github.com/hyperledger/aries-framework-go/pkg/didcomm/packer/authcrypt"
+	"github.com/hyperledger/aries-framework-go/pkg/didcomm/transport"
 	arieshttp "github.com/hyperledger/aries-framework-go/pkg/didcomm/transport/http"
 	"github.com/hyperledger/aries-framework-go/pkg/didcomm/transport/ws"
+	"github.com/hyperledger/aries-framework-go/pkg/doc/jose"
 	"github.com/hyperledger/aries-framework-go/pkg/doc/ld"
 	"github.com/hyperledger/aries-framework-go/pkg/framework/aries"
 	"github.com/hyperledger/aries-framework-go/pkg/framework/aries/api/vdr"
 	"github.com/hyperledger/aries-framework-go/pkg/framework/context"
+	kt "github.com/hyperledger/aries-framework-go/pkg/kms"
 	ldstore "github.com/hyperledger/aries-framework-go/pkg/store/ld"
 	"github.com/hyperledger/aries-framework-go/pkg/vdr/httpbinding"
 	"github.com/hyperledger/aries-framework-go/spi/storage"
@@ -63,7 +68,11 @@ type Aries struct {
 
 // NewAries returns a new Aries instance that contains handlers and an Aries framework instance.
 func NewAries(opts *config.Options) (*Aries, error) {
+
 	opts.MsgHandler = msghandler.NewRegistrar()
+	opts.MediaTypeProfiles = []string{transport.MediaTypeDIDCommV2Profile}
+	opts.KeyType = kt.ECDSAP521TypeIEEEP1363
+	opts.KeyAgreementType = kt.NISTP521ECDHKWType
 
 	options, err := prepareFrameworkOptions(opts)
 	if err != nil {
@@ -108,6 +117,17 @@ func NewAries(opts *config.Options) (*Aries, error) {
 
 func prepareFrameworkOptions(opts *config.Options) ([]aries.Option, error) {
 	var options []aries.Option
+
+	options = append(options, aries.WithKeyAgreementType(opts.KeyAgreementType))
+
+	options = append(options, aries.WithKeyType(opts.KeyType))
+
+	options = append(options, aries.WithMediaTypeProfiles(opts.MediaTypeProfiles))
+
+	options = append(options, aries.WithPacker(func(provider packer.Provider) (packer.Packer, error) {
+		return authcrypt.New(provider, jose.A256CBCHS512)
+	}))
+
 	options = append(options, aries.WithMessageServiceProvider(opts.MsgHandler))
 
 	if opts.TransportReturnRoute != "" {

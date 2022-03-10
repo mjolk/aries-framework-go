@@ -11,6 +11,7 @@ import (
 
 	"github.com/hyperledger/aries-framework-go/cmd/aries-agent-mobile/pkg/api"
 	"github.com/hyperledger/aries-framework-go/pkg/didcomm/messaging/msghandler"
+	"github.com/hyperledger/aries-framework-go/pkg/kms"
 )
 
 // Options represents configurations for Aries.
@@ -28,6 +29,9 @@ type Options struct {
 	DocumentLoader       ld.DocumentLoader
 	MsgHandler           *msghandler.Registrar
 	VDRDomain            string
+	KeyType              kms.KeyType
+	KeyAgreementType     kms.KeyType
+	MediaTypeProfiles    []string
 
 	// expected to be ignored by gomobile
 	// not intended to be used by golang code

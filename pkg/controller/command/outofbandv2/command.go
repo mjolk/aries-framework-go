@@ -33,9 +33,9 @@ const (
 // constants for out-of-band v2.
 const (
 	// command name.
-	CommandName      = "outofbandv2"
-	CreateInvitation = "CreateInvitation"
-	AcceptInvitation = "AcceptInvitation"
+	CommandName                   = "outofbandv2"
+	CreateInvitationCommandMethod = "CreateInvitation"
+	AcceptInvitationCommandMethod = "AcceptInvitation"
 
 	// error messages.
 	errEmptyRequest = "request was not provided"
@@ -65,8 +65,8 @@ func New(ctx outofbandv2.Provider) (*Command, error) {
 // GetHandlers returns list of all commands supported by this controller command.
 func (c *Command) GetHandlers() []command.Handler {
 	return []command.Handler{
-		cmdutil.NewCommandHandler(CommandName, CreateInvitation, c.CreateInvitation),
-		cmdutil.NewCommandHandler(CommandName, AcceptInvitation, c.AcceptInvitation),
+		cmdutil.NewCommandHandler(CommandName, CreateInvitationCommandMethod, c.CreateInvitation),
+		cmdutil.NewCommandHandler(CommandName, AcceptInvitationCommandMethod, c.AcceptInvitation),
 	}
 }
 
@@ -76,7 +76,7 @@ func (c *Command) GetHandlers() []command.Handler {
 func (c *Command) CreateInvitation(rw io.Writer, req io.Reader) command.Error {
 	var args CreateInvitationArgs
 	if err := json.NewDecoder(req).Decode(&args); err != nil {
-		logutil.LogInfo(logger, CommandName, CreateInvitation, err.Error())
+		logutil.LogInfo(logger, CommandName, CreateInvitationCommandMethod, err.Error())
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
@@ -88,7 +88,7 @@ func (c *Command) CreateInvitation(rw io.Writer, req io.Reader) command.Error {
 		outofbandv2.WithAttachments(args.Attachments...),
 	)
 	if err != nil {
-		logutil.LogError(logger, CommandName, CreateInvitation, err.Error())
+		logutil.LogError(logger, CommandName, CreateInvitationCommandMethod, err.Error())
 		return command.NewExecuteError(CreateInvitationErrorCode, err)
 	}
 
@@ -96,7 +96,7 @@ func (c *Command) CreateInvitation(rw io.Writer, req io.Reader) command.Error {
 		Invitation: invitation,
 	}, logger)
 
-	logutil.LogDebug(logger, CommandName, CreateInvitation, successString)
+	logutil.LogDebug(logger, CommandName, CreateInvitationCommandMethod, successString)
 
 	return nil
 }
@@ -105,17 +105,17 @@ func (c *Command) CreateInvitation(rw io.Writer, req io.Reader) command.Error {
 func (c *Command) AcceptInvitation(rw io.Writer, req io.Reader) command.Error {
 	var args AcceptInvitationArgs
 	if err := json.NewDecoder(req).Decode(&args); err != nil {
-		logutil.LogInfo(logger, CommandName, AcceptInvitation, err.Error())
+		logutil.LogInfo(logger, CommandName, AcceptInvitationCommandMethod, err.Error())
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	if args.Invitation == nil {
-		logutil.LogDebug(logger, CommandName, AcceptInvitation, errEmptyRequest)
+		logutil.LogDebug(logger, CommandName, AcceptInvitationCommandMethod, errEmptyRequest)
 		return command.NewValidationError(InvalidRequestErrorCode, errors.New(errEmptyRequest))
 	}
 
 	if args.MyLabel == "" {
-		logutil.LogDebug(logger, CommandName, AcceptInvitation, errEmptyMyLabel)
+		logutil.LogDebug(logger, CommandName, AcceptInvitationCommandMethod, errEmptyMyLabel)
 		return command.NewValidationError(InvalidRequestErrorCode, errors.New(errEmptyMyLabel))
 	}
 
@@ -124,13 +124,13 @@ func (c *Command) AcceptInvitation(rw io.Writer, req io.Reader) command.Error {
 		outofbandv2svc.WithRouterConnections(args.RouterConnections),
 	)
 	if err != nil {
-		logutil.LogError(logger, CommandName, AcceptInvitation, err.Error())
+		logutil.LogError(logger, CommandName, AcceptInvitationCommandMethod, err.Error())
 		return command.NewExecuteError(AcceptInvitationErrorCode, err)
 	}
 
 	command.WriteNillableResponse(rw, &AcceptInvitationResponse{ConnectionID: connID}, logger)
 
-	logutil.LogDebug(logger, CommandName, AcceptInvitation, successString)
+	logutil.LogDebug(logger, CommandName, AcceptInvitationCommandMethod, successString)
 
 	return nil
 }

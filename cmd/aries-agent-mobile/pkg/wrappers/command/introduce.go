@@ -27,7 +27,7 @@ func (i *Introduce) SendProposal(request *models.RequestEnvelope) *models.Respon
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(i.handlers[cmdintroduce.SendProposal], args)
+	response, cmdErr := exec(i.handlers[cmdintroduce.SendProposalCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -37,7 +37,7 @@ func (i *Introduce) SendProposal(request *models.RequestEnvelope) *models.Respon
 
 // Actions returns unfinished actions for the async usage.
 func (i *Introduce) Actions(request *models.RequestEnvelope) *models.ResponseEnvelope {
-	response, cmdErr := exec(i.handlers[cmdintroduce.Actions], request.Payload)
+	response, cmdErr := exec(i.handlers[cmdintroduce.ActionsCommandMethod], request.Payload)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -53,7 +53,7 @@ func (i *Introduce) SendProposalWithOOBInvitation(request *models.RequestEnvelop
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(i.handlers[cmdintroduce.SendProposalWithOOBInvitation], args)
+	response, cmdErr := exec(i.handlers[cmdintroduce.SendProposalWithOOBInvitationCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -69,7 +69,7 @@ func (i *Introduce) SendRequest(request *models.RequestEnvelope) *models.Respons
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(i.handlers[cmdintroduce.SendRequest], args)
+	response, cmdErr := exec(i.handlers[cmdintroduce.SendRequestCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -85,7 +85,7 @@ func (i *Introduce) AcceptProposalWithOOBInvitation(request *models.RequestEnvel
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(i.handlers[cmdintroduce.AcceptProposalWithOOBInvitation], args)
+	response, cmdErr := exec(i.handlers[cmdintroduce.AcceptProposalWithOOBInvitationCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -101,7 +101,7 @@ func (i *Introduce) AcceptProposal(request *models.RequestEnvelope) *models.Resp
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(i.handlers[cmdintroduce.AcceptProposal], args)
+	response, cmdErr := exec(i.handlers[cmdintroduce.AcceptProposalCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -117,7 +117,7 @@ func (i *Introduce) AcceptRequestWithPublicOOBInvitation(request *models.Request
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(i.handlers[cmdintroduce.AcceptRequestWithPublicOOBInvitation], args)
+	response, cmdErr := exec(i.handlers[cmdintroduce.AcceptRequestWithPublicOOBInvitationCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -134,7 +134,7 @@ func (i *Introduce) AcceptRequestWithRecipients(request *models.RequestEnvelope)
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(i.handlers[cmdintroduce.AcceptRequestWithRecipients], args)
+	response, cmdErr := exec(i.handlers[cmdintroduce.AcceptRequestWithRecipientsCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -150,7 +150,7 @@ func (i *Introduce) DeclineProposal(request *models.RequestEnvelope) *models.Res
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(i.handlers[cmdintroduce.DeclineProposal], args)
+	response, cmdErr := exec(i.handlers[cmdintroduce.DeclineProposalCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -166,7 +166,7 @@ func (i *Introduce) DeclineRequest(request *models.RequestEnvelope) *models.Resp
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(i.handlers[cmdintroduce.DeclineRequest], args)
+	response, cmdErr := exec(i.handlers[cmdintroduce.DeclineRequestCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -182,7 +182,7 @@ func (i *Introduce) AcceptProblemReport(request *models.RequestEnvelope) *models
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(i.handlers[cmdintroduce.AcceptProblemReport], args)
+	response, cmdErr := exec(i.handlers[cmdintroduce.AcceptProblemReportCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}

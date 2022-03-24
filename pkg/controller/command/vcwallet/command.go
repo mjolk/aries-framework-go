@@ -105,27 +105,27 @@ const (
 	CommandName = "vcwallet"
 
 	// command methods.
-	CreateProfileMethod             = "CreateProfile"
-	UpdateProfileMethod             = "UpdateProfile"
-	ProfileExistsMethod             = "ProfileExists"
-	OpenMethod                      = "Open"
-	CloseMethod                     = "Close"
-	AddMethod                       = "Add"
-	RemoveMethod                    = "Remove"
-	GetMethod                       = "Get"
-	GetAllMethod                    = "GetAll"
-	QueryMethod                     = "Query"
-	IssueMethod                     = "Issue"
-	ProveMethod                     = "Prove"
-	VerifyMethod                    = "Verify"
-	DeriveMethod                    = "Derive"
-	CreateKeyPairMethod             = "CreateKeyPair"
-	ConnectMethod                   = "Connect"
-	ProposePresentationMethod       = "ProposePresentation"
-	PresentProofMethod              = "PresentProof"
-	ProposeCredentialMethod         = "ProposeCredential"
-	RequestCredentialMethod         = "RequestCredential"
-	ResolveCredentialManifestMethod = "ResolveCredentialManifest"
+	CreateProfileCommandMethod             = "CreateProfile"
+	UpdateProfileCommandMethod             = "UpdateProfile"
+	ProfileExistsCommandMethod             = "ProfileExists"
+	OpenCommandMethod                      = "Open"
+	CloseCommandMethod                     = "Close"
+	AddCommandMethod                       = "Add"
+	RemoveCommandMethod                    = "Remove"
+	GetCommandMethod                       = "Get"
+	GetAllCommandMethod                    = "GetAll"
+	QueryCommandMethod                     = "Query"
+	IssueCommandMethod                     = "Issue"
+	ProveCommandMethod                     = "Prove"
+	VerifyCommandMethod                    = "Verify"
+	DeriveCommandMethod                    = "Derive"
+	CreateKeyPairCommandMethod             = "CreateKeyPair"
+	ConnectCommandMethod                   = "Connect"
+	ProposePresentationCommandMethod       = "ProposePresentation"
+	PresentProofCommandMethod              = "PresentProof"
+	ProposeCredentialCommandMethod         = "ProposeCredential"
+	RequestCredentialCommandMethod         = "RequestCredential"
+	ResolveCredentialManifestCommandMethod = "ResolveCredentialManifest"
 )
 
 // miscellaneous constants for the vc wallet command controller.
@@ -223,27 +223,27 @@ func New(p provider, config *Config) *Command {
 // GetHandlers returns list of all commands supported by this controller command.
 func (o *Command) GetHandlers() []command.Handler {
 	return []command.Handler{
-		cmdutil.NewCommandHandler(CommandName, CreateProfileMethod, o.CreateProfile),
-		cmdutil.NewCommandHandler(CommandName, UpdateProfileMethod, o.UpdateProfile),
-		cmdutil.NewCommandHandler(CommandName, ProfileExistsMethod, o.ProfileExists),
-		cmdutil.NewCommandHandler(CommandName, OpenMethod, o.Open),
-		cmdutil.NewCommandHandler(CommandName, CloseMethod, o.Close),
-		cmdutil.NewCommandHandler(CommandName, AddMethod, o.Add),
-		cmdutil.NewCommandHandler(CommandName, RemoveMethod, o.Remove),
-		cmdutil.NewCommandHandler(CommandName, GetMethod, o.Get),
-		cmdutil.NewCommandHandler(CommandName, GetAllMethod, o.GetAll),
-		cmdutil.NewCommandHandler(CommandName, QueryMethod, o.Query),
-		cmdutil.NewCommandHandler(CommandName, IssueMethod, o.Issue),
-		cmdutil.NewCommandHandler(CommandName, ProveMethod, o.Prove),
-		cmdutil.NewCommandHandler(CommandName, VerifyMethod, o.Verify),
-		cmdutil.NewCommandHandler(CommandName, DeriveMethod, o.Derive),
-		cmdutil.NewCommandHandler(CommandName, CreateKeyPairMethod, o.CreateKeyPair),
-		cmdutil.NewCommandHandler(CommandName, ConnectMethod, o.Connect),
-		cmdutil.NewCommandHandler(CommandName, ProposePresentationMethod, o.ProposePresentation),
-		cmdutil.NewCommandHandler(CommandName, PresentProofMethod, o.PresentProof),
-		cmdutil.NewCommandHandler(CommandName, ProposeCredentialMethod, o.ProposeCredential),
-		cmdutil.NewCommandHandler(CommandName, RequestCredentialMethod, o.RequestCredential),
-		cmdutil.NewCommandHandler(CommandName, ResolveCredentialManifestMethod, o.ResolveCredentialManifest),
+		cmdutil.NewCommandHandler(CommandName, CreateProfileCommandMethod, o.CreateProfile),
+		cmdutil.NewCommandHandler(CommandName, UpdateProfileCommandMethod, o.UpdateProfile),
+		cmdutil.NewCommandHandler(CommandName, ProfileExistsCommandMethod, o.ProfileExists),
+		cmdutil.NewCommandHandler(CommandName, OpenCommandMethod, o.Open),
+		cmdutil.NewCommandHandler(CommandName, CloseCommandMethod, o.Close),
+		cmdutil.NewCommandHandler(CommandName, AddCommandMethod, o.Add),
+		cmdutil.NewCommandHandler(CommandName, RemoveCommandMethod, o.Remove),
+		cmdutil.NewCommandHandler(CommandName, GetCommandMethod, o.Get),
+		cmdutil.NewCommandHandler(CommandName, GetAllCommandMethod, o.GetAll),
+		cmdutil.NewCommandHandler(CommandName, QueryCommandMethod, o.Query),
+		cmdutil.NewCommandHandler(CommandName, IssueCommandMethod, o.Issue),
+		cmdutil.NewCommandHandler(CommandName, ProveCommandMethod, o.Prove),
+		cmdutil.NewCommandHandler(CommandName, VerifyCommandMethod, o.Verify),
+		cmdutil.NewCommandHandler(CommandName, DeriveCommandMethod, o.Derive),
+		cmdutil.NewCommandHandler(CommandName, CreateKeyPairCommandMethod, o.CreateKeyPair),
+		cmdutil.NewCommandHandler(CommandName, ConnectCommandMethod, o.Connect),
+		cmdutil.NewCommandHandler(CommandName, ProposePresentationCommandMethod, o.ProposePresentation),
+		cmdutil.NewCommandHandler(CommandName, PresentProofCommandMethod, o.PresentProof),
+		cmdutil.NewCommandHandler(CommandName, ProposeCredentialCommandMethod, o.ProposeCredential),
+		cmdutil.NewCommandHandler(CommandName, RequestCredentialCommandMethod, o.RequestCredential),
+		cmdutil.NewCommandHandler(CommandName, ResolveCredentialManifestCommandMethod, o.ResolveCredentialManifest),
 	}
 }
 
@@ -253,7 +253,7 @@ func (o *Command) CreateProfile(rw io.Writer, req io.Reader) command.Error {
 
 	err := json.NewDecoder(req).Decode(request)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, CreateProfileMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, CreateProfileCommandMethod, err.Error())
 
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
@@ -261,7 +261,7 @@ func (o *Command) CreateProfile(rw io.Writer, req io.Reader) command.Error {
 	// create profile.
 	err = wallet.CreateProfile(request.UserID, o.ctx, prepareProfileOptions(request)...)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, CreateProfileMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, CreateProfileCommandMethod, err.Error())
 
 		return command.NewExecuteError(CreateProfileErrorCode, err)
 	}
@@ -270,13 +270,13 @@ func (o *Command) CreateProfile(rw io.Writer, req io.Reader) command.Error {
 	if request.LocalKMSPassphrase != "" && request.EDVConfiguration != nil {
 		err = wallet.CreateDataVaultKeyPairs(request.UserID, o.ctx, wallet.WithUnlockByPassphrase(request.LocalKMSPassphrase))
 		if err != nil {
-			logutil.LogInfo(logger, CommandName, CreateProfileMethod, err.Error())
+			logutil.LogInfo(logger, CommandName, CreateProfileCommandMethod, err.Error())
 
 			return command.NewExecuteError(CreateProfileErrorCode, err)
 		}
 	}
 
-	logutil.LogDebug(logger, CommandName, CreateProfileMethod, logSuccess,
+	logutil.LogDebug(logger, CommandName, CreateProfileCommandMethod, logSuccess,
 		logutil.CreateKeyValueString(logUserIDKey, request.UserID))
 
 	return nil
@@ -288,7 +288,7 @@ func (o *Command) UpdateProfile(rw io.Writer, req io.Reader) command.Error {
 
 	err := json.NewDecoder(req).Decode(&request)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, UpdateProfileMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, UpdateProfileCommandMethod, err.Error())
 
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
@@ -296,12 +296,12 @@ func (o *Command) UpdateProfile(rw io.Writer, req io.Reader) command.Error {
 	// update profile.
 	err = wallet.UpdateProfile(request.UserID, o.ctx, prepareProfileOptions(request)...)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, UpdateProfileMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, UpdateProfileCommandMethod, err.Error())
 
 		return command.NewExecuteError(UpdateProfileErrorCode, err)
 	}
 
-	logutil.LogDebug(logger, CommandName, UpdateProfileMethod, logSuccess,
+	logutil.LogDebug(logger, CommandName, UpdateProfileCommandMethod, logSuccess,
 		logutil.CreateKeyValueString(logUserIDKey, request.UserID))
 
 	return nil
@@ -313,19 +313,19 @@ func (o *Command) ProfileExists(rw io.Writer, req io.Reader) command.Error {
 
 	err := json.NewDecoder(req).Decode(&user)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, ProfileExistsMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, ProfileExistsCommandMethod, err.Error())
 
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	err = wallet.ProfileExists(user.ID, o.ctx)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, ProfileExistsMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, ProfileExistsCommandMethod, err.Error())
 
 		return command.NewExecuteError(ProfileExistsErrorCode, err)
 	}
 
-	logutil.LogDebug(logger, CommandName, ProfileExistsMethod, logSuccess,
+	logutil.LogDebug(logger, CommandName, ProfileExistsCommandMethod, logSuccess,
 		logutil.CreateKeyValueString(logUserIDKey, user.ID))
 
 	return nil
@@ -337,35 +337,35 @@ func (o *Command) Open(rw io.Writer, req io.Reader) command.Error {
 
 	err := json.NewDecoder(req).Decode(&request)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, OpenMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, OpenCommandMethod, err.Error())
 
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	opts, err := prepareUnlockOptions(request, o.config)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, OpenMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, OpenCommandMethod, err.Error())
 
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	vcWallet, err := wallet.New(request.UserID, o.ctx)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, OpenMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, OpenCommandMethod, err.Error())
 
 		return command.NewExecuteError(OpenWalletErrorCode, err)
 	}
 
 	token, err := vcWallet.Open(opts...)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, OpenMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, OpenCommandMethod, err.Error())
 
 		return command.NewExecuteError(OpenWalletErrorCode, err)
 	}
 
 	command.WriteNillableResponse(rw, UnlockWalletResponse{Token: token}, logger)
 
-	logutil.LogDebug(logger, CommandName, OpenMethod, logSuccess,
+	logutil.LogDebug(logger, CommandName, OpenCommandMethod, logSuccess,
 		logutil.CreateKeyValueString(logUserIDKey, request.UserID))
 
 	return nil
@@ -377,14 +377,14 @@ func (o *Command) Close(rw io.Writer, req io.Reader) command.Error {
 
 	err := json.NewDecoder(req).Decode(&request)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, CloseMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, CloseCommandMethod, err.Error())
 
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	vcWallet, err := wallet.New(request.UserID, o.ctx)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, CloseMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, CloseCommandMethod, err.Error())
 
 		return command.NewExecuteError(CloseWalletErrorCode, err)
 	}
@@ -393,7 +393,7 @@ func (o *Command) Close(rw io.Writer, req io.Reader) command.Error {
 
 	command.WriteNillableResponse(rw, LockWalletResponse{Closed: closed}, logger)
 
-	logutil.LogDebug(logger, CommandName, CloseMethod, logSuccess,
+	logutil.LogDebug(logger, CommandName, CloseCommandMethod, logSuccess,
 		logutil.CreateKeyValueString(logUserIDKey, request.UserID))
 
 	return nil
@@ -405,14 +405,14 @@ func (o *Command) Add(rw io.Writer, req io.Reader) command.Error {
 
 	err := json.NewDecoder(req).Decode(&request)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, AddMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, AddCommandMethod, err.Error())
 
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	vcWallet, err := wallet.New(request.UserID, o.ctx)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, AddMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, AddCommandMethod, err.Error())
 
 		return command.NewExecuteError(AddToWalletErrorCode, err)
 	}
@@ -427,12 +427,12 @@ func (o *Command) Add(rw io.Writer, req io.Reader) command.Error {
 
 	err = vcWallet.Add(request.Auth, request.ContentType, request.Content, addOpts...)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, AddMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, AddCommandMethod, err.Error())
 
 		return command.NewExecuteError(AddToWalletErrorCode, err)
 	}
 
-	logutil.LogDebug(logger, CommandName, AddMethod, logSuccess,
+	logutil.LogDebug(logger, CommandName, AddCommandMethod, logSuccess,
 		logutil.CreateKeyValueString(logUserIDKey, request.UserID))
 
 	return nil
@@ -444,26 +444,26 @@ func (o *Command) Remove(rw io.Writer, req io.Reader) command.Error {
 
 	err := json.NewDecoder(req).Decode(&request)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, RemoveMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, RemoveCommandMethod, err.Error())
 
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	vcWallet, err := wallet.New(request.UserID, o.ctx)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, RemoveMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, RemoveCommandMethod, err.Error())
 
 		return command.NewExecuteError(RemoveFromWalletErrorCode, err)
 	}
 
 	err = vcWallet.Remove(request.Auth, request.ContentType, request.ContentID)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, RemoveMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, RemoveCommandMethod, err.Error())
 
 		return command.NewExecuteError(RemoveFromWalletErrorCode, err)
 	}
 
-	logutil.LogDebug(logger, CommandName, RemoveMethod, logSuccess,
+	logutil.LogDebug(logger, CommandName, RemoveCommandMethod, logSuccess,
 		logutil.CreateKeyValueString(logUserIDKey, request.UserID))
 
 	return nil
@@ -475,28 +475,28 @@ func (o *Command) Get(rw io.Writer, req io.Reader) command.Error {
 
 	err := json.NewDecoder(req).Decode(&request)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, GetMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, GetCommandMethod, err.Error())
 
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	vcWallet, err := wallet.New(request.UserID, o.ctx)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, GetMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, GetCommandMethod, err.Error())
 
 		return command.NewExecuteError(GetFromWalletErrorCode, err)
 	}
 
 	content, err := vcWallet.Get(request.Auth, request.ContentType, request.ContentID)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, GetMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, GetCommandMethod, err.Error())
 
 		return command.NewExecuteError(GetFromWalletErrorCode, err)
 	}
 
 	command.WriteNillableResponse(rw, GetContentResponse{Content: content}, logger)
 
-	logutil.LogDebug(logger, CommandName, GetMethod, logSuccess,
+	logutil.LogDebug(logger, CommandName, GetCommandMethod, logSuccess,
 		logutil.CreateKeyValueString(logUserIDKey, request.UserID))
 
 	return nil
@@ -508,14 +508,14 @@ func (o *Command) GetAll(rw io.Writer, req io.Reader) command.Error {
 
 	err := json.NewDecoder(req).Decode(&request)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, GetAllMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, GetAllCommandMethod, err.Error())
 
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	vcWallet, err := wallet.New(request.UserID, o.ctx)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, GetAllMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, GetAllCommandMethod, err.Error())
 
 		return command.NewExecuteError(GetAllFromWalletErrorCode, err)
 	}
@@ -523,14 +523,14 @@ func (o *Command) GetAll(rw io.Writer, req io.Reader) command.Error {
 	contents, err := vcWallet.GetAll(request.Auth, request.ContentType,
 		wallet.FilterByCollection(request.CollectionID))
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, GetAllMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, GetAllCommandMethod, err.Error())
 
 		return command.NewExecuteError(GetAllFromWalletErrorCode, err)
 	}
 
 	command.WriteNillableResponse(rw, GetAllContentResponse{Contents: contents}, logger)
 
-	logutil.LogDebug(logger, CommandName, GetAllMethod, logSuccess,
+	logutil.LogDebug(logger, CommandName, GetAllCommandMethod, logSuccess,
 		logutil.CreateKeyValueString(logUserIDKey, request.UserID))
 
 	return nil
@@ -543,28 +543,28 @@ func (o *Command) Query(rw io.Writer, req io.Reader) command.Error {
 
 	err := json.NewDecoder(req).Decode(&request)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, GetAllMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, GetAllCommandMethod, err.Error())
 
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	vcWallet, err := wallet.New(request.UserID, o.ctx)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, GetAllMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, GetAllCommandMethod, err.Error())
 
 		return command.NewExecuteError(QueryWalletErrorCode, err)
 	}
 
 	presentations, err := vcWallet.Query(request.Auth, request.Query...)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, GetAllMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, GetAllCommandMethod, err.Error())
 
 		return command.NewExecuteError(QueryWalletErrorCode, err)
 	}
 
 	command.WriteNillableResponse(rw, &ContentQueryResponse{Results: presentations}, logger)
 
-	logutil.LogDebug(logger, CommandName, GetAllMethod, logSuccess,
+	logutil.LogDebug(logger, CommandName, GetAllCommandMethod, logSuccess,
 		logutil.CreateKeyValueString(logUserIDKey, request.UserID))
 
 	return nil
@@ -576,28 +576,28 @@ func (o *Command) Issue(rw io.Writer, req io.Reader) command.Error {
 
 	err := json.NewDecoder(req).Decode(&request)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, IssueMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, IssueCommandMethod, err.Error())
 
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	vcWallet, err := wallet.New(request.UserID, o.ctx)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, IssueMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, IssueCommandMethod, err.Error())
 
 		return command.NewExecuteError(IssueFromWalletErrorCode, err)
 	}
 
 	credential, err := vcWallet.Issue(request.Auth, request.Credential, request.ProofOptions)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, IssueMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, IssueCommandMethod, err.Error())
 
 		return command.NewExecuteError(IssueFromWalletErrorCode, err)
 	}
 
 	command.WriteNillableResponse(rw, &IssueResponse{Credential: credential}, logger)
 
-	logutil.LogDebug(logger, CommandName, IssueMethod, logSuccess,
+	logutil.LogDebug(logger, CommandName, IssueCommandMethod, logSuccess,
 		logutil.CreateKeyValueString(logUserIDKey, request.UserID))
 
 	return nil
@@ -609,28 +609,28 @@ func (o *Command) Prove(rw io.Writer, req io.Reader) command.Error {
 
 	err := json.NewDecoder(req).Decode(&request)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, ProveMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, ProveCommandMethod, err.Error())
 
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	vcWallet, err := wallet.New(request.UserID, o.ctx)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, ProveMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, ProveCommandMethod, err.Error())
 
 		return command.NewExecuteError(ProveFromWalletErrorCode, err)
 	}
 
 	vp, err := vcWallet.Prove(request.Auth, request.ProofOptions, prepareProveOptions(request)...)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, ProveMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, ProveCommandMethod, err.Error())
 
 		return command.NewExecuteError(ProveFromWalletErrorCode, err)
 	}
 
 	command.WriteNillableResponse(rw, &ProveResponse{Presentation: vp}, logger)
 
-	logutil.LogDebug(logger, CommandName, ProveMethod, logSuccess,
+	logutil.LogDebug(logger, CommandName, ProveCommandMethod, logSuccess,
 		logutil.CreateKeyValueString(logUserIDKey, request.UserID))
 
 	return nil
@@ -642,21 +642,21 @@ func (o *Command) Verify(rw io.Writer, req io.Reader) command.Error {
 
 	err := json.NewDecoder(req).Decode(&request)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, VerifyMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, VerifyCommandMethod, err.Error())
 
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	vcWallet, err := wallet.New(request.UserID, o.ctx)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, VerifyMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, VerifyCommandMethod, err.Error())
 
 		return command.NewExecuteError(VerifyFromWalletErrorCode, err)
 	}
 
 	option, err := prepareVerifyOption(request)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, VerifyMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, VerifyCommandMethod, err.Error())
 
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
@@ -671,7 +671,7 @@ func (o *Command) Verify(rw io.Writer, req io.Reader) command.Error {
 
 	command.WriteNillableResponse(rw, response, logger)
 
-	logutil.LogDebug(logger, CommandName, VerifyMethod, logSuccess,
+	logutil.LogDebug(logger, CommandName, VerifyCommandMethod, logSuccess,
 		logutil.CreateKeyValueString(logUserIDKey, request.UserID))
 
 	return nil
@@ -683,28 +683,28 @@ func (o *Command) Derive(rw io.Writer, req io.Reader) command.Error {
 
 	err := json.NewDecoder(req).Decode(&request)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, DeriveMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, DeriveCommandMethod, err.Error())
 
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	vcWallet, err := wallet.New(request.UserID, o.ctx)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, DeriveMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, DeriveCommandMethod, err.Error())
 
 		return command.NewExecuteError(DeriveFromWalletErrorCode, err)
 	}
 
 	derived, err := vcWallet.Derive(request.Auth, prepareDeriveOption(request), request.DeriveOptions)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, DeriveMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, DeriveCommandMethod, err.Error())
 
 		return command.NewExecuteError(DeriveFromWalletErrorCode, err)
 	}
 
 	command.WriteNillableResponse(rw, &DeriveResponse{Credential: derived}, logger)
 
-	logutil.LogDebug(logger, CommandName, DeriveMethod, logSuccess,
+	logutil.LogDebug(logger, CommandName, DeriveCommandMethod, logSuccess,
 		logutil.CreateKeyValueString(logUserIDKey, request.UserID))
 
 	return nil
@@ -716,28 +716,28 @@ func (o *Command) CreateKeyPair(rw io.Writer, req io.Reader) command.Error {
 
 	err := json.NewDecoder(req).Decode(&request)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, CreateKeyPairMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, CreateKeyPairCommandMethod, err.Error())
 
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	vcWallet, err := wallet.New(request.UserID, o.ctx)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, CreateKeyPairMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, CreateKeyPairCommandMethod, err.Error())
 
 		return command.NewExecuteError(CreateKeyPairFromWalletErrorCode, err)
 	}
 
 	response, err := vcWallet.CreateKeyPair(request.Auth, request.KeyType)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, CreateKeyPairMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, CreateKeyPairCommandMethod, err.Error())
 
 		return command.NewExecuteError(CreateKeyPairFromWalletErrorCode, err)
 	}
 
 	command.WriteNillableResponse(rw, &CreateKeyPairResponse{response}, logger)
 
-	logutil.LogDebug(logger, CommandName, CreateKeyPairMethod, logSuccess,
+	logutil.LogDebug(logger, CommandName, CreateKeyPairCommandMethod, logSuccess,
 		logutil.CreateKeyValueString(logUserIDKey, request.UserID))
 
 	return nil
@@ -749,14 +749,14 @@ func (o *Command) Connect(rw io.Writer, req io.Reader) command.Error {
 
 	err := json.NewDecoder(req).Decode(&request)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, ConnectMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, ConnectCommandMethod, err.Error())
 
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	vcWallet, err := wallet.New(request.UserID, o.ctx)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, ConnectMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, ConnectCommandMethod, err.Error())
 
 		return command.NewExecuteError(DIDConnectErrorCode, err)
 	}
@@ -773,14 +773,14 @@ func (o *Command) Connect(rw io.Writer, req io.Reader) command.Error {
 		wallet.WithReuseAnyConnection(request.ReuseAnyConnection), wallet.WithMyLabel(request.MyLabel),
 		wallet.WithRouterConnections(request.RouterConnections...))
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, ConnectMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, ConnectCommandMethod, err.Error())
 
 		return command.NewExecuteError(DIDConnectErrorCode, err)
 	}
 
 	command.WriteNillableResponse(rw, &ConnectResponse{ConnectionID: connectionID}, logger)
 
-	logutil.LogDebug(logger, CommandName, ConnectMethod, logSuccess,
+	logutil.LogDebug(logger, CommandName, ConnectCommandMethod, logSuccess,
 		logutil.CreateKeyValueString(logUserIDKey, request.UserID),
 		logutil.CreateKeyValueString(invitationIDString, request.Invitation.ID),
 		logutil.CreateKeyValueString(LabelString, request.MyLabel),
@@ -800,14 +800,14 @@ func (o *Command) ProposePresentation(rw io.Writer, req io.Reader) command.Error
 
 	err := json.NewDecoder(req).Decode(&request)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, ProposePresentationMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, ProposePresentationCommandMethod, err.Error())
 
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	vcWallet, err := wallet.New(request.UserID, o.ctx)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, ProposePresentationMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, ProposePresentationCommandMethod, err.Error())
 
 		return command.NewExecuteError(ProposePresentationErrorCode, err)
 	}
@@ -827,14 +827,14 @@ func (o *Command) ProposePresentation(rw io.Writer, req io.Reader) command.Error
 			wallet.WithMyLabel(request.ConnectionOpts.MyLabel),
 			wallet.WithRouterConnections(request.ConnectionOpts.RouterConnections...)))
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, ProposePresentationMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, ProposePresentationCommandMethod, err.Error())
 
 		return command.NewExecuteError(ProposePresentationErrorCode, err)
 	}
 
 	command.WriteNillableResponse(rw, &ProposePresentationResponse{PresentationRequest: msg}, logger)
 
-	logutil.LogDebug(logger, CommandName, ProposePresentationMethod, logSuccess,
+	logutil.LogDebug(logger, CommandName, ProposePresentationCommandMethod, logSuccess,
 		logutil.CreateKeyValueString(logUserIDKey, request.UserID))
 
 	return nil
@@ -851,14 +851,14 @@ func (o *Command) PresentProof(rw io.Writer, req io.Reader) command.Error {
 
 	err := json.NewDecoder(req).Decode(&request)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, PresentProofMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, PresentProofCommandMethod, err.Error())
 
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	vcWallet, err := wallet.New(request.UserID, o.ctx)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, PresentProofMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, PresentProofCommandMethod, err.Error())
 
 		return command.NewExecuteError(PresentProofErrorCode, err)
 	}
@@ -873,14 +873,14 @@ func (o *Command) PresentProof(rw io.Writer, req io.Reader) command.Error {
 	status, err := didComm.PresentProof(request.Auth, request.ThreadID,
 		prepareConcludeInteractionOpts(request.WaitForDone, request.Timeout, request.Presentation)...)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, PresentProofMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, PresentProofCommandMethod, err.Error())
 
 		return command.NewExecuteError(PresentProofErrorCode, err)
 	}
 
 	command.WriteNillableResponse(rw, status, logger)
 
-	logutil.LogDebug(logger, CommandName, PresentProofMethod, logSuccess,
+	logutil.LogDebug(logger, CommandName, PresentProofCommandMethod, logSuccess,
 		logutil.CreateKeyValueString(logUserIDKey, request.UserID))
 
 	return nil
@@ -897,14 +897,14 @@ func (o *Command) ProposeCredential(rw io.Writer, req io.Reader) command.Error {
 
 	err := json.NewDecoder(req).Decode(&request)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, ProposeCredentialMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, ProposeCredentialCommandMethod, err.Error())
 
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	vcWallet, err := wallet.New(request.UserID, o.ctx)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, ProposeCredentialMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, ProposeCredentialCommandMethod, err.Error())
 
 		return command.NewExecuteError(ProposeCredentialErrorCode, err)
 	}
@@ -924,14 +924,14 @@ func (o *Command) ProposeCredential(rw io.Writer, req io.Reader) command.Error {
 			wallet.WithMyLabel(request.ConnectionOpts.MyLabel),
 			wallet.WithRouterConnections(request.ConnectionOpts.RouterConnections...)))
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, ProposeCredentialMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, ProposeCredentialCommandMethod, err.Error())
 
 		return command.NewExecuteError(ProposeCredentialErrorCode, err)
 	}
 
 	command.WriteNillableResponse(rw, &ProposeCredentialResponse{OfferCredential: msg}, logger)
 
-	logutil.LogDebug(logger, CommandName, ProposeCredentialMethod, logSuccess,
+	logutil.LogDebug(logger, CommandName, ProposeCredentialCommandMethod, logSuccess,
 		logutil.CreateKeyValueString(logUserIDKey, request.UserID))
 
 	return nil
@@ -949,14 +949,14 @@ func (o *Command) RequestCredential(rw io.Writer, req io.Reader) command.Error {
 
 	err := json.NewDecoder(req).Decode(&request)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, RequestCredentialMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, RequestCredentialCommandMethod, err.Error())
 
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	vcWallet, err := wallet.New(request.UserID, o.ctx)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, RequestCredentialMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, RequestCredentialCommandMethod, err.Error())
 
 		return command.NewExecuteError(RequestCredentialErrorCode, err)
 	}
@@ -971,14 +971,14 @@ func (o *Command) RequestCredential(rw io.Writer, req io.Reader) command.Error {
 	status, err := didComm.RequestCredential(request.Auth, request.ThreadID,
 		prepareConcludeInteractionOpts(request.WaitForDone, request.Timeout, request.Presentation)...)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, RequestCredentialMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, RequestCredentialCommandMethod, err.Error())
 
 		return command.NewExecuteError(RequestCredentialErrorCode, err)
 	}
 
 	command.WriteNillableResponse(rw, status, logger)
 
-	logutil.LogDebug(logger, CommandName, RequestCredentialMethod, logSuccess,
+	logutil.LogDebug(logger, CommandName, RequestCredentialCommandMethod, logSuccess,
 		logutil.CreateKeyValueString(logUserIDKey, request.UserID))
 
 	return nil
@@ -994,14 +994,14 @@ func (o *Command) ResolveCredentialManifest(rw io.Writer, req io.Reader) command
 
 	err := json.NewDecoder(req).Decode(&request)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, ResolveCredentialManifestMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, ResolveCredentialManifestCommandMethod, err.Error())
 
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	vcWallet, err := wallet.New(request.UserID, o.ctx)
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, ResolveCredentialManifestMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, ResolveCredentialManifestCommandMethod, err.Error())
 
 		return command.NewExecuteError(ResolveCredentialManifestErrorCode, err)
 	}
@@ -1009,14 +1009,14 @@ func (o *Command) ResolveCredentialManifest(rw io.Writer, req io.Reader) command
 	resolved, err := vcWallet.ResolveCredentialManifest(request.Auth, request.Manifest,
 		prepareResolveManifestOption(request))
 	if err != nil {
-		logutil.LogInfo(logger, CommandName, ResolveCredentialManifestMethod, err.Error())
+		logutil.LogInfo(logger, CommandName, ResolveCredentialManifestCommandMethod, err.Error())
 
 		return command.NewExecuteError(ResolveCredentialManifestErrorCode, err)
 	}
 
 	command.WriteNillableResponse(rw, &ResolveCredentialManifestResponse{Resolved: resolved}, logger)
 
-	logutil.LogDebug(logger, CommandName, ResolveCredentialManifestMethod, logSuccess,
+	logutil.LogDebug(logger, CommandName, ResolveCredentialManifestCommandMethod, logSuccess,
 		logutil.CreateKeyValueString(logUserIDKey, request.UserID))
 
 	return nil

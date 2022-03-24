@@ -42,12 +42,12 @@ const (
 // constants for out-of-band.
 const (
 	// command name.
-	CommandName      = "outofband"
-	CreateInvitation = "CreateInvitation"
-	AcceptInvitation = "AcceptInvitation"
-	ActionStop       = "ActionStop"
-	Actions          = "Actions"
-	ActionContinue   = "ActionContinue"
+	CommandName                   = "outofband"
+	CreateInvitationCommandMethod = "CreateInvitation"
+	AcceptInvitationCommandMethod = "AcceptInvitation"
+	ActionStopCommandMethod       = "ActionStop"
+	ActionsCommandMethod          = "Actions"
+	ActionContinueCommandMethod   = "ActionContinue"
 
 	// error messages.
 	errEmptyRequest = "request was not provided"
@@ -98,11 +98,11 @@ func New(ctx outofband.Provider, notifier command.Notifier) (*Command, error) {
 // GetHandlers returns list of all commands supported by this controller command.
 func (c *Command) GetHandlers() []command.Handler {
 	return []command.Handler{
-		cmdutil.NewCommandHandler(CommandName, CreateInvitation, c.CreateInvitation),
-		cmdutil.NewCommandHandler(CommandName, AcceptInvitation, c.AcceptInvitation),
-		cmdutil.NewCommandHandler(CommandName, Actions, c.Actions),
-		cmdutil.NewCommandHandler(CommandName, ActionContinue, c.ActionContinue),
-		cmdutil.NewCommandHandler(CommandName, ActionStop, c.ActionStop),
+		cmdutil.NewCommandHandler(CommandName, CreateInvitationCommandMethod, c.CreateInvitation),
+		cmdutil.NewCommandHandler(CommandName, AcceptInvitationCommandMethod, c.AcceptInvitation),
+		cmdutil.NewCommandHandler(CommandName, ActionsCommandMethod, c.Actions),
+		cmdutil.NewCommandHandler(CommandName, ActionContinueCommandMethod, c.ActionContinue),
+		cmdutil.NewCommandHandler(CommandName, ActionStopCommandMethod, c.ActionStop),
 	}
 }
 
@@ -112,7 +112,7 @@ func (c *Command) GetHandlers() []command.Handler {
 func (c *Command) CreateInvitation(rw io.Writer, req io.Reader) command.Error {
 	var args CreateInvitationArgs
 	if err := json.NewDecoder(req).Decode(&args); err != nil {
-		logutil.LogInfo(logger, CommandName, CreateInvitation, err.Error())
+		logutil.LogInfo(logger, CommandName, CreateInvitationCommandMethod, err.Error())
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
@@ -125,7 +125,7 @@ func (c *Command) CreateInvitation(rw io.Writer, req io.Reader) command.Error {
 		outofband.WithAccept(args.Accept...),
 	)
 	if err != nil {
-		logutil.LogError(logger, CommandName, CreateInvitation, err.Error())
+		logutil.LogError(logger, CommandName, CreateInvitationCommandMethod, err.Error())
 		return command.NewExecuteError(CreateInvitationErrorCode, err)
 	}
 
@@ -133,7 +133,7 @@ func (c *Command) CreateInvitation(rw io.Writer, req io.Reader) command.Error {
 		Invitation: invitation,
 	}, logger)
 
-	logutil.LogDebug(logger, CommandName, CreateInvitation, successString)
+	logutil.LogDebug(logger, CommandName, CreateInvitationCommandMethod, successString)
 
 	return nil
 }
@@ -142,17 +142,17 @@ func (c *Command) CreateInvitation(rw io.Writer, req io.Reader) command.Error {
 func (c *Command) AcceptInvitation(rw io.Writer, req io.Reader) command.Error {
 	var args AcceptInvitationArgs
 	if err := json.NewDecoder(req).Decode(&args); err != nil {
-		logutil.LogInfo(logger, CommandName, AcceptInvitation, err.Error())
+		logutil.LogInfo(logger, CommandName, AcceptInvitationCommandMethod, err.Error())
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	if args.Invitation == nil {
-		logutil.LogDebug(logger, CommandName, AcceptInvitation, errEmptyRequest)
+		logutil.LogDebug(logger, CommandName, AcceptInvitationCommandMethod, errEmptyRequest)
 		return command.NewValidationError(InvalidRequestErrorCode, errors.New(errEmptyRequest))
 	}
 
 	if args.MyLabel == "" {
-		logutil.LogDebug(logger, CommandName, AcceptInvitation, errEmptyMyLabel)
+		logutil.LogDebug(logger, CommandName, AcceptInvitationCommandMethod, errEmptyMyLabel)
 		return command.NewValidationError(InvalidRequestErrorCode, errors.New(errEmptyMyLabel))
 	}
 
@@ -167,7 +167,7 @@ func (c *Command) AcceptInvitation(rw io.Writer, req io.Reader) command.Error {
 
 	connID, err := c.client.AcceptInvitation(args.Invitation, args.MyLabel, options...)
 	if err != nil {
-		logutil.LogError(logger, CommandName, AcceptInvitation, err.Error())
+		logutil.LogError(logger, CommandName, AcceptInvitationCommandMethod, err.Error())
 		return command.NewExecuteError(AcceptInvitationErrorCode, err)
 	}
 
@@ -175,7 +175,7 @@ func (c *Command) AcceptInvitation(rw io.Writer, req io.Reader) command.Error {
 		ConnectionID: connID,
 	}, logger)
 
-	logutil.LogDebug(logger, CommandName, AcceptInvitation, successString)
+	logutil.LogDebug(logger, CommandName, AcceptInvitationCommandMethod, successString)
 
 	return nil
 }
@@ -184,7 +184,7 @@ func (c *Command) AcceptInvitation(rw io.Writer, req io.Reader) command.Error {
 func (c *Command) Actions(rw io.Writer, _ io.Reader) command.Error {
 	result, err := c.client.Actions()
 	if err != nil {
-		logutil.LogError(logger, CommandName, Actions, err.Error())
+		logutil.LogError(logger, CommandName, ActionsCommandMethod, err.Error())
 		return command.NewExecuteError(ActionsErrorCode, err)
 	}
 
@@ -192,7 +192,7 @@ func (c *Command) Actions(rw io.Writer, _ io.Reader) command.Error {
 		Actions: result,
 	}, logger)
 
-	logutil.LogDebug(logger, CommandName, Actions, successString)
+	logutil.LogDebug(logger, CommandName, ActionsCommandMethod, successString)
 
 	return nil
 }
@@ -202,25 +202,25 @@ func (c *Command) ActionContinue(rw io.Writer, req io.Reader) command.Error {
 	var args ActionContinueArgs
 
 	if err := json.NewDecoder(req).Decode(&args); err != nil {
-		logutil.LogInfo(logger, CommandName, ActionContinue, err.Error())
+		logutil.LogInfo(logger, CommandName, ActionContinueCommandMethod, err.Error())
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	if args.PIID == "" {
-		logutil.LogDebug(logger, CommandName, ActionContinue, errEmptyPIID)
+		logutil.LogDebug(logger, CommandName, ActionContinueCommandMethod, errEmptyPIID)
 		return command.NewValidationError(InvalidRequestErrorCode, errors.New(errEmptyPIID))
 	}
 
 	err := c.client.ActionContinue(args.PIID, args.Label,
 		outofband.WithRouterConnections(strings.Split(args.RouterConnections, ",")...))
 	if err != nil {
-		logutil.LogError(logger, CommandName, ActionContinue, err.Error())
+		logutil.LogError(logger, CommandName, ActionContinueCommandMethod, err.Error())
 		return command.NewExecuteError(ActionContinueErrorCode, err)
 	}
 
 	command.WriteNillableResponse(rw, &ActionContinueResponse{}, logger)
 
-	logutil.LogDebug(logger, CommandName, ActionContinue, successString)
+	logutil.LogDebug(logger, CommandName, ActionContinueCommandMethod, successString)
 
 	return nil
 }
@@ -230,23 +230,23 @@ func (c *Command) ActionStop(rw io.Writer, req io.Reader) command.Error {
 	var args ActionStopArgs
 
 	if err := json.NewDecoder(req).Decode(&args); err != nil {
-		logutil.LogInfo(logger, CommandName, ActionStop, err.Error())
+		logutil.LogInfo(logger, CommandName, ActionStopCommandMethod, err.Error())
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	if args.PIID == "" {
-		logutil.LogDebug(logger, CommandName, ActionStop, errEmptyPIID)
+		logutil.LogDebug(logger, CommandName, ActionStopCommandMethod, errEmptyPIID)
 		return command.NewValidationError(InvalidRequestErrorCode, errors.New(errEmptyPIID))
 	}
 
 	if err := c.client.ActionStop(args.PIID, errors.New(args.Reason)); err != nil {
-		logutil.LogError(logger, CommandName, ActionStop, err.Error())
+		logutil.LogError(logger, CommandName, ActionStopCommandMethod, err.Error())
 		return command.NewExecuteError(ActionStopErrorCode, err)
 	}
 
 	command.WriteNillableResponse(rw, &ActionStopResponse{}, logger)
 
-	logutil.LogDebug(logger, CommandName, ActionStop, successString)
+	logutil.LogDebug(logger, CommandName, ActionStopCommandMethod, successString)
 
 	return nil
 }

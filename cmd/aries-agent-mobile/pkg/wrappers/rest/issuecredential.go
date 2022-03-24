@@ -22,72 +22,72 @@ type IssueCredential struct {
 
 // Actions returns pending actions that have not yet to be executed or canceled.
 func (ic *IssueCredential) Actions(request *models.RequestEnvelope) *models.ResponseEnvelope {
-	return ic.createRespEnvelope(request, cmdisscred.Actions)
+	return ic.createRespEnvelope(request, cmdisscred.ActionsCommandMethod)
 }
 
 // SendOffer is used by the Issuer to send an offer.
 func (ic *IssueCredential) SendOffer(request *models.RequestEnvelope) *models.ResponseEnvelope {
-	return ic.createRespEnvelope(request, cmdisscred.SendOffer)
+	return ic.createRespEnvelope(request, cmdisscred.SendOfferCommandMethod)
 }
 
 // SendProposal is used by the Holder to send a proposal.
 func (ic *IssueCredential) SendProposal(request *models.RequestEnvelope) *models.ResponseEnvelope {
-	return ic.createRespEnvelope(request, cmdisscred.SendProposal)
+	return ic.createRespEnvelope(request, cmdisscred.SendProposalCommandMethod)
 }
 
 // SendRequest is used by the Holder to send a request.
 func (ic *IssueCredential) SendRequest(request *models.RequestEnvelope) *models.ResponseEnvelope {
-	return ic.createRespEnvelope(request, cmdisscred.SendRequest)
+	return ic.createRespEnvelope(request, cmdisscred.SendRequestCommandMethod)
 }
 
 // AcceptProposal is used when the Issuer is willing to accept the proposal.
 func (ic *IssueCredential) AcceptProposal(request *models.RequestEnvelope) *models.ResponseEnvelope {
-	return ic.createRespEnvelope(request, cmdisscred.AcceptProposal)
+	return ic.createRespEnvelope(request, cmdisscred.AcceptProposalCommandMethod)
 }
 
 // NegotiateProposal is used when the Holder wants to negotiate about an offer he received.
 func (ic *IssueCredential) NegotiateProposal(request *models.RequestEnvelope) *models.ResponseEnvelope {
-	return ic.createRespEnvelope(request, cmdisscred.NegotiateProposal)
+	return ic.createRespEnvelope(request, cmdisscred.NegotiateProposalCommandMethod)
 }
 
 // DeclineProposal is used when the Issuer does not want to accept the proposal.
 func (ic *IssueCredential) DeclineProposal(request *models.RequestEnvelope) *models.ResponseEnvelope {
-	return ic.createRespEnvelope(request, cmdisscred.DeclineProposal)
+	return ic.createRespEnvelope(request, cmdisscred.DeclineProposalCommandMethod)
 }
 
 // AcceptOffer is used when the Holder is willing to accept the offer.
 func (ic *IssueCredential) AcceptOffer(request *models.RequestEnvelope) *models.ResponseEnvelope {
-	return ic.createRespEnvelope(request, cmdisscred.AcceptOffer)
+	return ic.createRespEnvelope(request, cmdisscred.AcceptOfferCommandMethod)
 }
 
 // AcceptProblemReport is used for accepting problem report.
 func (ic *IssueCredential) AcceptProblemReport(request *models.RequestEnvelope) *models.ResponseEnvelope {
-	return ic.createRespEnvelope(request, cmdisscred.AcceptProblemReport)
+	return ic.createRespEnvelope(request, cmdisscred.AcceptProblemReportCommandMethod)
 }
 
 // DeclineOffer is used when the Holder does not want to accept the offer.
 func (ic *IssueCredential) DeclineOffer(request *models.RequestEnvelope) *models.ResponseEnvelope {
-	return ic.createRespEnvelope(request, cmdisscred.DeclineOffer)
+	return ic.createRespEnvelope(request, cmdisscred.DeclineOfferCommandMethod)
 }
 
 // AcceptRequest is used when the Issuer is willing to accept the request.
 func (ic *IssueCredential) AcceptRequest(request *models.RequestEnvelope) *models.ResponseEnvelope {
-	return ic.createRespEnvelope(request, cmdisscred.AcceptRequest)
+	return ic.createRespEnvelope(request, cmdisscred.AcceptRequestCommandMethod)
 }
 
 // DeclineRequest is used when the Issuer does not want to accept the request.
 func (ic *IssueCredential) DeclineRequest(request *models.RequestEnvelope) *models.ResponseEnvelope {
-	return ic.createRespEnvelope(request, cmdisscred.DeclineRequest)
+	return ic.createRespEnvelope(request, cmdisscred.DeclineRequestCommandMethod)
 }
 
 // AcceptCredential is used when the Holder is willing to accept the IssueCredential.
 func (ic *IssueCredential) AcceptCredential(request *models.RequestEnvelope) *models.ResponseEnvelope {
-	return ic.createRespEnvelope(request, cmdisscred.AcceptCredential)
+	return ic.createRespEnvelope(request, cmdisscred.AcceptCredentialCommandMethod)
 }
 
 // DeclineCredential is used when the Holder does not want to accept the IssueCredential.
 func (ic *IssueCredential) DeclineCredential(request *models.RequestEnvelope) *models.ResponseEnvelope {
-	return ic.createRespEnvelope(request, cmdisscred.DeclineCredential)
+	return ic.createRespEnvelope(request, cmdisscred.DeclineCredentialCommandMethod)
 }
 
 //nolint: lll

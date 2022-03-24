@@ -36,12 +36,13 @@ func TestOutOfBandV2_AcceptInvitation(t *testing.T) {
 
 		mockResponse := mockConnectionIDJSON
 		fakeHandler := mockCommandRunner{data: []byte(mockResponse)}
-		controller.handlers[outofbandv2.AcceptInvitation] = fakeHandler.exec
+		controller.handlers[outofbandv2.AcceptInvitationCommandMethod] = fakeHandler.exec
 
 		payload := `{"invitation":{},"my_label":"label"}`
 
 		req := &models.RequestEnvelope{Payload: []byte(payload)}
 		resp := controller.AcceptInvitation(req)
+		u
 		require.NotNil(t, resp)
 		require.Nil(t, resp.Error)
 		require.Equal(t,
@@ -59,7 +60,7 @@ func TestOutOfBandV2_CreateInvitation(t *testing.T) {
 "goal":"goal","goal_code":"goal_code","accept":["didcomm/v2"]}}}
 `
 		fakeHandler := mockCommandRunner{data: []byte(mockResponse)}
-		controller.handlers[outofbandv2.CreateInvitation] = fakeHandler.exec
+		controller.handlers[outofbandv2.CreateInvitationCommandMethod] = fakeHandler.exec
 
 		payload := `{"label":"label","body":{"goal":"goal","goal_code":"goal_code","accept":["didcomm/v2"]}}`
 

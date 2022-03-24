@@ -27,7 +27,7 @@ func (v *VCWallet) CreateProfile(request *models.RequestEnvelope) *models.Respon
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(v.handlers[cmdvcwallet.CreateProfileMethod], args)
+	response, cmdErr := exec(v.handlers[cmdvcwallet.CreateProfileMethodCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -43,7 +43,7 @@ func (v *VCWallet) UpdateProfile(request *models.RequestEnvelope) *models.Respon
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(v.handlers[cmdvcwallet.UpdateProfileMethod], args)
+	response, cmdErr := exec(v.handlers[cmdvcwallet.UpdateProfileMethodCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -59,7 +59,7 @@ func (v *VCWallet) ProfileExists(request *models.RequestEnvelope) *models.Respon
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(v.handlers[cmdvcwallet.ProfileExistsMethod], args)
+	response, cmdErr := exec(v.handlers[cmdvcwallet.ProfileExistsMethodCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -75,7 +75,7 @@ func (v *VCWallet) Open(request *models.RequestEnvelope) *models.ResponseEnvelop
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(v.handlers[cmdvcwallet.OpenMethod], args)
+	response, cmdErr := exec(v.handlers[cmdvcwallet.OpenCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -91,7 +91,7 @@ func (v *VCWallet) Close(request *models.RequestEnvelope) *models.ResponseEnvelo
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(v.handlers[cmdvcwallet.CloseMethod], args)
+	response, cmdErr := exec(v.handlers[cmdvcwallet.CloseCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -107,7 +107,7 @@ func (v *VCWallet) Add(request *models.RequestEnvelope) *models.ResponseEnvelope
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(v.handlers[cmdvcwallet.AddMethod], args)
+	response, cmdErr := exec(v.handlers[cmdvcwallet.AddCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -123,7 +123,7 @@ func (v *VCWallet) Remove(request *models.RequestEnvelope) *models.ResponseEnvel
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(v.handlers[cmdvcwallet.RemoveMethod], args)
+	response, cmdErr := exec(v.handlers[cmdvcwallet.RemoveCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -139,7 +139,7 @@ func (v *VCWallet) Get(request *models.RequestEnvelope) *models.ResponseEnvelope
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(v.handlers[cmdvcwallet.GetMethod], args)
+	response, cmdErr := exec(v.handlers[cmdvcwallet.GetCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -155,7 +155,7 @@ func (v *VCWallet) GetAll(request *models.RequestEnvelope) *models.ResponseEnvel
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(v.handlers[cmdvcwallet.GetAllMethod], args)
+	response, cmdErr := exec(v.handlers[cmdvcwallet.GetAllCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -171,7 +171,7 @@ func (v *VCWallet) Query(request *models.RequestEnvelope) *models.ResponseEnvelo
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(v.handlers[cmdvcwallet.QueryMethod], args)
+	response, cmdErr := exec(v.handlers[cmdvcwallet.QueryCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -187,7 +187,7 @@ func (v *VCWallet) Issue(request *models.RequestEnvelope) *models.ResponseEnvelo
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(v.handlers[cmdvcwallet.IssueMethod], args)
+	response, cmdErr := exec(v.handlers[cmdvcwallet.IssueCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -203,7 +203,7 @@ func (v *VCWallet) Prove(request *models.RequestEnvelope) *models.ResponseEnvelo
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(v.handlers[cmdvcwallet.ProveMethod], args)
+	response, cmdErr := exec(v.handlers[cmdvcwallet.ProveCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -219,7 +219,7 @@ func (v *VCWallet) Verify(request *models.RequestEnvelope) *models.ResponseEnvel
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(v.handlers[cmdvcwallet.VerifyMethod], args)
+	response, cmdErr := exec(v.handlers[cmdvcwallet.VerifyCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -235,7 +235,7 @@ func (v *VCWallet) Derive(request *models.RequestEnvelope) *models.ResponseEnvel
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(v.handlers[cmdvcwallet.DeriveMethod], args)
+	response, cmdErr := exec(v.handlers[cmdvcwallet.DeriveCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -251,7 +251,7 @@ func (v *VCWallet) CreateKeyPair(request *models.RequestEnvelope) *models.Respon
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(v.handlers[cmdvcwallet.CreateKeyPairMethod], args)
+	response, cmdErr := exec(v.handlers[cmdvcwallet.CreateKeyPairCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -267,7 +267,7 @@ func (v *VCWallet) Connect(request *models.RequestEnvelope) *models.ResponseEnve
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(v.handlers[cmdvcwallet.ConnectMethod], args)
+	response, cmdErr := exec(v.handlers[cmdvcwallet.ConnectCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -284,7 +284,7 @@ func (v *VCWallet) ProposePresentation(request *models.RequestEnvelope) *models.
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(v.handlers[cmdvcwallet.ProposePresentationMethod], args)
+	response, cmdErr := exec(v.handlers[cmdvcwallet.ProposePresentationCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -300,7 +300,7 @@ func (v *VCWallet) PresentProof(request *models.RequestEnvelope) *models.Respons
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(v.handlers[cmdvcwallet.PresentProofMethod], args)
+	response, cmdErr := exec(v.handlers[cmdvcwallet.PresentProofCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}

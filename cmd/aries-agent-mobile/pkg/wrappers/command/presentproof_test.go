@@ -36,7 +36,7 @@ func TestPresentProof_Actions(t *testing.T) {
 
 		mockResponse := `{"actions":[{"PIID":"ID1"},{"PIID":"ID2"},{"PIID":"ID3"}]}`
 		fakeHandler := mockCommandRunner{data: []byte(mockResponse)}
-		p.handlers[cmdpresproof.Actions] = fakeHandler.exec
+		p.handlers[cmdpresproof.ActionsCommandMethod] = fakeHandler.exec
 
 		payload := ``
 
@@ -56,7 +56,7 @@ func TestPresentProof_SendRequestPresentation(t *testing.T) {
 
 		mockResponse := mockPIID
 		fakeHandler := mockCommandRunner{data: []byte(mockResponse)}
-		p.handlers[cmdpresproof.SendRequestPresentation] = fakeHandler.exec
+		p.handlers[cmdpresproof.SendRequestPresentationCommandMethod] = fakeHandler.exec
 
 		payload := `{"my_did":"id","their_did":"id","request_presentation":{}}`
 
@@ -76,7 +76,7 @@ func TestPresentProof_SendProposePresentation(t *testing.T) {
 
 		mockResponse := mockPIID
 		fakeHandler := mockCommandRunner{data: []byte(mockResponse)}
-		p.handlers[cmdpresproof.SendProposePresentation] = fakeHandler.exec
+		p.handlers[cmdpresproof.SendProposePresentationCommandMethod] = fakeHandler.exec
 
 		payload := `{"my_did":"id","their_did":"id","propose_presentation":{}}`
 
@@ -96,7 +96,7 @@ func TestPresentProof_AcceptRequestPresentation(t *testing.T) {
 
 		mockResponse := emptyJSON
 		fakeHandler := mockCommandRunner{data: []byte(mockResponse)}
-		p.handlers[cmdpresproof.AcceptRequestPresentation] = fakeHandler.exec
+		p.handlers[cmdpresproof.AcceptRequestPresentationCommandMethod] = fakeHandler.exec
 
 		payload := `{"piid":"id","presentation":{}}`
 
@@ -116,7 +116,7 @@ func TestPresentProof_NegotiateRequestPresentation(t *testing.T) {
 
 		mockResponse := emptyJSON
 		fakeHandler := mockCommandRunner{data: []byte(mockResponse)}
-		p.handlers[cmdpresproof.NegotiateRequestPresentation] = fakeHandler.exec
+		p.handlers[cmdpresproof.NegotiateRequestPresentationCommandMethod] = fakeHandler.exec
 
 		payload := `{"piid":"id","propose_presentation":{}}`
 
@@ -136,7 +136,7 @@ func TestPresentProof_DeclineRequestPresentation(t *testing.T) {
 
 		mockResponse := emptyJSON
 		fakeHandler := mockCommandRunner{data: []byte(mockResponse)}
-		p.handlers[cmdpresproof.DeclineRequestPresentation] = fakeHandler.exec
+		p.handlers[cmdpresproof.DeclineRequestPresentationCommandMethod] = fakeHandler.exec
 
 		payload := mockPIID
 
@@ -156,7 +156,7 @@ func TestPresentProof_AcceptProposePresentation(t *testing.T) {
 
 		mockResponse := emptyJSON
 		fakeHandler := mockCommandRunner{data: []byte(mockResponse)}
-		p.handlers[cmdpresproof.AcceptProposePresentation] = fakeHandler.exec
+		p.handlers[cmdpresproof.AcceptProposePresentationCommandMethod] = fakeHandler.exec
 
 		payload := `{"piid":"id","request_presentation":{}}`
 
@@ -176,7 +176,7 @@ func TestPresentProof_DeclineProposePresentation(t *testing.T) {
 
 		mockResponse := emptyJSON
 		fakeHandler := mockCommandRunner{data: []byte(mockResponse)}
-		p.handlers[cmdpresproof.DeclineProposePresentation] = fakeHandler.exec
+		p.handlers[cmdpresproof.DeclineProposePresentationCommandMethod] = fakeHandler.exec
 
 		payload := mockPIID
 
@@ -196,7 +196,7 @@ func TestPresentProof_AcceptPresentation(t *testing.T) {
 
 		mockResponse := emptyJSON
 		fakeHandler := mockCommandRunner{data: []byte(mockResponse)}
-		p.handlers[cmdpresproof.AcceptPresentation] = fakeHandler.exec
+		p.handlers[cmdpresproof.AcceptPresentationCommandMethod] = fakeHandler.exec
 
 		payload := mockPIID
 
@@ -216,7 +216,7 @@ func TestPresentProof_AcceptProblemReport(t *testing.T) {
 
 		mockResponse := emptyJSON
 		fakeHandler := mockCommandRunner{data: []byte(mockResponse)}
-		p.handlers[cmdpresproof.AcceptProblemReport] = fakeHandler.exec
+		p.handlers[cmdpresproof.AcceptProblemReportCommandMethod] = fakeHandler.exec
 
 		payload := mockPIID
 
@@ -236,7 +236,7 @@ func TestPresentProof_DeclinePresentation(t *testing.T) {
 
 		mockResponse := emptyJSON
 		fakeHandler := mockCommandRunner{data: []byte(mockResponse)}
-		p.handlers[cmdpresproof.DeclinePresentation] = fakeHandler.exec
+		p.handlers[cmdpresproof.DeclinePresentationCommandMethod] = fakeHandler.exec
 
 		payload := mockPIID
 

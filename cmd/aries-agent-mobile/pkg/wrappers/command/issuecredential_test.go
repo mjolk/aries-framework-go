@@ -40,7 +40,7 @@ func TestIssueCredential_Actions(t *testing.T) {
 
 		mockResponse := `{"actions":[{"PIID":"ID1"},{"PIID":"ID2"},{"PIID":"ID3"}]}`
 		fakeHandler := mockCommandRunner{data: []byte(mockResponse)}
-		ic.handlers[cmdisscred.Actions] = fakeHandler.exec
+		ic.handlers[cmdisscred.ActionsCommandMethod] = fakeHandler.exec
 
 		payload := ``
 
@@ -60,7 +60,7 @@ func TestIssueCredential_SendOffer(t *testing.T) {
 
 		mockResponse := mockPIID
 		fakeHandler := mockCommandRunner{data: []byte(mockResponse)}
-		ic.handlers[cmdisscred.SendOffer] = fakeHandler.exec
+		ic.handlers[cmdisscred.SendOfferCommandMethod] = fakeHandler.exec
 
 		payload := `{"my_did":"id","their_did":"id","offer_credential":{}}`
 
@@ -80,7 +80,7 @@ func TestIssueCredential_SendProposal(t *testing.T) {
 
 		mockResponse := mockPIID
 		fakeHandler := mockCommandRunner{data: []byte(mockResponse)}
-		ic.handlers[cmdisscred.SendProposal] = fakeHandler.exec
+		ic.handlers[cmdisscred.SendProposalCommandMethod] = fakeHandler.exec
 
 		payload := `{"my_did":"id","their_did":"id","propose_credential":{}}`
 
@@ -100,7 +100,7 @@ func TestIssueCredential_SendRequest(t *testing.T) {
 
 		mockResponse := mockPIID
 		fakeHandler := mockCommandRunner{data: []byte(mockResponse)}
-		ic.handlers[cmdisscred.SendRequest] = fakeHandler.exec
+		ic.handlers[cmdisscred.SendRequestCommandMethod] = fakeHandler.exec
 
 		payload := `{"my_did":"id","their_did":"id","request_credential":{}}`
 
@@ -120,7 +120,7 @@ func TestIssueCredential_AcceptProposal(t *testing.T) {
 
 		mockResponse := emptyJSON
 		fakeHandler := mockCommandRunner{data: []byte(mockResponse)}
-		ic.handlers[cmdisscred.AcceptProposal] = fakeHandler.exec
+		ic.handlers[cmdisscred.AcceptProposalCommandMethod] = fakeHandler.exec
 
 		payload := `{"piid":"id","offer_credential":{}}`
 
@@ -140,7 +140,7 @@ func TestIssueCredential_NegotiateProposal(t *testing.T) {
 
 		mockResponse := emptyJSON
 		fakeHandler := mockCommandRunner{data: []byte(mockResponse)}
-		ic.handlers[cmdisscred.NegotiateProposal] = fakeHandler.exec
+		ic.handlers[cmdisscred.NegotiateProposalCommandMethod] = fakeHandler.exec
 
 		payload := `{"piid":"id","propose_credential":{}}`
 
@@ -160,7 +160,7 @@ func TestIssueCredential_DeclineProposal(t *testing.T) {
 
 		mockResponse := emptyJSON
 		fakeHandler := mockCommandRunner{data: []byte(mockResponse)}
-		ic.handlers[cmdisscred.DeclineProposal] = fakeHandler.exec
+		ic.handlers[cmdisscred.DeclineProposalCommandMethod] = fakeHandler.exec
 
 		payload := mockPIID
 
@@ -180,7 +180,7 @@ func TestIssueCredential_AcceptOffer(t *testing.T) {
 
 		mockResponse := emptyJSON
 		fakeHandler := mockCommandRunner{data: []byte(mockResponse)}
-		ic.handlers[cmdisscred.AcceptOffer] = fakeHandler.exec
+		ic.handlers[cmdisscred.AcceptOfferCommandMethod] = fakeHandler.exec
 
 		payload := mockPIID
 
@@ -200,7 +200,7 @@ func TestIssueCredential_AcceptProblemReport(t *testing.T) {
 
 		mockResponse := emptyJSON
 		fakeHandler := mockCommandRunner{data: []byte(mockResponse)}
-		ic.handlers[cmdisscred.AcceptProblemReport] = fakeHandler.exec
+		ic.handlers[cmdisscred.AcceptProblemReportCommandMethod] = fakeHandler.exec
 
 		payload := mockPIID
 
@@ -220,7 +220,7 @@ func TestIssueCredential_DeclineOffer(t *testing.T) {
 
 		mockResponse := emptyJSON
 		fakeHandler := mockCommandRunner{data: []byte(mockResponse)}
-		ic.handlers[cmdisscred.DeclineOffer] = fakeHandler.exec
+		ic.handlers[cmdisscred.DeclineOfferCommandMethod] = fakeHandler.exec
 
 		payload := mockPIID
 
@@ -240,7 +240,7 @@ func TestIssueCredential_AcceptRequest(t *testing.T) {
 
 		mockResponse := emptyJSON
 		fakeHandler := mockCommandRunner{data: []byte(mockResponse)}
-		ic.handlers[cmdisscred.AcceptRequest] = fakeHandler.exec
+		ic.handlers[cmdisscred.AcceptRequestCommandMethod] = fakeHandler.exec
 
 		payload := `{"piid":"id","issue_credential":{}}`
 
@@ -260,7 +260,7 @@ func TestIssueCredential_DeclineRequest(t *testing.T) {
 
 		mockResponse := emptyJSON
 		fakeHandler := mockCommandRunner{data: []byte(mockResponse)}
-		ic.handlers[cmdisscred.DeclineRequest] = fakeHandler.exec
+		ic.handlers[cmdisscred.DeclineRequestCommandMethod] = fakeHandler.exec
 
 		payload := mockPIID
 
@@ -280,7 +280,7 @@ func TestIssueCredential_AcceptCredential(t *testing.T) {
 
 		mockResponse := emptyJSON
 		fakeHandler := mockCommandRunner{data: []byte(mockResponse)}
-		ic.handlers[cmdisscred.AcceptCredential] = fakeHandler.exec
+		ic.handlers[cmdisscred.AcceptCredentialCommandMethod] = fakeHandler.exec
 
 		payload := mockPIID
 
@@ -300,7 +300,7 @@ func TestIssueCredential_DeclineCredential(t *testing.T) {
 
 		mockResponse := emptyJSON
 		fakeHandler := mockCommandRunner{data: []byte(mockResponse)}
-		ic.handlers[cmdisscred.DeclineCredential] = fakeHandler.exec
+		ic.handlers[cmdisscred.DeclineCredentialCommandMethod] = fakeHandler.exec
 
 		payload := mockPIID
 

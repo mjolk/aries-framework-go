@@ -61,7 +61,7 @@ func TestIntroduce_Actions(t *testing.T) {
 		i := getIntroduceController(t)
 
 		fakeHandler := mockCommandRunner{data: []byte(`{"actions":[{"PIID":"ID1","Msg":null,"MyDID":"","TheirDID":""}]}`)}
-		i.handlers[cmdintroduce.Actions] = fakeHandler.exec
+		i.handlers[cmdintroduce.ActionsCommandMethod] = fakeHandler.exec
 
 		resp := i.Actions(&models.RequestEnvelope{})
 		require.NotNil(t, resp)
@@ -75,7 +75,7 @@ func TestIntroduce_SendProposal(t *testing.T) {
 		i := getIntroduceController(t)
 
 		fakeHandler := mockCommandRunner{data: []byte(`{"piid":"f749b739-1f3d-4213-9c33-c3878cdb6e24"}`)}
-		i.handlers[cmdintroduce.SendProposal] = fakeHandler.exec
+		i.handlers[cmdintroduce.SendProposalCommandMethod] = fakeHandler.exec
 
 		req := &models.RequestEnvelope{Payload: []byte(`{
 	"recipients": [
@@ -107,7 +107,7 @@ func TestIntroduce_SendProposalWithOOBInvitation(t *testing.T) {
 		i := getIntroduceController(t)
 
 		fakeHandler := mockCommandRunner{data: []byte(`{"piid":"a13832dc-88b8-4714-b697-e5410d23abe2"}`)}
-		i.handlers[cmdintroduce.SendProposalWithOOBInvitation] = fakeHandler.exec
+		i.handlers[cmdintroduce.SendProposalWithOOBInvitationCommandMethod] = fakeHandler.exec
 
 		reqData := fmt.Sprintf(`{
 	"recipient": {
@@ -131,7 +131,7 @@ func TestIntroduce_SendRequest(t *testing.T) {
 		i := getIntroduceController(t)
 
 		fakeHandler := mockCommandRunner{data: []byte(`{"piid":"a13832dc-88b8-4714-b697-e5410d23abe2"}`)}
-		i.handlers[cmdintroduce.SendRequest] = fakeHandler.exec
+		i.handlers[cmdintroduce.SendRequestCommandMethod] = fakeHandler.exec
 
 		reqData := `{
 	"my_did": "did:mydid:123",
@@ -153,7 +153,7 @@ func TestIntroduce_AcceptProposalWithOOBRequest(t *testing.T) {
 		i := getIntroduceController(t)
 
 		fakeHandler := mockCommandRunner{data: []byte(``)}
-		i.handlers[cmdintroduce.AcceptProposalWithOOBInvitation] = fakeHandler.exec
+		i.handlers[cmdintroduce.AcceptProposalWithOOBInvitationCommandMethod] = fakeHandler.exec
 
 		reqData := `{
 	"request": {},
@@ -172,7 +172,7 @@ func TestIntroduce_AcceptProposal(t *testing.T) {
 		i := getIntroduceController(t)
 
 		fakeHandler := mockCommandRunner{data: []byte(``)}
-		i.handlers[cmdintroduce.AcceptProposal] = fakeHandler.exec
+		i.handlers[cmdintroduce.AcceptProposalCommandMethod] = fakeHandler.exec
 
 		reqData := `{
 	"piid": "a13832dc-88b8-4714-b697-e5410d23abe2"
@@ -190,7 +190,7 @@ func TestIntroduce_AcceptRequestWithPublicOOBRequest(t *testing.T) {
 		i := getIntroduceController(t)
 
 		fakeHandler := mockCommandRunner{data: []byte(``)}
-		i.handlers[cmdintroduce.AcceptRequestWithPublicOOBInvitation] = fakeHandler.exec
+		i.handlers[cmdintroduce.AcceptRequestWithPublicOOBInvitationCommandMethod] = fakeHandler.exec
 
 		reqData := `{
 	"request": {},
@@ -210,7 +210,7 @@ func TestIntroduce_AcceptRequestWithRecipients(t *testing.T) {
 		i := getIntroduceController(t)
 
 		fakeHandler := mockCommandRunner{data: []byte(``)}
-		i.handlers[cmdintroduce.AcceptRequestWithRecipients] = fakeHandler.exec
+		i.handlers[cmdintroduce.AcceptRequestWithRecipientsCommandMethod] = fakeHandler.exec
 
 		reqData := `{
 	"request": {},
@@ -230,7 +230,7 @@ func TestIntroduce_DeclineProposal(t *testing.T) {
 		i := getIntroduceController(t)
 
 		fakeHandler := mockCommandRunner{data: []byte(``)}
-		i.handlers[cmdintroduce.DeclineProposal] = fakeHandler.exec
+		i.handlers[cmdintroduce.DeclineProposalCommandMethod] = fakeHandler.exec
 
 		reqData := `{
 	"reason": "not in agreement",
@@ -249,7 +249,7 @@ func TestIntroduce_DeclineRequest(t *testing.T) {
 		i := getIntroduceController(t)
 
 		fakeHandler := mockCommandRunner{data: []byte(``)}
-		i.handlers[cmdintroduce.DeclineRequest] = fakeHandler.exec
+		i.handlers[cmdintroduce.DeclineRequestCommandMethod] = fakeHandler.exec
 
 		reqData := `{
 	"reason": "not valid",
@@ -268,7 +268,7 @@ func TestIntroduce_AcceptProblemReport(t *testing.T) {
 		i := getIntroduceController(t)
 
 		fakeHandler := mockCommandRunner{data: []byte(``)}
-		i.handlers[cmdintroduce.AcceptProblemReport] = fakeHandler.exec
+		i.handlers[cmdintroduce.AcceptProblemReportCommandMethod] = fakeHandler.exec
 
 		reqData := `{"piid": "a13832dc-88b8-4714-b697-e5410d23abe2"}`
 		req := &models.RequestEnvelope{Payload: []byte(reqData)}

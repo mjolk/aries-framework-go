@@ -22,57 +22,57 @@ type PresentProof struct {
 
 // Actions returns pending actions that have not yet to be executed or canceled.
 func (p *PresentProof) Actions(request *models.RequestEnvelope) *models.ResponseEnvelope {
-	return p.createRespEnvelope(request, cmdpresproof.Actions)
+	return p.createRespEnvelope(request, cmdpresproof.ActionsCommandMethod)
 }
 
 // SendRequestPresentation is used by the Verifier to send a request presentation.
 func (p *PresentProof) SendRequestPresentation(request *models.RequestEnvelope) *models.ResponseEnvelope {
-	return p.createRespEnvelope(request, cmdpresproof.SendRequestPresentation)
+	return p.createRespEnvelope(request, cmdpresproof.SendRequestPresentationCommandMethod)
 }
 
 // SendProposePresentation is used by the Prover to send a propose presentation.
 func (p *PresentProof) SendProposePresentation(request *models.RequestEnvelope) *models.ResponseEnvelope {
-	return p.createRespEnvelope(request, cmdpresproof.SendProposePresentation)
+	return p.createRespEnvelope(request, cmdpresproof.SendProposePresentationCommandMethod)
 }
 
 // AcceptRequestPresentation is used by the Prover is to accept a presentation request.
 func (p *PresentProof) AcceptRequestPresentation(request *models.RequestEnvelope) *models.ResponseEnvelope {
-	return p.createRespEnvelope(request, cmdpresproof.AcceptRequestPresentation)
+	return p.createRespEnvelope(request, cmdpresproof.AcceptRequestPresentationCommandMethod)
 }
 
 // NegotiateRequestPresentation is used by the Prover to counter a presentation request they received with a proposal.
 func (p *PresentProof) NegotiateRequestPresentation(request *models.RequestEnvelope) *models.ResponseEnvelope {
-	return p.createRespEnvelope(request, cmdpresproof.NegotiateRequestPresentation)
+	return p.createRespEnvelope(request, cmdpresproof.NegotiateRequestPresentationCommandMethod)
 }
 
 // DeclineRequestPresentation is used when the Prover does not want to accept the request presentation.
 func (p *PresentProof) DeclineRequestPresentation(request *models.RequestEnvelope) *models.ResponseEnvelope {
-	return p.createRespEnvelope(request, cmdpresproof.DeclineRequestPresentation)
+	return p.createRespEnvelope(request, cmdpresproof.DeclineRequestPresentationCommandMethod)
 }
 
 // AcceptProposePresentation is used when the Verifier is willing to accept the propose presentation.
 func (p *PresentProof) AcceptProposePresentation(request *models.RequestEnvelope) *models.ResponseEnvelope {
-	return p.createRespEnvelope(request, cmdpresproof.AcceptProposePresentation)
+	return p.createRespEnvelope(request, cmdpresproof.AcceptProposePresentationCommandMethod)
 }
 
 // DeclineProposePresentation is used when the Verifier does not want to accept the propose presentation.
 func (p *PresentProof) DeclineProposePresentation(request *models.RequestEnvelope) *models.ResponseEnvelope {
-	return p.createRespEnvelope(request, cmdpresproof.DeclineProposePresentation)
+	return p.createRespEnvelope(request, cmdpresproof.DeclineProposePresentationCommandMethod)
 }
 
 // AcceptPresentation is used by the Verifier to accept a presentation.
 func (p *PresentProof) AcceptPresentation(request *models.RequestEnvelope) *models.ResponseEnvelope {
-	return p.createRespEnvelope(request, cmdpresproof.AcceptPresentation)
+	return p.createRespEnvelope(request, cmdpresproof.AcceptPresentationCommandMethod)
 }
 
 // AcceptProblemReport is used for accepting problem report.
 func (p *PresentProof) AcceptProblemReport(request *models.RequestEnvelope) *models.ResponseEnvelope {
-	return p.createRespEnvelope(request, cmdpresproof.AcceptProblemReport)
+	return p.createRespEnvelope(request, cmdpresproof.AcceptProblemReportCommandMethod)
 }
 
 // DeclinePresentation is used by the Verifier to decline a presentation.
 func (p *PresentProof) DeclinePresentation(request *models.RequestEnvelope) *models.ResponseEnvelope {
-	return p.createRespEnvelope(request, cmdpresproof.DeclinePresentation)
+	return p.createRespEnvelope(request, cmdpresproof.DeclinePresentationCommandMethod)
 }
 
 func (p *PresentProof) createRespEnvelope(request *models.RequestEnvelope, endpoint string) *models.ResponseEnvelope {

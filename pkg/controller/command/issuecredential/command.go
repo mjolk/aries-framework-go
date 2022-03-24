@@ -65,26 +65,26 @@ const (
 	// command name.
 	CommandName = "issuecredential"
 
-	Actions             = "Actions"
-	SendOffer           = "SendOffer"
-	SendOfferV3         = "SendOfferV3"
-	SendProposal        = "SendProposal"
-	SendProposalV3      = "SendProposalV3"
-	SendRequest         = "SendRequest"
-	SendRequestV3       = "SendRequestV3"
-	AcceptProposal      = "AcceptProposal"
-	AcceptProposalV3    = "AcceptProposalV3"
-	DeclineProposal     = "DeclineProposal"
-	AcceptOffer         = "AcceptOffer"
-	DeclineOffer        = "DeclineOffer"
-	NegotiateProposal   = "NegotiateProposal"
-	NegotiateProposalV3 = "NegotiateProposalV3"
-	AcceptRequest       = "AcceptRequest"
-	AcceptRequestV3     = "AcceptRequestV3"
-	DeclineRequest      = "DeclineRequest"
-	AcceptCredential    = "AcceptCredential"
-	DeclineCredential   = "DeclineCredential"
-	AcceptProblemReport = "AcceptProblemReport"
+	ActionsCommandMethod             = "Actions"
+	SendOfferCommandMethod           = "SendOffer"
+	SendOfferV3COmmandMethod         = "SendOfferV3"
+	SendProposalCommandMethod        = "SendProposal"
+	SendProposalV3CommandMethod      = "SendProposalV3"
+	SendRequestCommandMethod         = "SendRequest"
+	SendRequestV3CommandMethod       = "SendRequestV3"
+	AcceptProposalCommandMethod      = "AcceptProposal"
+	AcceptProposalV3CommandMethod    = "AcceptProposalV3"
+	DeclineProposalCommandMethod     = "DeclineProposal"
+	AcceptOfferCommandMethod         = "AcceptOffer"
+	DeclineOfferCommandMethod        = "DeclineOffer"
+	NegotiateProposalCommandMethod   = "NegotiateProposal"
+	NegotiateProposalV3CommandMethod = "NegotiateProposalV3"
+	AcceptRequestCommandMethod       = "AcceptRequest"
+	AcceptRequestV3CommandMethod     = "AcceptRequestV3"
+	DeclineRequestCommandMethod      = "DeclineRequest"
+	AcceptCredentialCommandMethod    = "AcceptCredential"
+	DeclineCredentialCommandMethod   = "DeclineCredential"
+	AcceptProblemReportCommandMethod = "AcceptProblemReport"
 )
 
 const (
@@ -190,26 +190,26 @@ func New(ctx Provider, notifier command.Notifier, options ...Option) (*Command, 
 // GetHandlers returns list of all commands supported by this controller command.
 func (c *Command) GetHandlers() []command.Handler {
 	return []command.Handler{
-		cmdutil.NewCommandHandler(CommandName, Actions, c.Actions),
-		cmdutil.NewCommandHandler(CommandName, SendOffer, c.SendOffer),
-		cmdutil.NewCommandHandler(CommandName, SendOfferV3, c.SendOffer),
-		cmdutil.NewCommandHandler(CommandName, SendProposal, c.SendProposal),
-		cmdutil.NewCommandHandler(CommandName, SendProposalV3, c.SendProposal),
-		cmdutil.NewCommandHandler(CommandName, SendRequest, c.SendRequest),
-		cmdutil.NewCommandHandler(CommandName, SendRequestV3, c.SendRequest),
-		cmdutil.NewCommandHandler(CommandName, AcceptProposal, c.AcceptProposal),
-		cmdutil.NewCommandHandler(CommandName, AcceptProposalV3, c.AcceptProposal),
-		cmdutil.NewCommandHandler(CommandName, DeclineProposal, c.DeclineProposal),
-		cmdutil.NewCommandHandler(CommandName, AcceptOffer, c.AcceptOffer),
-		cmdutil.NewCommandHandler(CommandName, AcceptProblemReport, c.AcceptProblemReport),
-		cmdutil.NewCommandHandler(CommandName, DeclineOffer, c.DeclineOffer),
-		cmdutil.NewCommandHandler(CommandName, NegotiateProposal, c.NegotiateProposal),
-		cmdutil.NewCommandHandler(CommandName, NegotiateProposalV3, c.NegotiateProposal),
-		cmdutil.NewCommandHandler(CommandName, AcceptRequest, c.AcceptRequest),
-		cmdutil.NewCommandHandler(CommandName, AcceptRequestV3, c.AcceptRequest),
-		cmdutil.NewCommandHandler(CommandName, DeclineRequest, c.DeclineRequest),
-		cmdutil.NewCommandHandler(CommandName, AcceptCredential, c.AcceptCredential),
-		cmdutil.NewCommandHandler(CommandName, DeclineCredential, c.DeclineCredential),
+		cmdutil.NewCommandHandler(CommandName, ActionsCommandMethod, c.Actions),
+		cmdutil.NewCommandHandler(CommandName, SendOfferCommandMethod, c.SendOffer),
+		cmdutil.NewCommandHandler(CommandName, SendOfferV3COmmandMethod, c.SendOffer),
+		cmdutil.NewCommandHandler(CommandName, SendProposalCommandMethod, c.SendProposal),
+		cmdutil.NewCommandHandler(CommandName, SendProposalV3CommandMethod, c.SendProposal),
+		cmdutil.NewCommandHandler(CommandName, SendRequestCommandMethod, c.SendRequest),
+		cmdutil.NewCommandHandler(CommandName, SendRequestV3CommandMethod, c.SendRequest),
+		cmdutil.NewCommandHandler(CommandName, AcceptProposalCommandMethod, c.AcceptProposal),
+		cmdutil.NewCommandHandler(CommandName, AcceptProposalV3CommandMethod, c.AcceptProposal),
+		cmdutil.NewCommandHandler(CommandName, DeclineProposalCommandMethod, c.DeclineProposal),
+		cmdutil.NewCommandHandler(CommandName, AcceptOfferCommandMethod, c.AcceptOffer),
+		cmdutil.NewCommandHandler(CommandName, AcceptProblemReportCommandMethod, c.AcceptProblemReport),
+		cmdutil.NewCommandHandler(CommandName, DeclineOfferCommandMethod, c.DeclineOffer),
+		cmdutil.NewCommandHandler(CommandName, NegotiateProposalCommandMethod, c.NegotiateProposal),
+		cmdutil.NewCommandHandler(CommandName, NegotiateProposalV3CommandMethod, c.NegotiateProposal),
+		cmdutil.NewCommandHandler(CommandName, AcceptRequestCommandMethod, c.AcceptRequest),
+		cmdutil.NewCommandHandler(CommandName, AcceptRequestV3CommandMethod, c.AcceptRequest),
+		cmdutil.NewCommandHandler(CommandName, DeclineRequestCommandMethod, c.DeclineRequest),
+		cmdutil.NewCommandHandler(CommandName, AcceptCredentialCommandMethod, c.AcceptCredential),
+		cmdutil.NewCommandHandler(CommandName, DeclineCredentialCommandMethod, c.DeclineCredential),
 	}
 }
 
@@ -217,7 +217,7 @@ func (c *Command) GetHandlers() []command.Handler {
 func (c *Command) Actions(rw io.Writer, _ io.Reader) command.Error {
 	result, err := c.client.Actions()
 	if err != nil {
-		logutil.LogError(logger, CommandName, Actions, err.Error())
+		logutil.LogError(logger, CommandName, ActionsCommandMethod, err.Error())
 		return command.NewExecuteError(ActionsErrorCode, err)
 	}
 
@@ -225,7 +225,7 @@ func (c *Command) Actions(rw io.Writer, _ io.Reader) command.Error {
 		Actions: result,
 	}, logger)
 
-	logutil.LogDebug(logger, CommandName, Actions, successString)
+	logutil.LogDebug(logger, CommandName, ActionsCommandMethod, successString)
 
 	return nil
 }
@@ -235,41 +235,41 @@ func (c *Command) SendOffer(rw io.Writer, req io.Reader) command.Error {
 	var args SendOfferArgs
 
 	if err := json.NewDecoder(req).Decode(&args); err != nil {
-		logutil.LogInfo(logger, CommandName, SendOffer, err.Error())
+		logutil.LogInfo(logger, CommandName, SendOfferCommandMethod, err.Error())
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	if args.MyDID == "" {
-		logutil.LogDebug(logger, CommandName, SendOffer, errEmptyMyDID)
+		logutil.LogDebug(logger, CommandName, SendOfferCommandMethod, errEmptyMyDID)
 		return command.NewValidationError(InvalidRequestErrorCode, errors.New(errEmptyMyDID))
 	}
 
 	if args.TheirDID == "" {
-		logutil.LogDebug(logger, CommandName, SendOffer, errEmptyTheirDID)
+		logutil.LogDebug(logger, CommandName, SendOfferCommandMethod, errEmptyTheirDID)
 		return command.NewValidationError(InvalidRequestErrorCode, errors.New(errEmptyTheirDID))
 	}
 
 	if args.OfferCredential == nil {
-		logutil.LogDebug(logger, CommandName, SendOffer, errEmptyOfferCredential)
+		logutil.LogDebug(logger, CommandName, SendOfferCommandMethod, errEmptyOfferCredential)
 		return command.NewValidationError(InvalidRequestErrorCode, errors.New(errEmptyOfferCredential))
 	}
 
 	conn, err := c.lookup.GetConnectionRecordByDIDs(args.MyDID, args.TheirDID)
 	if err != nil {
-		logutil.LogDebug(logger, CommandName, SendOffer, errMissingConnection)
+		logutil.LogDebug(logger, CommandName, SendOfferCommandMethod, errMissingConnection)
 
 		return command.NewValidationError(InvalidRequestErrorCode, errors.New(errMissingConnection))
 	}
 
 	piid, err := c.client.SendOffer(args.OfferCredential, conn)
 	if err != nil {
-		logutil.LogError(logger, CommandName, SendOffer, err.Error())
+		logutil.LogError(logger, CommandName, SendOfferCommandMethod, err.Error())
 		return command.NewExecuteError(SendOfferErrorCode, err)
 	}
 
 	command.WriteNillableResponse(rw, &SendOfferResponse{PIID: piid}, logger)
 
-	logutil.LogDebug(logger, CommandName, SendOffer, successString)
+	logutil.LogDebug(logger, CommandName, SendOfferCommandMethod, successString)
 
 	return nil
 }
@@ -279,41 +279,41 @@ func (c *Command) SendProposal(rw io.Writer, req io.Reader) command.Error {
 	var args SendProposalArgs
 
 	if err := json.NewDecoder(req).Decode(&args); err != nil {
-		logutil.LogInfo(logger, CommandName, SendProposal, err.Error())
+		logutil.LogInfo(logger, CommandName, SendProposalCommandMethod, err.Error())
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	if args.MyDID == "" {
-		logutil.LogDebug(logger, CommandName, SendProposal, errEmptyMyDID)
+		logutil.LogDebug(logger, CommandName, SendProposalCommandMethod, errEmptyMyDID)
 		return command.NewValidationError(InvalidRequestErrorCode, errors.New(errEmptyMyDID))
 	}
 
 	if args.TheirDID == "" {
-		logutil.LogDebug(logger, CommandName, SendProposal, errEmptyTheirDID)
+		logutil.LogDebug(logger, CommandName, SendProposalCommandMethod, errEmptyTheirDID)
 		return command.NewValidationError(InvalidRequestErrorCode, errors.New(errEmptyTheirDID))
 	}
 
 	if args.ProposeCredential == nil {
-		logutil.LogDebug(logger, CommandName, SendProposal, errEmptyProposeCredential)
+		logutil.LogDebug(logger, CommandName, SendProposalCommandMethod, errEmptyProposeCredential)
 		return command.NewValidationError(InvalidRequestErrorCode, errors.New(errEmptyProposeCredential))
 	}
 
 	conn, err := c.lookup.GetConnectionRecordByDIDs(args.MyDID, args.TheirDID)
 	if err != nil {
-		logutil.LogDebug(logger, CommandName, SendProposal, errMissingConnection)
+		logutil.LogDebug(logger, CommandName, SendProposalCommandMethod, errMissingConnection)
 
 		return command.NewValidationError(InvalidRequestErrorCode, errors.New(errMissingConnection))
 	}
 
 	piid, err := c.client.SendProposal(args.ProposeCredential, conn)
 	if err != nil {
-		logutil.LogError(logger, CommandName, SendProposal, err.Error())
+		logutil.LogError(logger, CommandName, SendProposalCommandMethod, err.Error())
 		return command.NewExecuteError(SendProposalErrorCode, err)
 	}
 
 	command.WriteNillableResponse(rw, &SendProposalResponse{PIID: piid}, logger)
 
-	logutil.LogDebug(logger, CommandName, SendProposal, successString)
+	logutil.LogDebug(logger, CommandName, SendProposalCommandMethod, successString)
 
 	return nil
 }
@@ -323,41 +323,41 @@ func (c *Command) SendRequest(rw io.Writer, req io.Reader) command.Error {
 	var args SendRequestArgs
 
 	if err := json.NewDecoder(req).Decode(&args); err != nil {
-		logutil.LogInfo(logger, CommandName, SendRequest, err.Error())
+		logutil.LogInfo(logger, CommandName, SendRequestCommandMethod, err.Error())
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	if args.MyDID == "" {
-		logutil.LogDebug(logger, CommandName, SendRequest, errEmptyMyDID)
+		logutil.LogDebug(logger, CommandName, SendRequestCommandMethod, errEmptyMyDID)
 		return command.NewValidationError(InvalidRequestErrorCode, errors.New(errEmptyMyDID))
 	}
 
 	if args.TheirDID == "" {
-		logutil.LogDebug(logger, CommandName, SendRequest, errEmptyTheirDID)
+		logutil.LogDebug(logger, CommandName, SendRequestCommandMethod, errEmptyTheirDID)
 		return command.NewValidationError(InvalidRequestErrorCode, errors.New(errEmptyTheirDID))
 	}
 
 	if args.RequestCredential == nil {
-		logutil.LogDebug(logger, CommandName, SendRequest, errEmptyRequestCredential)
+		logutil.LogDebug(logger, CommandName, SendRequestCommandMethod, errEmptyRequestCredential)
 		return command.NewValidationError(InvalidRequestErrorCode, errors.New(errEmptyRequestCredential))
 	}
 
 	conn, err := c.lookup.GetConnectionRecordByDIDs(args.MyDID, args.TheirDID)
 	if err != nil {
-		logutil.LogDebug(logger, CommandName, SendRequest, errMissingConnection)
+		logutil.LogDebug(logger, CommandName, SendRequestCommandMethod, errMissingConnection)
 
 		return command.NewValidationError(InvalidRequestErrorCode, errors.New(errMissingConnection))
 	}
 
 	piid, err := c.client.SendRequest(args.RequestCredential, conn)
 	if err != nil {
-		logutil.LogError(logger, CommandName, SendRequest, err.Error())
+		logutil.LogError(logger, CommandName, SendRequestCommandMethod, err.Error())
 		return command.NewExecuteError(SendRequestErrorCode, err)
 	}
 
 	command.WriteNillableResponse(rw, &SendRequestResponse{PIID: piid}, logger)
 
-	logutil.LogDebug(logger, CommandName, SendRequest, successString)
+	logutil.LogDebug(logger, CommandName, SendRequestCommandMethod, successString)
 
 	return nil
 }
@@ -367,28 +367,28 @@ func (c *Command) AcceptProposal(rw io.Writer, req io.Reader) command.Error {
 	var args AcceptProposalArgs
 
 	if err := json.NewDecoder(req).Decode(&args); err != nil {
-		logutil.LogInfo(logger, CommandName, AcceptProposal, err.Error())
+		logutil.LogInfo(logger, CommandName, AcceptProposalCommandMethod, err.Error())
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	if args.PIID == "" {
-		logutil.LogDebug(logger, CommandName, AcceptProposal, errEmptyPIID)
+		logutil.LogDebug(logger, CommandName, AcceptProposalCommandMethod, errEmptyPIID)
 		return command.NewValidationError(InvalidRequestErrorCode, errors.New(errEmptyPIID))
 	}
 
 	if args.OfferCredential == nil {
-		logutil.LogDebug(logger, CommandName, AcceptProposal, errEmptyOfferCredential)
+		logutil.LogDebug(logger, CommandName, AcceptProposalCommandMethod, errEmptyOfferCredential)
 		return command.NewValidationError(InvalidRequestErrorCode, errors.New(errEmptyOfferCredential))
 	}
 
 	if err := c.client.AcceptProposal(args.PIID, args.OfferCredential); err != nil {
-		logutil.LogError(logger, CommandName, AcceptProposal, err.Error())
+		logutil.LogError(logger, CommandName, AcceptProposalCommandMethod, err.Error())
 		return command.NewExecuteError(AcceptProposalErrorCode, err)
 	}
 
 	command.WriteNillableResponse(rw, &AcceptProposalResponse{}, logger)
 
-	logutil.LogDebug(logger, CommandName, AcceptProposal, successString)
+	logutil.LogDebug(logger, CommandName, AcceptProposalCommandMethod, successString)
 
 	return nil
 }
@@ -398,28 +398,28 @@ func (c *Command) NegotiateProposal(rw io.Writer, req io.Reader) command.Error {
 	var args NegotiateProposalArgs
 
 	if err := json.NewDecoder(req).Decode(&args); err != nil {
-		logutil.LogInfo(logger, CommandName, NegotiateProposal, err.Error())
+		logutil.LogInfo(logger, CommandName, NegotiateProposalCommandMethod, err.Error())
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	if args.PIID == "" {
-		logutil.LogDebug(logger, CommandName, NegotiateProposal, errEmptyPIID)
+		logutil.LogDebug(logger, CommandName, NegotiateProposalCommandMethod, errEmptyPIID)
 		return command.NewValidationError(InvalidRequestErrorCode, errors.New(errEmptyPIID))
 	}
 
 	if args.ProposeCredential == nil {
-		logutil.LogDebug(logger, CommandName, NegotiateProposal, errEmptyProposeCredential)
+		logutil.LogDebug(logger, CommandName, NegotiateProposalCommandMethod, errEmptyProposeCredential)
 		return command.NewValidationError(InvalidRequestErrorCode, errors.New(errEmptyProposeCredential))
 	}
 
 	if err := c.client.NegotiateProposal(args.PIID, args.ProposeCredential); err != nil {
-		logutil.LogError(logger, CommandName, NegotiateProposal, err.Error())
+		logutil.LogError(logger, CommandName, NegotiateProposalCommandMethod, err.Error())
 		return command.NewExecuteError(NegotiateProposalErrorCode, err)
 	}
 
 	command.WriteNillableResponse(rw, &NegotiateProposalResponse{}, logger)
 
-	logutil.LogDebug(logger, CommandName, NegotiateProposal, successString)
+	logutil.LogDebug(logger, CommandName, NegotiateProposalCommandMethod, successString)
 
 	return nil
 }
@@ -429,24 +429,24 @@ func (c *Command) DeclineProposal(rw io.Writer, req io.Reader) command.Error {
 	var args DeclineProposalArgs
 
 	if err := json.NewDecoder(req).Decode(&args); err != nil {
-		logutil.LogInfo(logger, CommandName, DeclineProposal, err.Error())
+		logutil.LogInfo(logger, CommandName, DeclineProposalCommandMethod, err.Error())
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	if args.PIID == "" {
-		logutil.LogDebug(logger, CommandName, DeclineProposal, errEmptyPIID)
+		logutil.LogDebug(logger, CommandName, DeclineProposalCommandMethod, errEmptyPIID)
 		return command.NewValidationError(InvalidRequestErrorCode, errors.New(errEmptyPIID))
 	}
 
 	if err := c.client.DeclineProposal(args.PIID, args.Reason,
 		issuecredential.RequestRedirect(args.RedirectURL)); err != nil {
-		logutil.LogError(logger, CommandName, DeclineProposal, err.Error())
+		logutil.LogError(logger, CommandName, DeclineProposalCommandMethod, err.Error())
 		return command.NewExecuteError(DeclineProposalErrorCode, err)
 	}
 
 	command.WriteNillableResponse(rw, &DeclineProposalResponse{}, logger)
 
-	logutil.LogDebug(logger, CommandName, DeclineProposal, successString)
+	logutil.LogDebug(logger, CommandName, DeclineProposalCommandMethod, successString)
 
 	return nil
 }
@@ -456,23 +456,23 @@ func (c *Command) AcceptOffer(rw io.Writer, req io.Reader) command.Error {
 	var args AcceptOfferArgs
 
 	if err := json.NewDecoder(req).Decode(&args); err != nil {
-		logutil.LogInfo(logger, CommandName, AcceptOffer, err.Error())
+		logutil.LogInfo(logger, CommandName, AcceptOfferCommandMethod, err.Error())
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	if args.PIID == "" {
-		logutil.LogDebug(logger, CommandName, AcceptOffer, errEmptyPIID)
+		logutil.LogDebug(logger, CommandName, AcceptOfferCommandMethod, errEmptyPIID)
 		return command.NewValidationError(InvalidRequestErrorCode, errors.New(errEmptyPIID))
 	}
 
 	if err := c.client.AcceptOffer(args.PIID, &args.RequestCredential); err != nil {
-		logutil.LogError(logger, CommandName, AcceptOffer, err.Error())
+		logutil.LogError(logger, CommandName, AcceptOfferCommandMethod, err.Error())
 		return command.NewExecuteError(AcceptOfferErrorCode, err)
 	}
 
 	command.WriteNillableResponse(rw, &AcceptOfferResponse{}, logger)
 
-	logutil.LogDebug(logger, CommandName, AcceptOffer, successString)
+	logutil.LogDebug(logger, CommandName, AcceptOfferCommandMethod, successString)
 
 	return nil
 }
@@ -482,23 +482,23 @@ func (c *Command) AcceptProblemReport(rw io.Writer, req io.Reader) command.Error
 	var args AcceptProblemReportArgs
 
 	if err := json.NewDecoder(req).Decode(&args); err != nil {
-		logutil.LogInfo(logger, CommandName, AcceptProblemReport, err.Error())
+		logutil.LogInfo(logger, CommandName, AcceptProblemReportCommandMethod, err.Error())
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	if args.PIID == "" {
-		logutil.LogDebug(logger, CommandName, AcceptProblemReport, errEmptyPIID)
+		logutil.LogDebug(logger, CommandName, AcceptProblemReportCommandMethod, errEmptyPIID)
 		return command.NewValidationError(InvalidRequestErrorCode, errors.New(errEmptyPIID))
 	}
 
 	if err := c.client.AcceptProblemReport(args.PIID); err != nil {
-		logutil.LogError(logger, CommandName, AcceptProblemReport, err.Error())
+		logutil.LogError(logger, CommandName, AcceptProblemReportCommandMethod, err.Error())
 		return command.NewExecuteError(AcceptProblemReportErrorCode, err)
 	}
 
 	command.WriteNillableResponse(rw, &AcceptProblemReportResponse{}, logger)
 
-	logutil.LogDebug(logger, CommandName, AcceptProblemReport, successString)
+	logutil.LogDebug(logger, CommandName, AcceptProblemReportCommandMethod, successString)
 
 	return nil
 }
@@ -508,23 +508,23 @@ func (c *Command) DeclineOffer(rw io.Writer, req io.Reader) command.Error {
 	var args DeclineOfferArgs
 
 	if err := json.NewDecoder(req).Decode(&args); err != nil {
-		logutil.LogInfo(logger, CommandName, DeclineOffer, err.Error())
+		logutil.LogInfo(logger, CommandName, DeclineOfferCommandMethod, err.Error())
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	if args.PIID == "" {
-		logutil.LogDebug(logger, CommandName, DeclineOffer, errEmptyPIID)
+		logutil.LogDebug(logger, CommandName, DeclineOfferCommandMethod, errEmptyPIID)
 		return command.NewValidationError(InvalidRequestErrorCode, errors.New(errEmptyPIID))
 	}
 
 	if err := c.client.DeclineOffer(args.PIID, args.Reason); err != nil {
-		logutil.LogError(logger, CommandName, DeclineOffer, err.Error())
+		logutil.LogError(logger, CommandName, DeclineOfferCommandMethod, err.Error())
 		return command.NewExecuteError(DeclineOfferErrorCode, err)
 	}
 
 	command.WriteNillableResponse(rw, &DeclineOfferResponse{}, logger)
 
-	logutil.LogDebug(logger, CommandName, DeclineOffer, successString)
+	logutil.LogDebug(logger, CommandName, DeclineOfferCommandMethod, successString)
 
 	return nil
 }
@@ -534,28 +534,28 @@ func (c *Command) AcceptRequest(rw io.Writer, req io.Reader) command.Error {
 	var request AcceptRequestArgs
 
 	if err := json.NewDecoder(req).Decode(&request); err != nil {
-		logutil.LogInfo(logger, CommandName, AcceptRequest, err.Error())
+		logutil.LogInfo(logger, CommandName, AcceptRequestCommandMethod, err.Error())
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	if request.PIID == "" {
-		logutil.LogDebug(logger, CommandName, AcceptRequest, errEmptyPIID)
+		logutil.LogDebug(logger, CommandName, AcceptRequestCommandMethod, errEmptyPIID)
 		return command.NewValidationError(InvalidRequestErrorCode, errors.New(errEmptyPIID))
 	}
 
 	if request.IssueCredential == nil {
-		logutil.LogDebug(logger, CommandName, AcceptRequest, errEmptyIssueCredential)
+		logutil.LogDebug(logger, CommandName, AcceptRequestCommandMethod, errEmptyIssueCredential)
 		return command.NewValidationError(InvalidRequestErrorCode, errors.New(errEmptyIssueCredential))
 	}
 
 	if err := c.client.AcceptRequest(request.PIID, request.IssueCredential); err != nil {
-		logutil.LogError(logger, CommandName, AcceptRequest, err.Error())
+		logutil.LogError(logger, CommandName, AcceptRequestCommandMethod, err.Error())
 		return command.NewExecuteError(AcceptRequestErrorCode, err)
 	}
 
 	command.WriteNillableResponse(rw, &AcceptRequestResponse{}, logger)
 
-	logutil.LogDebug(logger, CommandName, AcceptRequest, successString)
+	logutil.LogDebug(logger, CommandName, AcceptRequestCommandMethod, successString)
 
 	return nil
 }
@@ -565,24 +565,24 @@ func (c *Command) DeclineRequest(rw io.Writer, req io.Reader) command.Error {
 	var args DeclineRequestArgs
 
 	if err := json.NewDecoder(req).Decode(&args); err != nil {
-		logutil.LogInfo(logger, CommandName, DeclineRequest, err.Error())
+		logutil.LogInfo(logger, CommandName, DeclineRequestCommandMethod, err.Error())
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	if args.PIID == "" {
-		logutil.LogDebug(logger, CommandName, DeclineRequest, errEmptyPIID)
+		logutil.LogDebug(logger, CommandName, DeclineRequestCommandMethod, errEmptyPIID)
 		return command.NewValidationError(InvalidRequestErrorCode, errors.New(errEmptyPIID))
 	}
 
 	if err := c.client.DeclineRequest(args.PIID, args.Reason,
 		issuecredential.RequestRedirect(args.RedirectURL)); err != nil {
-		logutil.LogError(logger, CommandName, DeclineRequest, err.Error())
+		logutil.LogError(logger, CommandName, DeclineRequestCommandMethod, err.Error())
 		return command.NewExecuteError(DeclineRequestErrorCode, err)
 	}
 
 	command.WriteNillableResponse(rw, &DeclineRequestResponse{}, logger)
 
-	logutil.LogDebug(logger, CommandName, DeclineRequest, successString)
+	logutil.LogDebug(logger, CommandName, DeclineRequestCommandMethod, successString)
 
 	return nil
 }
@@ -592,12 +592,12 @@ func (c *Command) AcceptCredential(rw io.Writer, req io.Reader) command.Error {
 	var args AcceptCredentialArgs
 
 	if err := json.NewDecoder(req).Decode(&args); err != nil {
-		logutil.LogInfo(logger, CommandName, AcceptCredential, err.Error())
+		logutil.LogInfo(logger, CommandName, AcceptCredentialCommandMethod, err.Error())
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	if args.PIID == "" {
-		logutil.LogDebug(logger, CommandName, AcceptCredential, errEmptyPIID)
+		logutil.LogDebug(logger, CommandName, AcceptCredentialCommandMethod, errEmptyPIID)
 		return command.NewValidationError(InvalidRequestErrorCode, errors.New(errEmptyPIID))
 	}
 
@@ -610,13 +610,13 @@ func (c *Command) AcceptCredential(rw io.Writer, req io.Reader) command.Error {
 	}
 
 	if err := c.client.AcceptCredential(args.PIID, opts...); err != nil {
-		logutil.LogError(logger, CommandName, AcceptCredential, err.Error())
+		logutil.LogError(logger, CommandName, AcceptCredentialCommandMethod, err.Error())
 		return command.NewExecuteError(AcceptCredentialErrorCode, err)
 	}
 
 	command.WriteNillableResponse(rw, &AcceptCredentialResponse{}, logger)
 
-	logutil.LogDebug(logger, CommandName, AcceptCredential, successString)
+	logutil.LogDebug(logger, CommandName, AcceptCredentialCommandMethod, successString)
 
 	return nil
 }
@@ -626,23 +626,23 @@ func (c *Command) DeclineCredential(rw io.Writer, req io.Reader) command.Error {
 	var args DeclineCredentialArgs
 
 	if err := json.NewDecoder(req).Decode(&args); err != nil {
-		logutil.LogInfo(logger, CommandName, DeclineCredential, err.Error())
+		logutil.LogInfo(logger, CommandName, DeclineCredentialCommandMethod, err.Error())
 		return command.NewValidationError(InvalidRequestErrorCode, err)
 	}
 
 	if args.PIID == "" {
-		logutil.LogDebug(logger, CommandName, DeclineCredential, errEmptyPIID)
+		logutil.LogDebug(logger, CommandName, DeclineCredentialCommandMethod, errEmptyPIID)
 		return command.NewValidationError(InvalidRequestErrorCode, errors.New(errEmptyPIID))
 	}
 
 	if err := c.client.DeclineCredential(args.PIID, args.Reason); err != nil {
-		logutil.LogError(logger, CommandName, DeclineCredential, err.Error())
+		logutil.LogError(logger, CommandName, DeclineCredentialCommandMethod, err.Error())
 		return command.NewExecuteError(DeclineCredentialErrorCode, err)
 	}
 
 	command.WriteNillableResponse(rw, &DeclineCredentialResponse{}, logger)
 
-	logutil.LogDebug(logger, CommandName, DeclineCredential, successString)
+	logutil.LogDebug(logger, CommandName, DeclineCredentialCommandMethod, successString)
 
 	return nil
 }

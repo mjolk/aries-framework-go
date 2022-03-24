@@ -27,7 +27,7 @@ func (oob *OutOfBandV2) CreateInvitation(request *models.RequestEnvelope) *model
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(oob.handlers[outofbandv2.CreateInvitation], args)
+	response, cmdErr := exec(oob.handlers[outofbandv2.CreateInvitationCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -43,7 +43,7 @@ func (oob *OutOfBandV2) AcceptInvitation(request []byte) *models.ResponseEnvelop
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(oob.handlers[outofbandv2.AcceptInvitation], args)
+	response, cmdErr := exec(oob.handlers[outofbandv2.AcceptInvitationCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}

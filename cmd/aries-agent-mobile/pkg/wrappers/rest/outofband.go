@@ -22,27 +22,27 @@ type OutOfBand struct {
 
 // CreateInvitation creates and saves an out-of-band invitation.
 func (oob *OutOfBand) CreateInvitation(request *models.RequestEnvelope) *models.ResponseEnvelope {
-	return oob.createRespEnvelope(request, outofband.CreateInvitation)
+	return oob.createRespEnvelope(request, outofband.CreateInvitationCommandMethod)
 }
 
 // AcceptInvitation from another agent and return the ID of the new connection records.
 func (oob *OutOfBand) AcceptInvitation(request []byte) *models.ResponseEnvelope {
-	return oob.createRespEnvelope(models.NewRequestEnvelope(request), outofband.AcceptInvitation)
+	return oob.createRespEnvelope(models.NewRequestEnvelope(request), outofband.AcceptInvitationCommandMethod)
 }
 
 // Actions returns pending actions that have not yet to be executed or canceled.
 func (oob *OutOfBand) Actions(request *models.RequestEnvelope) *models.ResponseEnvelope {
-	return oob.createRespEnvelope(request, outofband.Actions)
+	return oob.createRespEnvelope(request, outofband.ActionsCommandMethod)
 }
 
 // ActionContinue allows continuing with the protocol after an action event was triggered.
 func (oob *OutOfBand) ActionContinue(request *models.RequestEnvelope) *models.ResponseEnvelope {
-	return oob.createRespEnvelope(request, outofband.ActionContinue)
+	return oob.createRespEnvelope(request, outofband.ActionContinueCommandMethod)
 }
 
 // ActionStop stops the protocol after an action event was triggered.
 func (oob *OutOfBand) ActionStop(request *models.RequestEnvelope) *models.ResponseEnvelope {
-	return oob.createRespEnvelope(request, outofband.ActionStop)
+	return oob.createRespEnvelope(request, outofband.ActionStopCommandMethod)
 }
 
 func (oob *OutOfBand) createRespEnvelope(request *models.RequestEnvelope, endpoint string) *models.ResponseEnvelope {

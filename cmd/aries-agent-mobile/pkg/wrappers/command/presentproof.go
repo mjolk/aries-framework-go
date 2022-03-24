@@ -21,7 +21,7 @@ type PresentProof struct {
 
 // Actions returns pending actions that have not yet to be executed or canceled.
 func (p *PresentProof) Actions(request *models.RequestEnvelope) *models.ResponseEnvelope {
-	response, cmdErr := exec(p.handlers[cmdpresproof.Actions], request.Payload)
+	response, cmdErr := exec(p.handlers[cmdpresproof.ActionsCommandMethod], request.Payload)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -37,7 +37,7 @@ func (p *PresentProof) SendRequestPresentation(request *models.RequestEnvelope) 
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(p.handlers[cmdpresproof.SendRequestPresentation], args)
+	response, cmdErr := exec(p.handlers[cmdpresproof.SendRequestPresentationCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -53,7 +53,7 @@ func (p *PresentProof) SendProposePresentation(request *models.RequestEnvelope) 
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(p.handlers[cmdpresproof.SendProposePresentation], args)
+	response, cmdErr := exec(p.handlers[cmdpresproof.SendProposePresentationCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -69,7 +69,7 @@ func (p *PresentProof) AcceptRequestPresentation(request *models.RequestEnvelope
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(p.handlers[cmdpresproof.AcceptRequestPresentation], args)
+	response, cmdErr := exec(p.handlers[cmdpresproof.AcceptRequestPresentationCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -85,7 +85,7 @@ func (p *PresentProof) NegotiateRequestPresentation(request *models.RequestEnvel
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(p.handlers[cmdpresproof.NegotiateRequestPresentation], args)
+	response, cmdErr := exec(p.handlers[cmdpresproof.NegotiateRequestPresentationCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -101,7 +101,7 @@ func (p *PresentProof) DeclineRequestPresentation(request *models.RequestEnvelop
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(p.handlers[cmdpresproof.DeclineRequestPresentation], args)
+	response, cmdErr := exec(p.handlers[cmdpresproof.DeclineRequestPresentationCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -117,7 +117,7 @@ func (p *PresentProof) AcceptProposePresentation(request *models.RequestEnvelope
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(p.handlers[cmdpresproof.AcceptProposePresentation], args)
+	response, cmdErr := exec(p.handlers[cmdpresproof.AcceptProposePresentationCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -133,7 +133,7 @@ func (p *PresentProof) DeclineProposePresentation(request *models.RequestEnvelop
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(p.handlers[cmdpresproof.DeclineProposePresentation], args)
+	response, cmdErr := exec(p.handlers[cmdpresproof.DeclineProposePresentationCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -149,7 +149,7 @@ func (p *PresentProof) AcceptPresentation(request *models.RequestEnvelope) *mode
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(p.handlers[cmdpresproof.AcceptPresentation], args)
+	response, cmdErr := exec(p.handlers[cmdpresproof.AcceptPresentationCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -165,7 +165,7 @@ func (p *PresentProof) AcceptProblemReport(request *models.RequestEnvelope) *mod
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(p.handlers[cmdpresproof.AcceptProblemReport], args)
+	response, cmdErr := exec(p.handlers[cmdpresproof.AcceptProblemReportCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -181,7 +181,7 @@ func (p *PresentProof) DeclinePresentation(request *models.RequestEnvelope) *mod
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(p.handlers[cmdpresproof.DeclinePresentation], args)
+	response, cmdErr := exec(p.handlers[cmdpresproof.DeclinePresentationCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}

@@ -27,7 +27,7 @@ func (oob *OutOfBand) CreateInvitation(request *models.RequestEnvelope) *models.
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(oob.handlers[outofband.CreateInvitation], args)
+	response, cmdErr := exec(oob.handlers[outofband.CreateInvitationCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -43,7 +43,7 @@ func (oob *OutOfBand) AcceptInvitation(request []byte) *models.ResponseEnvelope 
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(oob.handlers[outofband.AcceptInvitation], args)
+	response, cmdErr := exec(oob.handlers[outofband.AcceptInvitationCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -53,7 +53,7 @@ func (oob *OutOfBand) AcceptInvitation(request []byte) *models.ResponseEnvelope 
 
 // Actions returns pending actions that have not yet to be executed or canceled.
 func (oob *OutOfBand) Actions(request *models.RequestEnvelope) *models.ResponseEnvelope {
-	response, cmdErr := exec(oob.handlers[outofband.Actions], request.Payload)
+	response, cmdErr := exec(oob.handlers[outofband.ActionsCommandMethod], request.Payload)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -69,7 +69,7 @@ func (oob *OutOfBand) ActionContinue(request *models.RequestEnvelope) *models.Re
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(oob.handlers[outofband.ActionContinue], args)
+	response, cmdErr := exec(oob.handlers[outofband.ActionContinueCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -85,7 +85,7 @@ func (oob *OutOfBand) ActionStop(request *models.RequestEnvelope) *models.Respon
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(oob.handlers[outofband.ActionStop], args)
+	response, cmdErr := exec(oob.handlers[outofband.ActionStopCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}

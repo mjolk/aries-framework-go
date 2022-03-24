@@ -44,7 +44,7 @@ func TestOutOfBand_AcceptInvitation(t *testing.T) {
 
 		mockResponse := mockConnectionIDJSON
 		fakeHandler := mockCommandRunner{data: []byte(mockResponse)}
-		controller.handlers[outofband.AcceptInvitation] = fakeHandler.exec
+		controller.handlers[outofband.AcceptInvitationCommandMethod] = fakeHandler.exec
 
 		payload := `{"invitation":{},"my_label":"label"}`
 
@@ -64,7 +64,7 @@ func TestOutOfBand_ActionContinue(t *testing.T) {
 
 		mockResponse := emptyJSON
 		fakeHandler := mockCommandRunner{data: []byte(mockResponse)}
-		controller.handlers[outofband.ActionContinue] = fakeHandler.exec
+		controller.handlers[outofband.ActionContinueCommandMethod] = fakeHandler.exec
 
 		payload := jsonPayload
 
@@ -84,7 +84,7 @@ func TestOutOfBand_ActionStop(t *testing.T) {
 
 		mockResponse := emptyJSON
 		fakeHandler := mockCommandRunner{data: []byte(mockResponse)}
-		controller.handlers[outofband.ActionStop] = fakeHandler.exec
+		controller.handlers[outofband.ActionStopCommandMethod] = fakeHandler.exec
 
 		payload := jsonPayload
 
@@ -104,7 +104,7 @@ func TestOutOfBand_Actions(t *testing.T) {
 
 		mockResponse := `{"actions":[{"PIID":"ID1","Msg":null,"MyDID":"","TheirDID":""}]}`
 		fakeHandler := mockCommandRunner{data: []byte(mockResponse)}
-		controller.handlers[outofband.Actions] = fakeHandler.exec
+		controller.handlers[outofband.ActionsCommandMethod] = fakeHandler.exec
 
 		payload := emptyJSON
 
@@ -127,7 +127,7 @@ func TestOutOfBand_CreateInvitation(t *testing.T) {
 "goal_code":"goal_code","service":["s1"],"protocols":["s1"]}}
 `
 		fakeHandler := mockCommandRunner{data: []byte(mockResponse)}
-		controller.handlers[outofband.CreateInvitation] = fakeHandler.exec
+		controller.handlers[outofband.CreateInvitationCommandMethod] = fakeHandler.exec
 
 		payload := `{"label":"label","goal":"goal","goal_code":"goal_code","service":["s1"],"protocols":["s1"]}`
 

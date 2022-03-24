@@ -21,7 +21,7 @@ type IssueCredential struct {
 
 // Actions returns pending actions that have not yet to be executed or canceled.
 func (ic *IssueCredential) Actions(request *models.RequestEnvelope) *models.ResponseEnvelope {
-	response, cmdErr := exec(ic.handlers[cmdisscred.Actions], request.Payload)
+	response, cmdErr := exec(ic.handlers[cmdisscred.ActionsCommandMethod], request.Payload)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -37,7 +37,7 @@ func (ic *IssueCredential) SendOffer(request *models.RequestEnvelope) *models.Re
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(ic.handlers[cmdisscred.SendOffer], args)
+	response, cmdErr := exec(ic.handlers[cmdisscred.SendOfferCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -53,7 +53,7 @@ func (ic *IssueCredential) SendProposal(request *models.RequestEnvelope) *models
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(ic.handlers[cmdisscred.SendProposal], args)
+	response, cmdErr := exec(ic.handlers[cmdisscred.SendProposalCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -69,7 +69,7 @@ func (ic *IssueCredential) SendRequest(request *models.RequestEnvelope) *models.
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(ic.handlers[cmdisscred.SendRequest], args)
+	response, cmdErr := exec(ic.handlers[cmdisscred.SendRequestCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -85,7 +85,7 @@ func (ic *IssueCredential) AcceptProposal(request *models.RequestEnvelope) *mode
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(ic.handlers[cmdisscred.AcceptProposal], args)
+	response, cmdErr := exec(ic.handlers[cmdisscred.AcceptProposalCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -101,7 +101,7 @@ func (ic *IssueCredential) NegotiateProposal(request *models.RequestEnvelope) *m
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(ic.handlers[cmdisscred.NegotiateProposal], args)
+	response, cmdErr := exec(ic.handlers[cmdisscred.NegotiateProposalCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -117,7 +117,7 @@ func (ic *IssueCredential) DeclineProposal(request *models.RequestEnvelope) *mod
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(ic.handlers[cmdisscred.DeclineProposal], args)
+	response, cmdErr := exec(ic.handlers[cmdisscred.DeclineProposalCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -133,7 +133,7 @@ func (ic *IssueCredential) AcceptOffer(request *models.RequestEnvelope) *models.
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(ic.handlers[cmdisscred.AcceptOffer], args)
+	response, cmdErr := exec(ic.handlers[cmdisscred.AcceptOfferCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -149,7 +149,7 @@ func (ic *IssueCredential) AcceptProblemReport(request *models.RequestEnvelope) 
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(ic.handlers[cmdisscred.AcceptProblemReport], args)
+	response, cmdErr := exec(ic.handlers[cmdisscred.AcceptProblemReportCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -165,7 +165,7 @@ func (ic *IssueCredential) DeclineOffer(request *models.RequestEnvelope) *models
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(ic.handlers[cmdisscred.DeclineOffer], args)
+	response, cmdErr := exec(ic.handlers[cmdisscred.DeclineOfferCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -181,7 +181,7 @@ func (ic *IssueCredential) AcceptRequest(request *models.RequestEnvelope) *model
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(ic.handlers[cmdisscred.AcceptRequest], args)
+	response, cmdErr := exec(ic.handlers[cmdisscred.AcceptRequestCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -197,7 +197,7 @@ func (ic *IssueCredential) DeclineRequest(request *models.RequestEnvelope) *mode
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(ic.handlers[cmdisscred.DeclineRequest], args)
+	response, cmdErr := exec(ic.handlers[cmdisscred.DeclineRequestCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -213,7 +213,7 @@ func (ic *IssueCredential) AcceptCredential(request *models.RequestEnvelope) *mo
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(ic.handlers[cmdisscred.AcceptCredential], args)
+	response, cmdErr := exec(ic.handlers[cmdisscred.AcceptCredentialCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}
@@ -229,7 +229,7 @@ func (ic *IssueCredential) DeclineCredential(request *models.RequestEnvelope) *m
 		return &models.ResponseEnvelope{Error: &models.CommandError{Message: err.Error()}}
 	}
 
-	response, cmdErr := exec(ic.handlers[cmdisscred.DeclineCredential], args)
+	response, cmdErr := exec(ic.handlers[cmdisscred.DeclineCredentialCommandMethod], args)
 	if cmdErr != nil {
 		return &models.ResponseEnvelope{Error: cmdErr}
 	}

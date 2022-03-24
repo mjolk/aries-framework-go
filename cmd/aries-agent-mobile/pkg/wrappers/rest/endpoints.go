@@ -62,47 +62,47 @@ func getControllerEndpoints() map[string]map[string]*endpoint {
 
 func getIntroduceEndpoints() map[string]*endpoint {
 	return map[string]*endpoint{
-		cmdintroduce.Actions: {
+		cmdintroduce.ActionsCommandMethod: {
 			Path:   opintroduce.Actions,
 			Method: http.MethodGet,
 		},
-		cmdintroduce.SendProposal: {
+		cmdintroduce.SendProposalCommandMethod: {
 			Path:   opintroduce.SendProposal,
 			Method: http.MethodPost,
 		},
-		cmdintroduce.SendProposalWithOOBInvitation: {
+		cmdintroduce.SendProposalWithOOBInvitationCommandMethod: {
 			Path:   opintroduce.SendProposalWithOOBInvitation,
 			Method: http.MethodPost,
 		},
-		cmdintroduce.SendRequest: {
+		cmdintroduce.SendRequestCommandMethod: {
 			Path:   opintroduce.SendRequest,
 			Method: http.MethodPost,
 		},
-		cmdintroduce.AcceptProposalWithOOBInvitation: {
+		cmdintroduce.AcceptProposalWithOOBInvitationCommandMethod: {
 			Path:   opintroduce.AcceptProposalWithOOBInvitation,
 			Method: http.MethodPost,
 		},
-		cmdintroduce.AcceptProposal: {
+		cmdintroduce.AcceptProposalCommandMethod: {
 			Path:   opintroduce.AcceptProposal,
 			Method: http.MethodPost,
 		},
-		cmdintroduce.AcceptRequestWithPublicOOBInvitation: {
+		cmdintroduce.AcceptRequestWithPublicOOBInvitationCommandMethod: {
 			Path:   opintroduce.AcceptRequestWithPublicOOBInvitation,
 			Method: http.MethodPost,
 		},
-		cmdintroduce.AcceptRequestWithRecipients: {
+		cmdintroduce.AcceptRequestWithRecipientsCommandMethod: {
 			Path:   opintroduce.AcceptRequestWithRecipients,
 			Method: http.MethodPost,
 		},
-		cmdintroduce.DeclineProposal: {
+		cmdintroduce.DeclineProposalCommandMethod: {
 			Path:   opintroduce.DeclineProposal,
 			Method: http.MethodPost,
 		},
-		cmdintroduce.DeclineRequest: {
+		cmdintroduce.DeclineRequestCommandMethod: {
 			Path:   opintroduce.DeclineRequest,
 			Method: http.MethodPost,
 		},
-		cmdintroduce.AcceptProblemReport: {
+		cmdintroduce.AcceptProblemReportCommandMethod: {
 			Path:   opintroduce.AcceptProblemReport,
 			Method: http.MethodPost,
 		},
@@ -209,59 +209,59 @@ func getDIDExchangeEndpoints() map[string]*endpoint {
 
 func getIssueCredentialEndpoints() map[string]*endpoint {
 	return map[string]*endpoint{
-		cmdisscred.Actions: {
+		cmdisscred.ActionsCommandMethod: {
 			Path:   opisscred.Actions,
 			Method: http.MethodGet,
 		},
-		cmdisscred.SendOffer: {
+		cmdisscred.SendOfferCommandMethod: {
 			Path:   opisscred.SendOffer,
 			Method: http.MethodPost,
 		},
-		cmdisscred.SendProposal: {
+		cmdisscred.SendProposalCommandMethod: {
 			Path:   opisscred.SendProposal,
 			Method: http.MethodPost,
 		},
-		cmdisscred.SendRequest: {
+		cmdisscred.SendRequestCommandMethod: {
 			Path:   opisscred.SendRequest,
 			Method: http.MethodPost,
 		},
-		cmdisscred.AcceptProposal: {
+		cmdisscred.AcceptProposalCommandMethod: {
 			Path:   opisscred.AcceptProposal,
 			Method: http.MethodPost,
 		},
-		cmdisscred.NegotiateProposal: {
+		cmdisscred.NegotiateProposalCommandMethod: {
 			Path:   opisscred.NegotiateProposal,
 			Method: http.MethodPost,
 		},
-		cmdisscred.DeclineProposal: {
+		cmdisscred.DeclineProposalCommandMethod: {
 			Path:   opisscred.DeclineProposal,
 			Method: http.MethodPost,
 		},
-		cmdisscred.AcceptOffer: {
+		cmdisscred.AcceptOfferCommandMethod: {
 			Path:   opisscred.AcceptOffer,
 			Method: http.MethodPost,
 		},
-		cmdisscred.AcceptProblemReport: {
+		cmdisscred.AcceptProblemReportCommandMethod: {
 			Path:   opisscred.AcceptProblemReport,
 			Method: http.MethodPost,
 		},
-		cmdisscred.DeclineOffer: {
+		cmdisscred.DeclineOfferCommandMethod: {
 			Path:   opisscred.DeclineOffer,
 			Method: http.MethodPost,
 		},
-		cmdisscred.AcceptRequest: {
+		cmdisscred.AcceptRequestCommandMethod: {
 			Path:   opisscred.AcceptRequest,
 			Method: http.MethodPost,
 		},
-		cmdisscred.DeclineRequest: {
+		cmdisscred.DeclineRequestCommandMethod: {
 			Path:   opisscred.DeclineRequest,
 			Method: http.MethodPost,
 		},
-		cmdisscred.AcceptCredential: {
+		cmdisscred.AcceptCredentialCommandMethod: {
 			Path:   opisscred.AcceptCredential,
 			Method: http.MethodPost,
 		},
-		cmdisscred.DeclineCredential: {
+		cmdisscred.DeclineCredentialCommandMethod: {
 			Path:   opisscred.DeclineCredential,
 			Method: http.MethodPost,
 		},
@@ -270,47 +270,47 @@ func getIssueCredentialEndpoints() map[string]*endpoint {
 
 func getPresentProofEndpoints() map[string]*endpoint {
 	return map[string]*endpoint{
-		cmdpresproof.Actions: {
+		cmdpresproof.ActionsCommandMethod: {
 			Path:   oppresproof.Actions,
 			Method: http.MethodGet,
 		},
-		cmdpresproof.SendRequestPresentation: {
+		cmdpresproof.SendRequestPresentationCommandMethod: {
 			Path:   oppresproof.SendRequestPresentation,
 			Method: http.MethodPost,
 		},
-		cmdpresproof.SendProposePresentation: {
+		cmdpresproof.SendProposePresentationCommandMethod: {
 			Path:   oppresproof.SendProposePresentation,
 			Method: http.MethodPost,
 		},
-		cmdpresproof.AcceptRequestPresentation: {
+		cmdpresproof.AcceptRequestPresentationCommandMethod: {
 			Path:   oppresproof.AcceptRequestPresentation,
 			Method: http.MethodPost,
 		},
-		cmdpresproof.NegotiateRequestPresentation: {
+		cmdpresproof.NegotiateRequestPresentationCommandMethod: {
 			Path:   oppresproof.NegotiateRequestPresentation,
 			Method: http.MethodPost,
 		},
-		cmdpresproof.DeclineRequestPresentation: {
+		cmdpresproof.DeclineRequestPresentationCommandMethod: {
 			Path:   oppresproof.DeclineRequestPresentation,
 			Method: http.MethodPost,
 		},
-		cmdpresproof.AcceptProposePresentation: {
+		cmdpresproof.AcceptProposePresentationCommandMethod: {
 			Path:   oppresproof.AcceptProposePresentation,
 			Method: http.MethodPost,
 		},
-		cmdpresproof.DeclineProposePresentation: {
+		cmdpresproof.DeclineProposePresentationCommandMethod: {
 			Path:   oppresproof.DeclineProposePresentation,
 			Method: http.MethodPost,
 		},
-		cmdpresproof.AcceptPresentation: {
+		cmdpresproof.AcceptPresentationCommandMethod: {
 			Path:   oppresproof.AcceptPresentation,
 			Method: http.MethodPost,
 		},
-		cmdpresproof.AcceptProblemReport: {
+		cmdpresproof.AcceptProblemReportCommandMethod: {
 			Path:   oppresproof.AcceptProblemReport,
 			Method: http.MethodPost,
 		},
-		cmdpresproof.DeclinePresentation: {
+		cmdpresproof.DeclinePresentationCommandMethod: {
 			Path:   oppresproof.DeclinePresentation,
 			Method: http.MethodPost,
 		},
@@ -406,23 +406,23 @@ func getMessagingEndpoints() map[string]*endpoint {
 
 func getOutOfBandEndpoints() map[string]*endpoint {
 	return map[string]*endpoint{
-		cmdoob.Actions: {
+		cmdoob.ActionsCommandMethod: {
 			Path:   opoob.Actions,
 			Method: http.MethodGet,
 		},
-		cmdoob.AcceptInvitation: {
+		cmdoob.AcceptInvitationCommandMethod: {
 			Path:   opoob.AcceptInvitation,
 			Method: http.MethodPost,
 		},
-		cmdoob.CreateInvitation: {
+		cmdoob.CreateInvitationCommandMethod: {
 			Path:   opoob.CreateInvitation,
 			Method: http.MethodPost,
 		},
-		cmdoob.ActionContinue: {
+		cmdoob.ActionContinueCommandMethod: {
 			Path:   opoob.ActionContinue,
 			Method: http.MethodPost,
 		},
-		cmdoob.ActionStop: {
+		cmdoob.ActionStopCommandMethod: {
 			Path:   opoob.ActionStop,
 			Method: http.MethodPost,
 		},
@@ -473,58 +473,58 @@ func getLDEndpoints() map[string]*endpoint {
 
 func getVCWalletEndpoints() map[string]*endpoint {
 	return map[string]*endpoint{
-		cmdvcwallet.CreateProfileMethod: {
+		cmdvcwallet.CreateProfileMethodCommandMethod: {
 			Path: opvcwallet.CreateProfilePath, Method: http.MethodPost,
 		},
-		cmdvcwallet.UpdateProfileMethod: {
+		cmdvcwallet.UpdateProfileMethodCommandMethod: {
 			Path: opvcwallet.UpdateProfilePath, Method: http.MethodPost,
 		},
-		cmdvcwallet.ProfileExistsMethod: {
+		cmdvcwallet.ProfileExistsMethodCommandMethod: {
 			Path: opvcwallet.ProfileExistsPath, Method: http.MethodGet,
 		},
-		cmdvcwallet.OpenMethod: {
+		cmdvcwallet.OpenCommandMethod: {
 			Path: opvcwallet.OpenPath, Method: http.MethodPost,
 		},
-		cmdvcwallet.CloseMethod: {
+		cmdvcwallet.CloseCommandMethod: {
 			Path: opvcwallet.ClosePath, Method: http.MethodPost,
 		},
-		cmdvcwallet.AddMethod: {
+		cmdvcwallet.AddCommandMethod: {
 			Path: opvcwallet.AddPath, Method: http.MethodPost,
 		},
-		cmdvcwallet.RemoveMethod: {
+		cmdvcwallet.RemoveCommandMethod: {
 			Path: opvcwallet.RemovePath, Method: http.MethodPost,
 		},
-		cmdvcwallet.GetMethod: {
+		cmdvcwallet.GetCommandMethod: {
 			Path: opvcwallet.GetPath, Method: http.MethodPost,
 		},
-		cmdvcwallet.GetAllMethod: {
+		cmdvcwallet.GetAllCommandMethod: {
 			Path: opvcwallet.GetAllPath, Method: http.MethodPost,
 		},
-		cmdvcwallet.QueryMethod: {
+		cmdvcwallet.QueryCommandMethod: {
 			Path: opvcwallet.QueryPath, Method: http.MethodPost,
 		},
-		cmdvcwallet.IssueMethod: {
+		cmdvcwallet.IssueCommandMethod: {
 			Path: opvcwallet.IssuePath, Method: http.MethodPost,
 		},
-		cmdvcwallet.ProveMethod: {
+		cmdvcwallet.ProveCommandMethod: {
 			Path: opvcwallet.ProvePath, Method: http.MethodPost,
 		},
-		cmdvcwallet.VerifyMethod: {
+		cmdvcwallet.VerifyCommandMethod: {
 			Path: opvcwallet.VerifyPath, Method: http.MethodPost,
 		},
-		cmdvcwallet.DeriveMethod: {
+		cmdvcwallet.DeriveCommandMethod: {
 			Path: opvcwallet.DerivePath, Method: http.MethodPost,
 		},
-		cmdvcwallet.CreateKeyPairMethod: {
+		cmdvcwallet.CreateKeyPairCommandMethod: {
 			Path: opvcwallet.CreateKeyPairPath, Method: http.MethodPost,
 		},
-		cmdvcwallet.ConnectMethod: {
+		cmdvcwallet.ConnectCommandMethod: {
 			Path: opvcwallet.ConnectPath, Method: http.MethodPost,
 		},
-		cmdvcwallet.ProposePresentationMethod: {
+		cmdvcwallet.ProposePresentationCommandMethod: {
 			Path: opvcwallet.ProposePresentationPath, Method: http.MethodPost,
 		},
-		cmdvcwallet.PresentProofMethod: {
+		cmdvcwallet.PresentProofCommandMethod: {
 			Path: opvcwallet.PresentProofPath, Method: http.MethodPost,
 		},
 	}

@@ -25,10 +25,10 @@ import (
 
 // constants for connection management endpoints.
 const (
-	OperationID            = "/connections"
-	RotateDIDPath          = OperationID + "/{id}/rotate-did"
-	CreateConnectionV2Path = OperationID + "/create-v2"
-	SetConnectionToV2Path  = OperationID + "/{id}/use-v2"
+	OperationID = "/connections"
+	RotateDID   = OperationID + "/{id}/rotate-did"
+	CreateV2    = OperationID + "/create-v2"
+	SetToV2     = OperationID + "/{id}/use-v2"
 )
 
 type provider interface {
@@ -72,9 +72,9 @@ func (c *Operation) GetRESTHandlers() []rest.Handler {
 // registerHandler register handlers to be exposed from this service as REST API endpoints.
 func (c *Operation) registerHandler() {
 	c.handlers = []rest.Handler{
-		cmdutil.NewHTTPHandler(RotateDIDPath, http.MethodPost, c.RotateDID),
-		cmdutil.NewHTTPHandler(SetConnectionToV2Path, http.MethodPost, c.SetConnectionToDIDCommV2),
-		cmdutil.NewHTTPHandler(CreateConnectionV2Path, http.MethodPost, c.CreateConnectionV2),
+		cmdutil.NewHTTPHandler(RotateDID, http.MethodPost, c.RotateDID),
+		cmdutil.NewHTTPHandler(SetToV2, http.MethodPost, c.SetConnectionToDIDCommV2),
+		cmdutil.NewHTTPHandler(CreateV2, http.MethodPost, c.CreateConnectionV2),
 	}
 }
 

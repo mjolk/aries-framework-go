@@ -40,7 +40,7 @@ func TestMessaging_RegisterHTTPService(t *testing.T) {
 
 		controller.httpClient = &mockHTTPClient{
 			data:   mockResponse,
-			method: http.MethodPost, url: mockAgentURL + messaging.RegisterHTTPOverDIDCommService,
+			method: http.MethodPost, url: mockAgentURL + messaging.RegisterHTTPMessageService,
 		}
 
 		req := &models.RequestEnvelope{Payload: []byte(reqData)}
@@ -62,7 +62,7 @@ func TestMessaging_RegisterService(t *testing.T) {
 
 		controller.httpClient = &mockHTTPClient{
 			data:   mockResponse,
-			method: http.MethodPost, url: mockAgentURL + messaging.RegisterMsgService,
+			method: http.MethodPost, url: mockAgentURL + messaging.RegisterMessageService,
 		}
 
 		req := &models.RequestEnvelope{Payload: []byte(reqData)}
@@ -83,7 +83,7 @@ func TestMessaging_Reply(t *testing.T) {
 
 		controller.httpClient = &mockHTTPClient{
 			data:   mockResponse,
-			method: http.MethodPost, url: mockAgentURL + messaging.SendReplyMsg,
+			method: http.MethodPost, url: mockAgentURL + messaging.SendReplyMessage,
 		}
 
 		req := &models.RequestEnvelope{Payload: []byte(reqData)}
@@ -104,7 +104,7 @@ func TestMessaging_Send(t *testing.T) {
 
 		controller.httpClient = &mockHTTPClient{
 			data:   mockResponse,
-			method: http.MethodPost, url: mockAgentURL + messaging.SendNewMsg,
+			method: http.MethodPost, url: mockAgentURL + messaging.SendNewMessage,
 		}
 
 		req := &models.RequestEnvelope{Payload: []byte(reqData)}
@@ -125,7 +125,7 @@ func TestMessaging_Services(t *testing.T) {
 
 		controller.httpClient = &mockHTTPClient{
 			data:   mockResponse,
-			method: http.MethodGet, url: mockAgentURL + messaging.MsgServiceList,
+			method: http.MethodGet, url: mockAgentURL + messaging.RegisteredServices,
 		}
 
 		req := &models.RequestEnvelope{Payload: []byte(reqData)}
@@ -146,7 +146,7 @@ func TestMessaging_UnregisterService(t *testing.T) {
 
 		controller.httpClient = &mockHTTPClient{
 			data:   mockResponse,
-			method: http.MethodPost, url: mockAgentURL + messaging.UnregisterMsgService,
+			method: http.MethodPost, url: mockAgentURL + messaging.UnregisterMessageService,
 		}
 
 		req := &models.RequestEnvelope{Payload: []byte(reqData)}

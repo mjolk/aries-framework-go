@@ -49,7 +49,7 @@ func TestDIDExchange_CreateInvitation(t *testing.T) {
 		"alias":"myalias","invitation_url":""}`
 		de.httpClient = &mockHTTPClient{
 			data:   mockResponse,
-			method: http.MethodPost, url: mockAgentURL + opdidexch.CreateInvitationPath,
+			method: http.MethodPost, url: mockAgentURL + opdidexch.CreateInvitation,
 		}
 
 		reqData := fmt.Sprintf(`{"alias":"myalias", "public": "%s"}`, publicDID)
@@ -74,7 +74,7 @@ func TestDIDExchange_ReceiveInvitation(t *testing.T) {
 		"request_id":"","my_did":""}`
 		de.httpClient = &mockHTTPClient{
 			data:   mockResponse,
-			method: http.MethodPost, url: mockAgentURL + opdidexch.ReceiveInvitationPath,
+			method: http.MethodPost, url: mockAgentURL + opdidexch.ReceiveInvitation,
 		}
 
 		reqData := `{
@@ -97,7 +97,7 @@ func TestDIDExchange_AcceptInvitation(t *testing.T) {
 		de := getDIDExchangeController(t)
 
 		reqData := mockRequestWithID
-		mockURL, err := parseURL(mockAgentURL, opdidexch.AcceptInvitationPath, reqData)
+		mockURL, err := parseURL(mockAgentURL, opdidexch.AcceptInvitation, reqData)
 		require.NoError(t, err, "failed to parse test url")
 
 		mockResponse := `{"created_at":"0001-01-01T00:00:00Z","updated_at":"0001-01-01T00:00:00Z","connection_id":"1234"}`
@@ -122,7 +122,7 @@ func TestDIDExchange_CreateImplicitInvitation(t *testing.T) {
 		mockResponse := `{"connection_id":"connection-id"}`
 		de.httpClient = &mockHTTPClient{
 			data:   mockResponse,
-			method: http.MethodPost, url: mockAgentURL + opdidexch.CreateImplicitInvitationPath,
+			method: http.MethodPost, url: mockAgentURL + opdidexch.CreateImplicitInvitation,
 		}
 
 		reqData := `{"their_did":"sample-public-did"}`
@@ -170,7 +170,7 @@ func TestDIDExchange_QueryConnections(t *testing.T) {
 		"RoutingKeys":null,"InvitationID":"","InvitationDID":"","Implicit":false,"Namespace":""}]}`
 		de.httpClient = &mockHTTPClient{
 			data:   mockResponse,
-			method: http.MethodGet, url: mockAgentURL + opdidexch.Connections,
+			method: http.MethodGet, url: mockAgentURL + opdidexch.QueryConnections,
 		}
 
 		reqData := `{"state":"requested"}`
@@ -189,7 +189,7 @@ func TestDIDExchange_QueryConnectionByID(t *testing.T) {
 		de := getDIDExchangeController(t)
 
 		reqData := mockRequestWithID
-		mockURL, err := parseURL(mockAgentURL, opdidexch.ConnectionsByID, reqData)
+		mockURL, err := parseURL(mockAgentURL, opdidexch.QueryConnectionsByID, reqData)
 		require.NoError(t, err, "failed to parse test url")
 
 		mockResponse := `{"result":{"ConnectionID":"1234","State":"complete","ThreadID":"th1234","ParentThreadID":"",

@@ -90,7 +90,7 @@ func TestOperation_CreateProfile(t *testing.T) {
 			LocalKMSPassphrase: samplePassPhrase,
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, CreateProfilePath, getReader(t, &request))
+		rq := httptest.NewRequest(http.MethodPost, CreateProfile, getReader(t, &request))
 		rw := httptest.NewRecorder()
 		cmd.CreateProfile(rw, rq)
 		require.Equal(t, rw.Code, http.StatusOK)
@@ -107,7 +107,7 @@ func TestOperation_CreateProfile(t *testing.T) {
 			KeyStoreURL: sampleKeyStoreURL,
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, CreateProfilePath, getReader(t, &request))
+		rq := httptest.NewRequest(http.MethodPost, CreateProfile, getReader(t, &request))
 		rw := httptest.NewRecorder()
 		cmd.CreateProfile(rw, rq)
 		require.Equal(t, rw.Code, http.StatusOK)
@@ -131,7 +131,7 @@ func TestOperation_CreateProfile(t *testing.T) {
 			},
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, CreateProfilePath, getReader(t, &request))
+		rq := httptest.NewRequest(http.MethodPost, CreateProfile, getReader(t, &request))
 		rw := httptest.NewRecorder()
 		cmd.CreateProfile(rw, rq)
 		require.Equal(t, rw.Code, http.StatusOK)
@@ -151,7 +151,7 @@ func TestOperation_CreateProfile(t *testing.T) {
 			},
 		}
 
-		rq = httptest.NewRequest(http.MethodPost, CreateProfilePath, getReader(t, &request))
+		rq = httptest.NewRequest(http.MethodPost, CreateProfile, getReader(t, &request))
 		rw = httptest.NewRecorder()
 		cmd.CreateProfile(rw, rq)
 		require.Equal(t, rw.Code, http.StatusOK)
@@ -168,7 +168,7 @@ func TestOperation_CreateProfile(t *testing.T) {
 			LocalKMSPassphrase: samplePassPhrase,
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, CreateProfilePath, getReader(t, &request))
+		rq := httptest.NewRequest(http.MethodPost, CreateProfile, getReader(t, &request))
 		rw := httptest.NewRecorder()
 		cmd.CreateProfile(rw, rq)
 		require.Equal(t, rw.Code, http.StatusOK)
@@ -178,7 +178,7 @@ func TestOperation_CreateProfile(t *testing.T) {
 			KeyStoreURL: sampleKeyStoreURL,
 		}
 
-		rq = httptest.NewRequest(http.MethodPost, CreateProfilePath, getReader(t, &request))
+		rq = httptest.NewRequest(http.MethodPost, CreateProfile, getReader(t, &request))
 		rw = httptest.NewRecorder()
 		cmd.CreateProfile(rw, rq)
 		require.Equal(t, rw.Code, http.StatusInternalServerError)
@@ -194,7 +194,7 @@ func TestOperation_CreateProfile(t *testing.T) {
 			UserID: sampleUserID,
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, CreateProfilePath, getReader(t, &request))
+		rq := httptest.NewRequest(http.MethodPost, CreateProfile, getReader(t, &request))
 		rw := httptest.NewRecorder()
 		cmd.CreateProfile(rw, rq)
 		require.Equal(t, rw.Code, http.StatusInternalServerError)
@@ -206,7 +206,7 @@ func TestOperation_CreateProfile(t *testing.T) {
 		cmd := New(mockctx, &vcwallet.Config{})
 		require.NotNil(t, cmd)
 
-		rq := httptest.NewRequest(http.MethodPost, CreateProfilePath, getReader(t, "--"))
+		rq := httptest.NewRequest(http.MethodPost, CreateProfile, getReader(t, "--"))
 		rw := httptest.NewRecorder()
 		cmd.CreateProfile(rw, rq)
 		require.Equal(t, rw.Code, http.StatusBadRequest)
@@ -233,7 +233,7 @@ func TestOperation_CreateProfile(t *testing.T) {
 			},
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, CreateProfilePath, getReader(t, &request))
+		rq := httptest.NewRequest(http.MethodPost, CreateProfile, getReader(t, &request))
 		rw := httptest.NewRecorder()
 		cmd.CreateProfile(rw, rq)
 		require.Equal(t, rw.Code, http.StatusInternalServerError)
@@ -251,7 +251,7 @@ func TestOperation_UpdateProfile(t *testing.T) {
 		LocalKMSPassphrase: samplePassPhrase,
 	}
 
-	rq := httptest.NewRequest(http.MethodPost, UpdateProfilePath, getReader(t, &createRqst))
+	rq := httptest.NewRequest(http.MethodPost, UpdateProfile, getReader(t, &createRqst))
 	rw := httptest.NewRecorder()
 	cmd.CreateProfile(rw, rq)
 	require.Equal(t, rw.Code, http.StatusOK)
@@ -262,7 +262,7 @@ func TestOperation_UpdateProfile(t *testing.T) {
 			KeyStoreURL: sampleKeyStoreURL,
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, UpdateProfilePath, getReader(t, &request))
+		rq := httptest.NewRequest(http.MethodPost, UpdateProfile, getReader(t, &request))
 		rw := httptest.NewRecorder()
 		cmd.UpdateProfile(rw, rq)
 		require.Equal(t, rw.Code, http.StatusOK)
@@ -281,7 +281,7 @@ func TestOperation_UpdateProfile(t *testing.T) {
 			},
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, UpdateProfilePath, getReader(t, &request))
+		rq := httptest.NewRequest(http.MethodPost, UpdateProfile, getReader(t, &request))
 		rw := httptest.NewRecorder()
 		cmd.UpdateProfile(rw, rq)
 		require.Equal(t, rw.Code, http.StatusOK)
@@ -292,14 +292,14 @@ func TestOperation_UpdateProfile(t *testing.T) {
 			UserID: sampleUserID,
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, UpdateProfilePath, getReader(t, &request))
+		rq := httptest.NewRequest(http.MethodPost, UpdateProfile, getReader(t, &request))
 		rw := httptest.NewRecorder()
 		cmd.UpdateProfile(rw, rq)
 		require.Equal(t, rw.Code, http.StatusInternalServerError)
 	})
 
 	t.Run("failed to update profile due to invalid request", func(t *testing.T) {
-		rq := httptest.NewRequest(http.MethodPost, UpdateProfilePath, getReader(t, "---"))
+		rq := httptest.NewRequest(http.MethodPost, UpdateProfile, getReader(t, "---"))
 		rw := httptest.NewRecorder()
 		cmd.UpdateProfile(rw, rq)
 		require.Equal(t, rw.Code, http.StatusBadRequest)
@@ -324,7 +324,7 @@ func TestCommand_ProfileExists(t *testing.T) {
 		require.NotNil(t, cmd)
 
 		rw := httptest.NewRecorder()
-		rq := mux.SetURLVars(httptest.NewRequest(http.MethodGet, ProfileExistsPath, nil), map[string]string{
+		rq := mux.SetURLVars(httptest.NewRequest(http.MethodGet, ProfileExists, nil), map[string]string{
 			"id": sampleUser1,
 		})
 
@@ -338,7 +338,7 @@ func TestCommand_ProfileExists(t *testing.T) {
 		require.NotNil(t, cmd)
 
 		rw := httptest.NewRecorder()
-		rq := mux.SetURLVars(httptest.NewRequest(http.MethodGet, ProfileExistsPath, nil), map[string]string{
+		rq := mux.SetURLVars(httptest.NewRequest(http.MethodGet, ProfileExists, nil), map[string]string{
 			"id": sampleUser2,
 		})
 
@@ -352,7 +352,7 @@ func TestCommand_ProfileExists(t *testing.T) {
 		require.NotNil(t, cmd)
 
 		rw := httptest.NewRecorder()
-		rq := httptest.NewRequest(http.MethodGet, ProfileExistsPath, nil)
+		rq := httptest.NewRequest(http.MethodGet, ProfileExists, nil)
 
 		cmd.ProfileExists(rw, rq)
 		require.Equal(t, rw.Code, http.StatusBadRequest)
@@ -397,20 +397,20 @@ func TestOperation_OpenAndClose(t *testing.T) {
 		}
 
 		// unlock wallet
-		rq := httptest.NewRequest(http.MethodPost, OpenPath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, Open, getReader(t, request))
 		rw := httptest.NewRecorder()
 		cmd.Open(rw, rq)
 		require.Equal(t, rw.Code, http.StatusOK)
 		require.NotEmpty(t, getUnlockToken(t, rw.Body))
 
 		// try again, should get error, wallet already unlocked
-		rq = httptest.NewRequest(http.MethodPost, OpenPath, getReader(t, request))
+		rq = httptest.NewRequest(http.MethodPost, Open, getReader(t, request))
 		rw = httptest.NewRecorder()
 		cmd.Open(rw, rq)
 		require.Equal(t, rw.Code, http.StatusInternalServerError)
 
 		// lock wallet
-		rq = httptest.NewRequest(http.MethodPost, ClosePath,
+		rq = httptest.NewRequest(http.MethodPost, Close,
 			getReader(t, &vcwallet.LockWalletRequest{UserID: sampleUser1}))
 		rw = httptest.NewRecorder()
 		cmd.Close(rw, rq)
@@ -418,7 +418,7 @@ func TestOperation_OpenAndClose(t *testing.T) {
 		require.Contains(t, rw.Body.String(), `{"closed":true}`)
 
 		// lock wallet again
-		rq = httptest.NewRequest(http.MethodPost, ClosePath,
+		rq = httptest.NewRequest(http.MethodPost, Close,
 			getReader(t, &vcwallet.LockWalletRequest{UserID: sampleUser1}))
 		rw = httptest.NewRecorder()
 		cmd.Close(rw, rq)
@@ -435,20 +435,20 @@ func TestOperation_OpenAndClose(t *testing.T) {
 		}
 
 		// unlock wallet
-		rq := httptest.NewRequest(http.MethodPost, OpenPath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, Open, getReader(t, request))
 		rw := httptest.NewRecorder()
 		cmd.Open(rw, rq)
 		require.Equal(t, rw.Code, http.StatusOK)
 		require.NotEmpty(t, getUnlockToken(t, rw.Body))
 
 		// try again, should get error, wallet already unlocked
-		rq = httptest.NewRequest(http.MethodPost, OpenPath, getReader(t, request))
+		rq = httptest.NewRequest(http.MethodPost, Open, getReader(t, request))
 		rw = httptest.NewRecorder()
 		cmd.Open(rw, rq)
 		require.Equal(t, rw.Code, http.StatusInternalServerError)
 
 		// lock wallet
-		rq = httptest.NewRequest(http.MethodPost, ClosePath,
+		rq = httptest.NewRequest(http.MethodPost, Close,
 			getReader(t, &vcwallet.LockWalletRequest{UserID: sampleUser2}))
 		rw = httptest.NewRecorder()
 		cmd.Close(rw, rq)
@@ -456,7 +456,7 @@ func TestOperation_OpenAndClose(t *testing.T) {
 		require.Contains(t, rw.Body.String(), `{"closed":true}`)
 
 		// lock wallet again
-		rq = httptest.NewRequest(http.MethodPost, ClosePath,
+		rq = httptest.NewRequest(http.MethodPost, Close,
 			getReader(t, &vcwallet.LockWalletRequest{UserID: sampleUser2}))
 		rw = httptest.NewRecorder()
 		cmd.Close(rw, rq)
@@ -476,20 +476,20 @@ func TestOperation_OpenAndClose(t *testing.T) {
 		}
 
 		// unlock wallet
-		rq := httptest.NewRequest(http.MethodPost, OpenPath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, Open, getReader(t, request))
 		rw := httptest.NewRecorder()
 		cmd.Open(rw, rq)
 		require.Equal(t, rw.Code, http.StatusOK)
 		require.NotEmpty(t, getUnlockToken(t, rw.Body))
 
 		// try again, should get error, wallet already unlocked
-		rq = httptest.NewRequest(http.MethodPost, OpenPath, getReader(t, request))
+		rq = httptest.NewRequest(http.MethodPost, Open, getReader(t, request))
 		rw = httptest.NewRecorder()
 		cmd.Open(rw, rq)
 		require.Equal(t, rw.Code, http.StatusInternalServerError)
 
 		// lock wallet
-		rq = httptest.NewRequest(http.MethodPost, ClosePath,
+		rq = httptest.NewRequest(http.MethodPost, Close,
 			getReader(t, &vcwallet.LockWalletRequest{UserID: sampleUser3}))
 		rw = httptest.NewRecorder()
 		cmd.Close(rw, rq)
@@ -497,7 +497,7 @@ func TestOperation_OpenAndClose(t *testing.T) {
 		require.Contains(t, rw.Body.String(), `{"closed":true}`)
 
 		// lock wallet again
-		rq = httptest.NewRequest(http.MethodPost, ClosePath,
+		rq = httptest.NewRequest(http.MethodPost, Close,
 			getReader(t, &vcwallet.LockWalletRequest{UserID: sampleUser3}))
 		rw = httptest.NewRecorder()
 		cmd.Close(rw, rq)
@@ -508,23 +508,23 @@ func TestOperation_OpenAndClose(t *testing.T) {
 	t.Run("lock & unlock failures", func(t *testing.T) {
 		cmd := New(mockctx, &vcwallet.Config{})
 
-		rq := httptest.NewRequest(http.MethodPost, OpenPath, getReader(t, vcwallet.UnlockWalletRequest{}))
+		rq := httptest.NewRequest(http.MethodPost, Open, getReader(t, vcwallet.UnlockWalletRequest{}))
 		rw := httptest.NewRecorder()
 		cmd.Open(rw, rq)
 		require.Equal(t, rw.Code, http.StatusInternalServerError)
 
-		rq = httptest.NewRequest(http.MethodPost, OpenPath, nil)
+		rq = httptest.NewRequest(http.MethodPost, Open, nil)
 		rw = httptest.NewRecorder()
 		cmd.Open(rw, rq)
 		require.Equal(t, rw.Code, http.StatusBadRequest)
 
-		rq = httptest.NewRequest(http.MethodPost, ClosePath,
+		rq = httptest.NewRequest(http.MethodPost, Close,
 			getReader(t, &vcwallet.LockWalletRequest{}))
 		rw = httptest.NewRecorder()
 		cmd.Close(rw, rq)
 		require.Equal(t, rw.Code, http.StatusInternalServerError)
 
-		rq = httptest.NewRequest(http.MethodPost, ClosePath, nil)
+		rq = httptest.NewRequest(http.MethodPost, Close, nil)
 		rw = httptest.NewRecorder()
 		cmd.Close(rw, rq)
 		require.Equal(t, rw.Code, http.StatusBadRequest)
@@ -563,7 +563,7 @@ func TestOperation_AddRemoveGetGetAll(t *testing.T) {
 			WalletAuth:  vcwallet.WalletAuth{UserID: sampleUser1, Auth: token1},
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, AddPath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, Add, getReader(t, request))
 		rw := httptest.NewRecorder()
 
 		cmd := New(mockctx, &vcwallet.Config{})
@@ -578,7 +578,7 @@ func TestOperation_AddRemoveGetGetAll(t *testing.T) {
 			WalletAuth:  vcwallet.WalletAuth{UserID: sampleUser1, Auth: token1},
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, AddPath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, Add, getReader(t, request))
 		rw := httptest.NewRecorder()
 
 		cmd := New(mockctx, &vcwallet.Config{})
@@ -593,7 +593,7 @@ func TestOperation_AddRemoveGetGetAll(t *testing.T) {
 			WalletAuth:  vcwallet.WalletAuth{UserID: sampleUser1, Auth: token1},
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, GetPath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, Get, getReader(t, request))
 		rw := httptest.NewRecorder()
 
 		cmd := New(mockctx, &vcwallet.Config{})
@@ -614,7 +614,7 @@ func TestOperation_AddRemoveGetGetAll(t *testing.T) {
 				WalletAuth:  vcwallet.WalletAuth{UserID: sampleUser1, Auth: token1},
 			}
 
-			rq := httptest.NewRequest(http.MethodPost, AddPath, getReader(t, request))
+			rq := httptest.NewRequest(http.MethodPost, Add, getReader(t, request))
 			rw := httptest.NewRecorder()
 
 			cmd.Add(rw, rq)
@@ -626,7 +626,7 @@ func TestOperation_AddRemoveGetGetAll(t *testing.T) {
 			WalletAuth:  vcwallet.WalletAuth{UserID: sampleUser1, Auth: token1},
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, AddPath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, Add, getReader(t, request))
 		rw := httptest.NewRecorder()
 
 		cmd.GetAll(rw, rq)
@@ -647,7 +647,7 @@ func TestOperation_AddRemoveGetGetAll(t *testing.T) {
 
 		cmd := New(mockctx, &vcwallet.Config{})
 
-		rq := httptest.NewRequest(http.MethodPost, RemovePath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, Remove, getReader(t, request))
 		rw := httptest.NewRecorder()
 
 		cmd.Remove(rw, rq)
@@ -660,7 +660,7 @@ func TestOperation_AddRemoveGetGetAll(t *testing.T) {
 		const expectedErr = "invalid auth token"
 
 		rw := httptest.NewRecorder()
-		rq := httptest.NewRequest(http.MethodPost, RemovePath, getReader(t, &vcwallet.AddContentRequest{
+		rq := httptest.NewRequest(http.MethodPost, Remove, getReader(t, &vcwallet.AddContentRequest{
 			Content:     testdata.SampleUDCVC,
 			ContentType: "credential",
 			WalletAuth:  vcwallet.WalletAuth{UserID: sampleUser1, Auth: sampleFakeTkn},
@@ -670,7 +670,7 @@ func TestOperation_AddRemoveGetGetAll(t *testing.T) {
 		require.Contains(t, rw.Body.String(), expectedErr)
 
 		rw = httptest.NewRecorder()
-		rq = httptest.NewRequest(http.MethodPost, RemovePath, getReader(t, &vcwallet.GetContentRequest{
+		rq = httptest.NewRequest(http.MethodPost, Remove, getReader(t, &vcwallet.GetContentRequest{
 			ContentID:   "http://example.edu/credentials/1877",
 			ContentType: "credential",
 			WalletAuth:  vcwallet.WalletAuth{UserID: sampleUser1, Auth: sampleFakeTkn},
@@ -680,7 +680,7 @@ func TestOperation_AddRemoveGetGetAll(t *testing.T) {
 		require.Contains(t, rw.Body.String(), expectedErr)
 
 		rw = httptest.NewRecorder()
-		rq = httptest.NewRequest(http.MethodPost, RemovePath, getReader(t, &vcwallet.GetAllContentRequest{
+		rq = httptest.NewRequest(http.MethodPost, Remove, getReader(t, &vcwallet.GetAllContentRequest{
 			ContentType: "credential",
 			WalletAuth:  vcwallet.WalletAuth{UserID: sampleUser1, Auth: sampleFakeTkn},
 		}))
@@ -689,7 +689,7 @@ func TestOperation_AddRemoveGetGetAll(t *testing.T) {
 		require.Contains(t, rw.Body.String(), expectedErr)
 
 		rw = httptest.NewRecorder()
-		rq = httptest.NewRequest(http.MethodPost, RemovePath, getReader(t, &vcwallet.RemoveContentRequest{
+		rq = httptest.NewRequest(http.MethodPost, Remove, getReader(t, &vcwallet.RemoveContentRequest{
 			ContentID:   "http://example.edu/credentials/1877",
 			ContentType: "credential",
 			WalletAuth:  vcwallet.WalletAuth{UserID: sampleUser1, Auth: sampleFakeTkn},
@@ -748,7 +748,7 @@ func TestOperation_Query(t *testing.T) {
 			WalletAuth: vcwallet.WalletAuth{UserID: sampleUser1, Auth: token},
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, QueryPath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, Query, getReader(t, request))
 		rw := httptest.NewRecorder()
 
 		cmd := New(mockctx, &vcwallet.Config{})
@@ -776,7 +776,7 @@ func TestOperation_Query(t *testing.T) {
 			WalletAuth: vcwallet.WalletAuth{UserID: sampleUser1, Auth: sampleFakeTkn},
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, QueryPath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, Query, getReader(t, request))
 		rw := httptest.NewRecorder()
 
 		cmd := New(mockctx, &vcwallet.Config{})
@@ -800,7 +800,7 @@ func TestOperation_Query(t *testing.T) {
 			WalletAuth: vcwallet.WalletAuth{UserID: sampleUser1, Auth: token},
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, QueryPath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, Query, getReader(t, request))
 		rw := httptest.NewRecorder()
 
 		cmd := New(mockctx, &vcwallet.Config{})
@@ -855,7 +855,7 @@ func TestOperation_IssueProveVerify(t *testing.T) {
 			},
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, IssuePath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, Issue, getReader(t, request))
 		rw := httptest.NewRecorder()
 
 		cmd := New(mockctx, &vcwallet.Config{})
@@ -882,7 +882,7 @@ func TestOperation_IssueProveVerify(t *testing.T) {
 			StoredCredentialID: "http://example.edu/credentials/1872",
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, VerifyPath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, Verify, getReader(t, request))
 		rw := httptest.NewRecorder()
 
 		cmd := New(mockctx, &vcwallet.Config{})
@@ -901,7 +901,7 @@ func TestOperation_IssueProveVerify(t *testing.T) {
 			RawCredential: rawCredentialToVerify,
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, VerifyPath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, Verify, getReader(t, request))
 		rw := httptest.NewRecorder()
 
 		cmd := New(mockctx, &vcwallet.Config{})
@@ -924,7 +924,7 @@ func TestOperation_IssueProveVerify(t *testing.T) {
 			RawCredential: []byte(invalidVC),
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, VerifyPath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, Verify, getReader(t, request))
 		rw := httptest.NewRecorder()
 
 		cmd := New(mockctx, &vcwallet.Config{})
@@ -950,7 +950,7 @@ func TestOperation_IssueProveVerify(t *testing.T) {
 			},
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, ProvePath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, Prove, getReader(t, request))
 		rw := httptest.NewRecorder()
 
 		cmd := New(mockctx, &vcwallet.Config{})
@@ -975,7 +975,7 @@ func TestOperation_IssueProveVerify(t *testing.T) {
 			},
 		}
 
-		rq = httptest.NewRequest(http.MethodPost, ProvePath, getReader(t, request))
+		rq = httptest.NewRequest(http.MethodPost, Prove, getReader(t, request))
 		rw = httptest.NewRecorder()
 
 		cmd.Prove(rw, rq)
@@ -996,7 +996,7 @@ func TestOperation_IssueProveVerify(t *testing.T) {
 			Presentation: vpBytes,
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, VerifyPath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, Verify, getReader(t, request))
 		rw := httptest.NewRecorder()
 
 		cmd := New(mockctx, &vcwallet.Config{})
@@ -1017,7 +1017,7 @@ func TestOperation_IssueProveVerify(t *testing.T) {
 			Presentation: []byte(invalidVP),
 		}
 
-		rq = httptest.NewRequest(http.MethodPost, VerifyPath, getReader(t, request))
+		rq = httptest.NewRequest(http.MethodPost, Verify, getReader(t, request))
 		rw = httptest.NewRecorder()
 
 		cmd.Verify(rw, rq)
@@ -1038,7 +1038,7 @@ func TestOperation_IssueProveVerify(t *testing.T) {
 			},
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, ProvePath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, Prove, getReader(t, request))
 		rw := httptest.NewRecorder()
 
 		cmd := New(mockctx, &vcwallet.Config{})
@@ -1054,7 +1054,7 @@ func TestOperation_IssueProveVerify(t *testing.T) {
 			},
 		}
 
-		rq = httptest.NewRequest(http.MethodPost, IssuePath, getReader(t, issuerRqst))
+		rq = httptest.NewRequest(http.MethodPost, Issue, getReader(t, issuerRqst))
 		rw = httptest.NewRecorder()
 
 		cmd.Issue(rw, rq)
@@ -1102,7 +1102,7 @@ func TestOperation_Derive(t *testing.T) {
 			},
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, DerivePath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, Derive, getReader(t, request))
 		rw := httptest.NewRecorder()
 
 		cmd := New(mockctx, &vcwallet.Config{})
@@ -1125,7 +1125,7 @@ func TestOperation_Derive(t *testing.T) {
 			},
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, DerivePath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, Derive, getReader(t, request))
 		rw := httptest.NewRecorder()
 
 		cmd := New(mockctx, &vcwallet.Config{})
@@ -1148,7 +1148,7 @@ func TestOperation_Derive(t *testing.T) {
 			},
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, DerivePath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, Derive, getReader(t, request))
 		rw := httptest.NewRecorder()
 
 		cmd := New(mockctx, &vcwallet.Config{})
@@ -1182,7 +1182,7 @@ func TestOperation_CreateKeyPair(t *testing.T) {
 			KeyType:    kms.ED25519,
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, CreateKeyPairPath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, CreateKeyPair, getReader(t, request))
 		rw := httptest.NewRecorder()
 
 		cmd := New(mockctx, &vcwallet.Config{})
@@ -1203,7 +1203,7 @@ func TestOperation_CreateKeyPair(t *testing.T) {
 			KeyType:    kms.ED25519,
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, CreateKeyPairPath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, CreateKeyPair, getReader(t, request))
 		rw := httptest.NewRecorder()
 
 		cmd := New(mockctx, &vcwallet.Config{})
@@ -1261,7 +1261,7 @@ func TestOperation_Connect(t *testing.T) {
 			},
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, ConnectPath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, Connect, getReader(t, request))
 		rw := httptest.NewRecorder()
 
 		cmd := New(mockctx, &vcwallet.Config{})
@@ -1291,7 +1291,7 @@ func TestOperation_Connect(t *testing.T) {
 			},
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, ConnectPath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, Connect, getReader(t, request))
 		rw := httptest.NewRecorder()
 
 		cmd := New(mockctx, &vcwallet.Config{})
@@ -1384,7 +1384,7 @@ func TestOperation_ProposePresentation(t *testing.T) {
 			Invitation: &wallet.GenericInvitation{},
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, ProposeCredentialPath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, ProposeCredential, getReader(t, request))
 		rw := httptest.NewRecorder()
 
 		cmd := New(mockctx, &vcwallet.Config{})
@@ -1412,7 +1412,7 @@ func TestOperation_ProposePresentation(t *testing.T) {
 			Invitation: &wallet.GenericInvitation{},
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, ProposePresentationPath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, ProposePresentation, getReader(t, request))
 		rw := httptest.NewRecorder()
 
 		cmd := New(mockctx, &vcwallet.Config{})
@@ -1468,7 +1468,7 @@ func TestOperation_PresentProof(t *testing.T) {
 			Timeout:      1 * time.Millisecond,
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, PresentProofPath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, PresentProof, getReader(t, request))
 		rw := httptest.NewRecorder()
 
 		cmd := New(mockctx, &vcwallet.Config{})
@@ -1490,7 +1490,7 @@ func TestOperation_PresentProof(t *testing.T) {
 			Presentation: json.RawMessage{},
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, PresentProofPath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, PresentProof, getReader(t, request))
 		rw := httptest.NewRecorder()
 
 		cmd := New(mockctx, &vcwallet.Config{})
@@ -1513,7 +1513,7 @@ func TestOperation_PresentProof(t *testing.T) {
 			Presentation: json.RawMessage{},
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, PresentProofPath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, PresentProof, getReader(t, request))
 		rw := httptest.NewRecorder()
 
 		cmd := New(mockctx, &vcwallet.Config{})
@@ -1604,7 +1604,7 @@ func TestOperation_ProposeCredential(t *testing.T) {
 			Invitation: &wallet.GenericInvitation{},
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, ProposeCredentialPath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, ProposeCredential, getReader(t, request))
 		rw := httptest.NewRecorder()
 
 		cmd := New(mockctx, &vcwallet.Config{})
@@ -1639,7 +1639,7 @@ func TestOperation_ProposeCredential(t *testing.T) {
 			Invitation: &wallet.GenericInvitation{},
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, ProposeCredentialPath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, ProposeCredential, getReader(t, request))
 		rw := httptest.NewRecorder()
 
 		cmd := New(mockctx, &vcwallet.Config{})
@@ -1698,7 +1698,7 @@ func TestOperation_RequestCredential(t *testing.T) {
 			Timeout:      600 * time.Millisecond,
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, PresentProofPath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, PresentProof, getReader(t, request))
 		rw := httptest.NewRecorder()
 
 		cmd := New(mockctx, &vcwallet.Config{})
@@ -1720,7 +1720,7 @@ func TestOperation_RequestCredential(t *testing.T) {
 			Presentation: json.RawMessage{},
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, PresentProofPath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, PresentProof, getReader(t, request))
 		rw := httptest.NewRecorder()
 
 		cmd := New(mockctx, &vcwallet.Config{})
@@ -1742,7 +1742,7 @@ func TestOperation_RequestCredential(t *testing.T) {
 			Presentation: json.RawMessage{},
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, PresentProofPath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, PresentProof, getReader(t, request))
 		rw := httptest.NewRecorder()
 
 		cmd := New(mockctx, &vcwallet.Config{})
@@ -1777,7 +1777,7 @@ func TestOperation_ResolveCredentialManifest(t *testing.T) {
 			Fulfillment: testdata.CredentialFulfillmentWithMultipleVCs,
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, ResolveCredentialManifestPath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, ResolveCredentialManifest, getReader(t, request))
 		rw := httptest.NewRecorder()
 
 		cmd := New(mockctx, &vcwallet.Config{})
@@ -1798,7 +1798,7 @@ func TestOperation_ResolveCredentialManifest(t *testing.T) {
 			Credential: testdata.SampleUDCVC,
 		}
 
-		rq := httptest.NewRequest(http.MethodPost, ResolveCredentialManifestPath, getReader(t, request))
+		rq := httptest.NewRequest(http.MethodPost, ResolveCredentialManifest, getReader(t, request))
 		rw := httptest.NewRecorder()
 
 		cmd := New(mockctx, &vcwallet.Config{})
@@ -1812,7 +1812,7 @@ func createSampleUserProfile(t *testing.T, ctx *mockprovider.Provider, request *
 	cmd := New(ctx, &vcwallet.Config{})
 	require.NotNil(t, cmd)
 
-	rq := httptest.NewRequest(http.MethodPost, CreateProfilePath, getReader(t, request))
+	rq := httptest.NewRequest(http.MethodPost, CreateProfile, getReader(t, request))
 	rw := httptest.NewRecorder()
 	cmd.CreateProfile(rw, rq)
 	require.Equal(t, rw.Code, http.StatusOK)
@@ -1834,7 +1834,7 @@ func getUnlockToken(t *testing.T, b *bytes.Buffer) string {
 }
 
 func unlockWallet(t *testing.T, ctx *mockprovider.Provider, request *vcwallet.UnlockWalletRequest) (string, func()) {
-	rq := httptest.NewRequest(http.MethodPost, OpenPath, getReader(t, request))
+	rq := httptest.NewRequest(http.MethodPost, Open, getReader(t, request))
 	rw := httptest.NewRecorder()
 
 	cmd := New(ctx, &vcwallet.Config{})
@@ -1843,14 +1843,14 @@ func unlockWallet(t *testing.T, ctx *mockprovider.Provider, request *vcwallet.Un
 	require.Equal(t, rw.Code, http.StatusOK)
 
 	return getUnlockToken(t, rw.Body), func() {
-		rq = httptest.NewRequest(http.MethodPost, ClosePath,
+		rq = httptest.NewRequest(http.MethodPost, Close,
 			getReader(t, &vcwallet.LockWalletRequest{UserID: request.UserID}))
 		cmd.Close(httptest.NewRecorder(), rq)
 	}
 }
 
 func addContent(t *testing.T, ctx *mockprovider.Provider, request *vcwallet.AddContentRequest) {
-	rq := httptest.NewRequest(http.MethodPost, AddPath, getReader(t, request))
+	rq := httptest.NewRequest(http.MethodPost, Add, getReader(t, request))
 	rw := httptest.NewRecorder()
 
 	cmd := New(ctx, &vcwallet.Config{})

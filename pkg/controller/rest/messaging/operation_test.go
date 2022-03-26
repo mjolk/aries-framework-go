@@ -87,7 +87,7 @@ func TestOperation_RegisterService(t *testing.T) {
     	"purpose": ["prp-01","prp-02"]
   	}`)
 
-		handler := lookupCreatePublicDIDHandler(t, svc, RegisterMsgService)
+		handler := lookupCreatePublicDIDHandler(t, svc, RegisterMessageService)
 		buf, err := getSuccessResponseFromHandler(handler, bytes.NewBuffer(jsonStr), handler.Path())
 		require.NoError(t, err)
 		require.Empty(t, buf)
@@ -137,7 +137,7 @@ func TestOperation_RegisterService(t *testing.T) {
 				require.NoError(t, err)
 				require.NotNil(t, svc)
 
-				handler := lookupCreatePublicDIDHandler(t, svc, RegisterMsgService)
+				handler := lookupCreatePublicDIDHandler(t, svc, RegisterMessageService)
 				buf, code, err := sendRequestToHandler(handler, bytes.NewBufferString(tc.json), handler.Path())
 				require.NoError(t, err)
 				require.NotEmpty(t, buf)
@@ -162,7 +162,7 @@ func TestOperation_RegisterService(t *testing.T) {
     	"purpose": ["prp-01","prp-02"]
   	}`)
 
-		handler := lookupCreatePublicDIDHandler(t, svc, RegisterMsgService)
+		handler := lookupCreatePublicDIDHandler(t, svc, RegisterMessageService)
 		buf, code, err := sendRequestToHandler(handler, bytes.NewBuffer(jsonStr), handler.Path())
 		require.NoError(t, err)
 		require.NotEmpty(t, buf)
@@ -183,7 +183,7 @@ func TestOperation_RegisterHTTPService(t *testing.T) {
     	"purpose": ["prp-01","prp-02"]
   	}`)
 
-		handler := lookupCreatePublicDIDHandler(t, svc, RegisterHTTPOverDIDCommService)
+		handler := lookupCreatePublicDIDHandler(t, svc, RegisterHTTPMessageService)
 		buf, err := getSuccessResponseFromHandler(handler, bytes.NewBuffer(jsonStr), handler.Path())
 		require.NoError(t, err)
 		require.Empty(t, buf)
@@ -227,7 +227,7 @@ func TestOperation_RegisterHTTPService(t *testing.T) {
 				require.NoError(t, err)
 				require.NotNil(t, svc)
 
-				handler := lookupCreatePublicDIDHandler(t, svc, RegisterHTTPOverDIDCommService)
+				handler := lookupCreatePublicDIDHandler(t, svc, RegisterHTTPMessageService)
 				buf, code, err := sendRequestToHandler(handler, bytes.NewBufferString(tc.json), handler.Path())
 				require.NoError(t, err)
 				require.NotEmpty(t, buf)
@@ -251,7 +251,7 @@ func TestOperation_RegisterHTTPService(t *testing.T) {
     	"purpose": ["prp-01","prp-02"]
   	}`)
 
-		handler := lookupCreatePublicDIDHandler(t, svc, RegisterHTTPOverDIDCommService)
+		handler := lookupCreatePublicDIDHandler(t, svc, RegisterHTTPMessageService)
 		buf, code, err := sendRequestToHandler(handler, bytes.NewBuffer(jsonStr), handler.Path())
 		require.NoError(t, err)
 		require.NotEmpty(t, buf)
@@ -270,7 +270,7 @@ func TestOperation_UnregisterService(t *testing.T) {
 		"name":"json-msg-01"
   	}`)
 
-		handler := lookupCreatePublicDIDHandler(t, svc, UnregisterMsgService)
+		handler := lookupCreatePublicDIDHandler(t, svc, UnregisterMessageService)
 		buf, code, err := sendRequestToHandler(handler, bytes.NewBuffer(jsonStr), handler.Path())
 		require.NoError(t, err)
 		require.NotEmpty(t, buf)
@@ -287,7 +287,7 @@ func TestOperation_UnregisterService(t *testing.T) {
 		"name":""
   	}`)
 
-		handler := lookupCreatePublicDIDHandler(t, svc, UnregisterMsgService)
+		handler := lookupCreatePublicDIDHandler(t, svc, UnregisterMessageService)
 		buf, code, err := sendRequestToHandler(handler, bytes.NewBuffer(jsonStr), handler.Path())
 		require.NoError(t, err)
 		require.NotEmpty(t, buf)
@@ -309,7 +309,7 @@ func TestOperation_UnregisterService(t *testing.T) {
 
 		jsonStr := `{"name":"%s"}`
 		for _, svcName := range svcNames {
-			handler := lookupCreatePublicDIDHandler(t, svc, UnregisterMsgService)
+			handler := lookupCreatePublicDIDHandler(t, svc, UnregisterMessageService)
 			buf, err := getSuccessResponseFromHandler(handler,
 				bytes.NewBufferString(fmt.Sprintf(jsonStr, svcName)),
 				handler.Path())
@@ -325,7 +325,7 @@ func TestOperation_UnregisterService(t *testing.T) {
 
 		jsonStr := []byte(`{--`)
 
-		handler := lookupCreatePublicDIDHandler(t, svc, UnregisterMsgService)
+		handler := lookupCreatePublicDIDHandler(t, svc, UnregisterMessageService)
 		buf, code, err := sendRequestToHandler(handler, bytes.NewBuffer(jsonStr), handler.Path())
 		require.NoError(t, err)
 		require.NotEmpty(t, buf)
@@ -349,7 +349,7 @@ func TestOperation_Services(t *testing.T) {
 		require.Len(t, response.Names, count)
 	}
 
-	handler := lookupCreatePublicDIDHandler(t, svc, MsgServiceList)
+	handler := lookupCreatePublicDIDHandler(t, svc, RegisteredServices)
 	buf, err := getSuccessResponseFromHandler(handler, nil, handler.Path())
 	require.NoError(t, err)
 	verifyResponse(buf, 0)
@@ -431,7 +431,7 @@ func TestOperation_Send(t *testing.T) {
 				require.NoError(t, err)
 				require.NotNil(t, svc)
 
-				handler := lookupCreatePublicDIDHandler(t, svc, SendNewMsg)
+				handler := lookupCreatePublicDIDHandler(t, svc, SendNewMessage)
 				buf, code, err := sendRequestToHandler(handler, bytes.NewBufferString(tc.requestJSON), handler.Path())
 				require.NoError(t, err)
 				require.NotEmpty(t, buf)
@@ -501,7 +501,7 @@ func TestOperation_Send(t *testing.T) {
 				require.NoError(t, err)
 				require.NotNil(t, svc)
 
-				handler := lookupCreatePublicDIDHandler(t, svc, SendNewMsg)
+				handler := lookupCreatePublicDIDHandler(t, svc, SendNewMessage)
 				buf, err := getSuccessResponseFromHandler(handler, bytes.NewBufferString(tc.requestJSON), handler.Path())
 				require.NoError(t, err)
 				require.Contains(t, buf.String(), "{}")
@@ -634,7 +634,7 @@ func TestOperation_Send(t *testing.T) {
 				require.NoError(t, err)
 				require.NotNil(t, svc)
 
-				handler := lookupCreatePublicDIDHandler(t, svc, SendNewMsg)
+				handler := lookupCreatePublicDIDHandler(t, svc, SendNewMessage)
 				buf, code, err := sendRequestToHandler(handler, bytes.NewBufferString(tc.requestJSON), handler.Path())
 				require.NoError(t, err)
 				require.NotEmpty(t, buf)
@@ -708,7 +708,7 @@ func TestOperation_Reply(t *testing.T) {
 				require.NoError(t, err)
 				require.NotNil(t, svc)
 
-				handler := lookupCreatePublicDIDHandler(t, svc, SendReplyMsg)
+				handler := lookupCreatePublicDIDHandler(t, svc, SendReplyMessage)
 				buf, code, err := sendRequestToHandler(handler, bytes.NewBufferString(tc.requestJSON), handler.Path())
 				require.NoError(t, err)
 				require.NotEmpty(t, buf)
@@ -724,7 +724,7 @@ func TestOperation_Reply(t *testing.T) {
 		require.NoError(t, err)
 		require.NotNil(t, svc)
 
-		handler := lookupCreatePublicDIDHandler(t, svc, SendReplyMsg)
+		handler := lookupCreatePublicDIDHandler(t, svc, SendReplyMessage)
 		buf, code, err := sendRequestToHandler(handler, bytes.NewBufferString(jsonMsg), handler.Path())
 		require.NoError(t, err)
 		require.Contains(t, buf.String(), "{}")

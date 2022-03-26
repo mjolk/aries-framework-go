@@ -26,16 +26,16 @@ import (
 
 // constants for endpoints of DIDExchange.
 const (
-	OperationID                  = "/connections"
-	CreateInvitationPath         = OperationID + "/create-invitation"
-	CreateImplicitInvitationPath = OperationID + "/create-implicit-invitation"
-	ReceiveInvitationPath        = OperationID + "/receive-invitation"
-	AcceptInvitationPath         = OperationID + "/{id}/accept-invitation"
-	Connections                  = OperationID
-	ConnectionsByID              = OperationID + "/{id}"
-	AcceptExchangeRequest        = OperationID + "/{id}/accept-request"
-	CreateConnection             = OperationID + "/create"
-	RemoveConnection             = OperationID + "/{id}/remove"
+	OperationID              = "/connections"
+	CreateInvitation         = OperationID + "/create-invitation"
+	CreateImplicitInvitation = OperationID + "/create-implicit-invitation"
+	ReceiveInvitation        = OperationID + "/receive-invitation"
+	AcceptInvitation         = OperationID + "/{id}/accept-invitation"
+	QueryConnections         = OperationID
+	QueryConnectionByID      = OperationID + "/{id}"
+	AcceptExchangeRequest    = OperationID + "/{id}/accept-request"
+	CreateConnection         = OperationID + "/create"
+	RemoveConnection         = OperationID + "/{id}/remove"
 )
 
 var logger = log.New("aries-framework/controller/rest/did-exchange")
@@ -80,12 +80,12 @@ func (c *Operation) GetRESTHandlers() []rest.Handler {
 func (c *Operation) registerHandler() {
 	// Add more protocol endpoints here to expose them as controller API endpoints
 	c.handlers = []rest.Handler{
-		cmdutil.NewHTTPHandler(Connections, http.MethodGet, c.QueryConnections),
-		cmdutil.NewHTTPHandler(ConnectionsByID, http.MethodGet, c.QueryConnectionByID),
-		cmdutil.NewHTTPHandler(CreateInvitationPath, http.MethodPost, c.CreateInvitation),
-		cmdutil.NewHTTPHandler(CreateImplicitInvitationPath, http.MethodPost, c.CreateImplicitInvitation),
-		cmdutil.NewHTTPHandler(ReceiveInvitationPath, http.MethodPost, c.ReceiveInvitation),
-		cmdutil.NewHTTPHandler(AcceptInvitationPath, http.MethodPost, c.AcceptInvitation),
+		cmdutil.NewHTTPHandler(QueryConnections, http.MethodGet, c.QueryConnections),
+		cmdutil.NewHTTPHandler(QueryConnectionByID, http.MethodGet, c.QueryConnectionByID),
+		cmdutil.NewHTTPHandler(CreateInvitation, http.MethodPost, c.CreateInvitation),
+		cmdutil.NewHTTPHandler(CreateImplicitInvitation, http.MethodPost, c.CreateImplicitInvitation),
+		cmdutil.NewHTTPHandler(ReceiveInvitation, http.MethodPost, c.ReceiveInvitation),
+		cmdutil.NewHTTPHandler(AcceptInvitation, http.MethodPost, c.AcceptInvitation),
 		cmdutil.NewHTTPHandler(AcceptExchangeRequest, http.MethodPost, c.AcceptExchangeRequest),
 		cmdutil.NewHTTPHandler(CreateConnection, http.MethodPost, c.CreateConnection),
 		cmdutil.NewHTTPHandler(RemoveConnection, http.MethodPost, c.RemoveConnection),

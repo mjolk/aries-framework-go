@@ -19,9 +19,9 @@ import (
 
 // constants for KMS operations.
 const (
-	KmsOperationID   = "/kms"
-	CreateKeySetPath = KmsOperationID + "/keyset"
-	ImportKeyPath    = KmsOperationID + "/import"
+	OperationID  = "/kms"
+	CreateKeySet = OperationID + "/keyset"
+	ImportKey    = OperationID + "/import"
 )
 
 // provider contains dependencies for the kms command and is typically created by using aries.Context().
@@ -58,8 +58,8 @@ func (o *Operation) GetRESTHandlers() []rest.Handler {
 // registerHandler register handlers to be exposed from this protocol service as REST API endpoints.
 func (o *Operation) registerHandler() {
 	o.handlers = []rest.Handler{
-		cmdutil.NewHTTPHandler(CreateKeySetPath, http.MethodPost, o.CreateKeySet),
-		cmdutil.NewHTTPHandler(ImportKeyPath, http.MethodPost, o.ImportKey),
+		cmdutil.NewHTTPHandler(CreateKeySet, http.MethodPost, o.CreateKeySet),
+		cmdutil.NewHTTPHandler(ImportKey, http.MethodPost, o.ImportKey),
 	}
 }
 

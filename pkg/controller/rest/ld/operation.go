@@ -21,13 +21,13 @@ import (
 
 // constants for the JSON-LD operations.
 const (
-	OperationID                   = "/ld"
-	AddContextsPath               = OperationID + "/context"
-	AddRemoteProviderPath         = OperationID + "/remote-provider"
-	RefreshRemoteProviderPath     = OperationID + "/remote-provider/{id}/refresh"
-	DeleteRemoteProviderPath      = OperationID + "/remote-provider/{id}"
-	GetAllRemoteProvidersPath     = OperationID + "/remote-providers"
-	RefreshAllRemoteProvidersPath = OperationID + "/remote-providers/refresh"
+	OperationID               = "/ld"
+	AddContexts               = OperationID + "/context"
+	AddRemoteProvider         = OperationID + "/remote-provider"
+	RefreshRemoteProvider     = OperationID + "/remote-provider/{id}/refresh"
+	DeleteRemoteProvider      = OperationID + "/remote-provider/{id}"
+	GetAllRemoteProviders     = OperationID + "/remote-providers"
+	RefreshAllRemoteProviders = OperationID + "/remote-providers/refresh"
 )
 
 // Operation contains REST operations provided by JSON-LD API.
@@ -54,12 +54,12 @@ func New(svc ld.Service, opts ...Option) *Operation {
 
 func (o *Operation) registerHandlers() {
 	o.handlers = []rest.Handler{
-		cmdutil.NewHTTPHandler(AddContextsPath, http.MethodPost, o.AddContexts),
-		cmdutil.NewHTTPHandler(AddRemoteProviderPath, http.MethodPost, o.AddRemoteProvider),
-		cmdutil.NewHTTPHandler(RefreshRemoteProviderPath, http.MethodPost, o.RefreshRemoteProvider),
-		cmdutil.NewHTTPHandler(DeleteRemoteProviderPath, http.MethodDelete, o.DeleteRemoteProvider),
-		cmdutil.NewHTTPHandler(GetAllRemoteProvidersPath, http.MethodGet, o.GetAllRemoteProviders),
-		cmdutil.NewHTTPHandler(RefreshAllRemoteProvidersPath, http.MethodPost, o.RefreshAllRemoteProviders),
+		cmdutil.NewHTTPHandler(AddContexts, http.MethodPost, o.AddContexts),
+		cmdutil.NewHTTPHandler(AddRemoteProvider, http.MethodPost, o.AddRemoteProvider),
+		cmdutil.NewHTTPHandler(RefreshRemoteProvider, http.MethodPost, o.RefreshRemoteProvider),
+		cmdutil.NewHTTPHandler(DeleteRemoteProvider, http.MethodDelete, o.DeleteRemoteProvider),
+		cmdutil.NewHTTPHandler(GetAllRemoteProviders, http.MethodGet, o.GetAllRemoteProviders),
+		cmdutil.NewHTTPHandler(RefreshAllRemoteProviders, http.MethodPost, o.RefreshAllRemoteProviders),
 	}
 }
 

@@ -28,27 +28,27 @@ const (
 	OperationID = "/vcwallet"
 
 	// command Paths.
-	CreateProfilePath             = OperationID + "/create-profile"
-	UpdateProfilePath             = OperationID + "/update-profile"
-	ProfileExistsPath             = OperationID + "/profile/{id}"
-	OpenPath                      = OperationID + "/open"
-	ClosePath                     = OperationID + "/close"
-	AddPath                       = OperationID + "/add"
-	RemovePath                    = OperationID + "/remove"
-	GetPath                       = OperationID + "/get"
-	GetAllPath                    = OperationID + "/getall"
-	QueryPath                     = OperationID + "/query"
-	IssuePath                     = OperationID + "/issue"
-	ProvePath                     = OperationID + "/prove"
-	VerifyPath                    = OperationID + "/verify"
-	DerivePath                    = OperationID + "/derive"
-	CreateKeyPairPath             = OperationID + "/create-key-pair"
-	ConnectPath                   = OperationID + "/connect"
-	ProposePresentationPath       = OperationID + "/propose-presentation"
-	PresentProofPath              = OperationID + "/present-proof"
-	ProposeCredentialPath         = OperationID + "/propose-credential"
-	RequestCredentialPath         = OperationID + "/request-credential"
-	ResolveCredentialManifestPath = OperationID + "/resolve-credential-manifest"
+	CreateProfile             = OperationID + "/create-profile"
+	UpdateProfile             = OperationID + "/update-profile"
+	ProfileExists             = OperationID + "/profile/{id}"
+	Open                      = OperationID + "/open"
+	Close                     = OperationID + "/close"
+	Add                       = OperationID + "/add"
+	Remove                    = OperationID + "/remove"
+	Get                       = OperationID + "/get"
+	GetAll                    = OperationID + "/getall"
+	Query                     = OperationID + "/query"
+	Issue                     = OperationID + "/issue"
+	Prove                     = OperationID + "/prove"
+	Verify                    = OperationID + "/verify"
+	Derive                    = OperationID + "/derive"
+	CreateKeyPair             = OperationID + "/create-key-pair"
+	Connect                   = OperationID + "/connect"
+	ProposePresentation       = OperationID + "/propose-presentation"
+	PresentProof              = OperationID + "/present-proof"
+	ProposeCredential         = OperationID + "/propose-credential"
+	RequestCredential         = OperationID + "/request-credential"
+	ResolveCredentialManifest = OperationID + "/resolve-credential-manifest"
 )
 
 // provider contains dependencies for the verifiable credential wallet command controller
@@ -99,27 +99,27 @@ func (o *Operation) GetRESTHandlers() []rest.Handler {
 // registerHandler register handlers to be exposed from this protocol service as REST API endpoints.
 func (o *Operation) registerHandler() {
 	o.handlers = []rest.Handler{
-		cmdutil.NewHTTPHandler(CreateProfilePath, http.MethodPost, o.CreateProfile),
-		cmdutil.NewHTTPHandler(UpdateProfilePath, http.MethodPost, o.UpdateProfile),
-		cmdutil.NewHTTPHandler(ProfileExistsPath, http.MethodGet, o.ProfileExists),
-		cmdutil.NewHTTPHandler(OpenPath, http.MethodPost, o.Open),
-		cmdutil.NewHTTPHandler(ClosePath, http.MethodPost, o.Close),
-		cmdutil.NewHTTPHandler(AddPath, http.MethodPost, o.Add),
-		cmdutil.NewHTTPHandler(RemovePath, http.MethodPost, o.Remove),
-		cmdutil.NewHTTPHandler(GetPath, http.MethodPost, o.Get),
-		cmdutil.NewHTTPHandler(GetAllPath, http.MethodPost, o.GetAll),
-		cmdutil.NewHTTPHandler(QueryPath, http.MethodPost, o.Query),
-		cmdutil.NewHTTPHandler(IssuePath, http.MethodPost, o.Issue),
-		cmdutil.NewHTTPHandler(ProvePath, http.MethodPost, o.Prove),
-		cmdutil.NewHTTPHandler(VerifyPath, http.MethodPost, o.Verify),
-		cmdutil.NewHTTPHandler(DerivePath, http.MethodPost, o.Derive),
-		cmdutil.NewHTTPHandler(CreateKeyPairPath, http.MethodPost, o.CreateKeyPair),
-		cmdutil.NewHTTPHandler(ConnectPath, http.MethodPost, o.Connect),
-		cmdutil.NewHTTPHandler(ProposePresentationPath, http.MethodPost, o.ProposePresentation),
-		cmdutil.NewHTTPHandler(PresentProofPath, http.MethodPost, o.PresentProof),
-		cmdutil.NewHTTPHandler(ProposeCredentialPath, http.MethodPost, o.ProposeCredential),
-		cmdutil.NewHTTPHandler(RequestCredentialPath, http.MethodPost, o.RequestCredential),
-		cmdutil.NewHTTPHandler(ResolveCredentialManifestPath, http.MethodPost, o.ResolveCredentialManifest),
+		cmdutil.NewHTTPHandler(CreateProfile, http.MethodPost, o.CreateProfile),
+		cmdutil.NewHTTPHandler(UpdateProfile, http.MethodPost, o.UpdateProfile),
+		cmdutil.NewHTTPHandler(ProfileExists, http.MethodGet, o.ProfileExists),
+		cmdutil.NewHTTPHandler(Open, http.MethodPost, o.Open),
+		cmdutil.NewHTTPHandler(Close, http.MethodPost, o.Close),
+		cmdutil.NewHTTPHandler(Add, http.MethodPost, o.Add),
+		cmdutil.NewHTTPHandler(Remove, http.MethodPost, o.Remove),
+		cmdutil.NewHTTPHandler(Get, http.MethodPost, o.Get),
+		cmdutil.NewHTTPHandler(GetAll, http.MethodPost, o.GetAll),
+		cmdutil.NewHTTPHandler(Query, http.MethodPost, o.Query),
+		cmdutil.NewHTTPHandler(Issue, http.MethodPost, o.Issue),
+		cmdutil.NewHTTPHandler(Prove, http.MethodPost, o.Prove),
+		cmdutil.NewHTTPHandler(Verify, http.MethodPost, o.Verify),
+		cmdutil.NewHTTPHandler(Derive, http.MethodPost, o.Derive),
+		cmdutil.NewHTTPHandler(CreateKeyPair, http.MethodPost, o.CreateKeyPair),
+		cmdutil.NewHTTPHandler(Connect, http.MethodPost, o.Connect),
+		cmdutil.NewHTTPHandler(ProposePresentation, http.MethodPost, o.ProposePresentation),
+		cmdutil.NewHTTPHandler(PresentProof, http.MethodPost, o.PresentProof),
+		cmdutil.NewHTTPHandler(ProposeCredential, http.MethodPost, o.ProposeCredential),
+		cmdutil.NewHTTPHandler(RequestCredential, http.MethodPost, o.RequestCredential),
+		cmdutil.NewHTTPHandler(ResolveCredentialManifest, http.MethodPost, o.ResolveCredentialManifest),
 	}
 }
 

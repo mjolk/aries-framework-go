@@ -187,9 +187,9 @@ func (ar *Aries) GetIntroduceController() (api.IntroduceController, error) {
 
 // GetVerifiableController returns an Verifiable instance.
 func (ar *Aries) GetVerifiableController() (api.VerifiableController, error) {
-	endpoints, ok := ar.endpoints[verifiable.VerifiableOperationID]
+	endpoints, ok := ar.endpoints[verifiable.OperationID]
 	if !ok {
-		return nil, fmt.Errorf("no endpoints found for controller [%s]", verifiable.VerifiableOperationID)
+		return nil, fmt.Errorf("no endpoints found for controller [%s]", verifiable.OperationID)
 	}
 
 	return &Verifiable{endpoints: endpoints, URL: ar.URL, Token: ar.Token, httpClient: &http.Client{}}, nil
@@ -227,9 +227,9 @@ func (ar *Aries) GetPresentProofController() (api.PresentProofController, error)
 
 // GetVDRController returns a VDR instance.
 func (ar *Aries) GetVDRController() (api.VDRController, error) {
-	endpoints, ok := ar.endpoints[vdr.VDROperationID]
+	endpoints, ok := ar.endpoints[vdr.OperationID]
 	if !ok {
-		return nil, fmt.Errorf("no endpoints found for controller [%s]", vdr.VDROperationID)
+		return nil, fmt.Errorf("no endpoints found for controller [%s]", vdr.OperationID)
 	}
 
 	return &VDR{endpoints: endpoints, URL: ar.URL, Token: ar.Token, httpClient: &http.Client{}}, nil
@@ -237,9 +237,9 @@ func (ar *Aries) GetVDRController() (api.VDRController, error) {
 
 // GetMediatorController returns a Mediator instance.
 func (ar *Aries) GetMediatorController() (api.MediatorController, error) {
-	endpoints, ok := ar.endpoints[mediator.RouteOperationID]
+	endpoints, ok := ar.endpoints[mediator.OperationID]
 	if !ok {
-		return nil, fmt.Errorf("no endpoints found for controller [%s]", mediator.RouteOperationID)
+		return nil, fmt.Errorf("no endpoints found for controller [%s]", mediator.OperationID)
 	}
 
 	return &Mediator{endpoints: endpoints, URL: ar.URL, Token: ar.Token, httpClient: &http.Client{}}, nil
@@ -247,9 +247,9 @@ func (ar *Aries) GetMediatorController() (api.MediatorController, error) {
 
 // GetMessagingController returns a Messaging instance.
 func (ar *Aries) GetMessagingController() (api.MessagingController, error) {
-	endpoints, ok := ar.endpoints[messaging.MsgServiceOperationID]
+	endpoints, ok := ar.endpoints[messaging.OperationID]
 	if !ok {
-		return nil, fmt.Errorf("no endpoints found for controller [%s]", messaging.MsgServiceOperationID)
+		return nil, fmt.Errorf("no endpoints found for controller [%s]", messaging.OperationID)
 	}
 
 	return &Messaging{endpoints: endpoints, URL: ar.URL, Token: ar.Token, httpClient: &http.Client{}}, nil
@@ -267,9 +267,9 @@ func (ar *Aries) GetOutOfBandController() (api.OutOfBandController, error) {
 
 // GetKMSController returns a KMS instance.
 func (ar *Aries) GetKMSController() (api.KMSController, error) {
-	endpoints, ok := ar.endpoints[kms.KmsOperationID]
+	endpoints, ok := ar.endpoints[kms.OperationID]
 	if !ok {
-		return nil, fmt.Errorf("no endpoints found for controller [%s]", kms.KmsOperationID)
+		return nil, fmt.Errorf("no endpoints found for controller [%s]", kms.OperationID)
 	}
 
 	return &KMS{endpoints: endpoints, URL: ar.URL, Token: ar.Token, httpClient: &http.Client{}}, nil

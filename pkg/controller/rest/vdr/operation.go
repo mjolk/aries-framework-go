@@ -23,13 +23,13 @@ import (
 
 // constants for the VDR operations.
 const (
-	VDROperationID    = "/vdr"
-	vdrDIDPath        = VDROperationID + "/did"
-	SaveDIDPath       = vdrDIDPath
-	GetDIDPath        = vdrDIDPath + "/{id}"
-	ResolveDIDPath    = vdrDIDPath + "/resolve/{id}"
-	CreateDIDPath     = vdrDIDPath + "/create"
-	GetDIDRecordsPath = vdrDIDPath + "/records"
+	OperationID = "/vdr"
+	vdrDIDPath  = OperationID + "/did"
+	SaveDID     = vdrDIDPath
+	GetDID      = vdrDIDPath + "/{id}"
+	ResolveDID  = vdrDIDPath + "/resolve/{id}"
+	CreateDID   = vdrDIDPath + "/create"
+	GetDIDs     = vdrDIDPath + "/records"
 )
 
 // provider contains dependencies for the common controller operations
@@ -67,11 +67,11 @@ func (o *Operation) GetRESTHandlers() []rest.Handler {
 func (o *Operation) registerHandler() {
 	// Add more protocol endpoints here to expose them as controller API endpoints
 	o.handlers = []rest.Handler{
-		cmdutil.NewHTTPHandler(SaveDIDPath, http.MethodPost, o.SaveDID),
-		cmdutil.NewHTTPHandler(ResolveDIDPath, http.MethodGet, o.ResolveDID),
-		cmdutil.NewHTTPHandler(CreateDIDPath, http.MethodPost, o.CreateDID),
-		cmdutil.NewHTTPHandler(GetDIDRecordsPath, http.MethodGet, o.GetDIDRecords),
-		cmdutil.NewHTTPHandler(GetDIDPath, http.MethodGet, o.GetDID),
+		cmdutil.NewHTTPHandler(SaveDID, http.MethodPost, o.SaveDID),
+		cmdutil.NewHTTPHandler(ResolveDID, http.MethodGet, o.ResolveDID),
+		cmdutil.NewHTTPHandler(CreateDID, http.MethodPost, o.CreateDID),
+		cmdutil.NewHTTPHandler(GetDIDs, http.MethodGet, o.GetDIDRecords),
+		cmdutil.NewHTTPHandler(GetDID, http.MethodGet, o.GetDID),
 	}
 }
 

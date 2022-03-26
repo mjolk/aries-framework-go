@@ -40,7 +40,7 @@ func TestKMS_CreateKeySet(t *testing.T) {
 
 		controller.httpClient = &mockHTTPClient{
 			data:   mockResponse,
-			method: http.MethodPost, url: mockAgentURL + kms.CreateKeySetPath,
+			method: http.MethodPost, url: mockAgentURL + kms.CreateKeySet,
 		}
 
 		req := &models.RequestEnvelope{Payload: []byte(reqData)}
@@ -62,7 +62,7 @@ func TestKMS_ImportKey(t *testing.T) {
 
 		controller.httpClient = &mockHTTPClient{
 			data:   mockResponse,
-			method: http.MethodPost, url: mockAgentURL + kms.ImportKeyPath,
+			method: http.MethodPost, url: mockAgentURL + kms.ImportKey,
 		}
 
 		req := &models.RequestEnvelope{Payload: []byte(reqData)}

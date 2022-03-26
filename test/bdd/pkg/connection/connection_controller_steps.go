@@ -23,7 +23,7 @@ import (
 )
 
 const (
-	createConnectionEndpoint = connectionrest.CreateConnectionV2Path
+	createConnectionEndpoint = connectionrest.CreateV2
 	connectionBasePath       = connectionrest.OperationID + "/"
 	setConnectionToV2Path    = "/use-v2"
 	rotateDIDPath            = "/rotate-did"

@@ -45,15 +45,15 @@ func getControllerEndpoints() map[string]map[string]*endpoint {
 	allEndpoints := make(map[string]map[string]*endpoint)
 
 	allEndpoints[opintroduce.OperationID] = getIntroduceEndpoints()
-	allEndpoints[opverifiable.VerifiableOperationID] = getVerifiableEndpoints()
+	allEndpoints[opverifiable.OperationID] = getVerifiableEndpoints()
 	allEndpoints[opdidexch.OperationID] = getDIDExchangeEndpoints()
 	allEndpoints[opisscred.OperationID] = getIssueCredentialEndpoints()
 	allEndpoints[oppresproof.OperationID] = getPresentProofEndpoints()
-	allEndpoints[opvdr.VDROperationID] = getVDREndpoints()
-	allEndpoints[opmediator.RouteOperationID] = getMediatorEndpoints()
-	allEndpoints[opmessaging.MsgServiceOperationID] = getMessagingEndpoints()
+	allEndpoints[opvdr.OperationID] = getVDREndpoints()
+	allEndpoints[opmediator.OperationID] = getMediatorEndpoints()
+	allEndpoints[opmessaging.OperationID] = getMessagingEndpoints()
 	allEndpoints[opoob.OperationID] = getOutOfBandEndpoints()
-	allEndpoints[opkms.KmsOperationID] = getKMSEndpoints()
+	allEndpoints[opkms.OperationID] = getKMSEndpoints()
 	allEndpoints[opld.OperationID] = getLDEndpoints()
 	allEndpoints[opvcwallet.OperationID] = getVCWalletEndpoints()
 
@@ -112,55 +112,55 @@ func getIntroduceEndpoints() map[string]*endpoint {
 func getVerifiableEndpoints() map[string]*endpoint {
 	return map[string]*endpoint{
 		cmdverifiable.ValidateCredentialCommandMethod: {
-			Path:   opverifiable.ValidateCredentialPath,
+			Path:   opverifiable.ValidateCredential,
 			Method: http.MethodPost,
 		},
 		cmdverifiable.SaveCredentialCommandMethod: {
-			Path:   opverifiable.SaveCredentialPath,
+			Path:   opverifiable.SaveCredential,
 			Method: http.MethodPost,
 		},
 		cmdverifiable.SavePresentationCommandMethod: {
-			Path:   opverifiable.SavePresentationPath,
+			Path:   opverifiable.SavePresentation,
 			Method: http.MethodPost,
 		},
 		cmdverifiable.GetCredentialCommandMethod: {
-			Path:   opverifiable.GetCredentialPath,
+			Path:   opverifiable.GetCredential,
 			Method: http.MethodGet,
 		},
 		cmdverifiable.SignCredentialCommandMethod: {
-			Path:   opverifiable.SignCredentialsPath,
+			Path:   opverifiable.SignCredentials,
 			Method: http.MethodPost,
 		},
 		cmdverifiable.GetPresentationCommandMethod: {
-			Path:   opverifiable.GetPresentationPath,
+			Path:   opverifiable.GetPresentation,
 			Method: http.MethodGet,
 		},
 		cmdverifiable.GetCredentialByNameCommandMethod: {
-			Path:   opverifiable.GetCredentialByNamePath,
+			Path:   opverifiable.GetCredentialByName,
 			Method: http.MethodGet,
 		},
 		cmdverifiable.GetCredentialsCommandMethod: {
-			Path:   opverifiable.GetCredentialsPath,
+			Path:   opverifiable.GetCredentials,
 			Method: http.MethodGet,
 		},
 		cmdverifiable.GetPresentationsCommandMethod: {
-			Path:   opverifiable.GetPresentationsPath,
+			Path:   opverifiable.GetPresentations,
 			Method: http.MethodGet,
 		},
 		cmdverifiable.GeneratePresentationCommandMethod: {
-			Path:   opverifiable.GeneratePresentationPath,
+			Path:   opverifiable.GeneratePresentation,
 			Method: http.MethodPost,
 		},
 		cmdverifiable.GeneratePresentationByIDCommandMethod: {
-			Path:   opverifiable.GeneratePresentationByIDPath,
+			Path:   opverifiable.GeneratePresentationByID,
 			Method: http.MethodPost,
 		},
 		cmdverifiable.RemoveCredentialByNameCommandMethod: {
-			Path:   opverifiable.RemoveCredentialByNamePath,
+			Path:   opverifiable.RemoveCredentialByName,
 			Method: http.MethodPost,
 		},
 		cmdverifiable.RemovePresentationByNameCommandMethod: {
-			Path:   opverifiable.RemovePresentationByNamePath,
+			Path:   opverifiable.RemovePresentationByName,
 			Method: http.MethodPost,
 		},
 	}
@@ -169,19 +169,19 @@ func getVerifiableEndpoints() map[string]*endpoint {
 func getDIDExchangeEndpoints() map[string]*endpoint {
 	return map[string]*endpoint{
 		cmddidexch.CreateInvitationCommandMethod: {
-			Path:   opdidexch.CreateInvitationPath,
+			Path:   opdidexch.CreateInvitation,
 			Method: http.MethodPost,
 		},
 		cmddidexch.ReceiveInvitationCommandMethod: {
-			Path:   opdidexch.ReceiveInvitationPath,
+			Path:   opdidexch.ReceiveInvitation,
 			Method: http.MethodPost,
 		},
 		cmddidexch.AcceptInvitationCommandMethod: {
-			Path:   opdidexch.AcceptInvitationPath,
+			Path:   opdidexch.AcceptInvitation,
 			Method: http.MethodPost,
 		},
 		cmddidexch.CreateImplicitInvitationCommandMethod: {
-			Path:   opdidexch.CreateImplicitInvitationPath,
+			Path:   opdidexch.CreateImplicitInvitation,
 			Method: http.MethodPost,
 		},
 		cmddidexch.AcceptExchangeRequestCommandMethod: {
@@ -189,11 +189,11 @@ func getDIDExchangeEndpoints() map[string]*endpoint {
 			Method: http.MethodPost,
 		},
 		cmddidexch.QueryConnectionsCommandMethod: {
-			Path:   opdidexch.Connections,
+			Path:   opdidexch.QueryConnections,
 			Method: http.MethodGet,
 		},
 		cmddidexch.QueryConnectionByIDCommandMethod: {
-			Path:   opdidexch.ConnectionsByID,
+			Path:   opdidexch.QueryConnectionsByID,
 			Method: http.MethodGet,
 		},
 		cmddidexch.CreateConnectionCommandMethod: {
@@ -320,23 +320,23 @@ func getPresentProofEndpoints() map[string]*endpoint {
 func getVDREndpoints() map[string]*endpoint {
 	return map[string]*endpoint{
 		cmdvdr.GetDIDCommandMethod: {
-			Path:   opvdr.GetDIDPath,
+			Path:   opvdr.GetDID,
 			Method: http.MethodGet,
 		},
 		cmdvdr.GetDIDsCommandMethod: {
-			Path:   opvdr.GetDIDRecordsPath,
+			Path:   opvdr.GetDIDRecords,
 			Method: http.MethodGet,
 		},
 		cmdvdr.SaveDIDCommandMethod: {
-			Path:   opvdr.SaveDIDPath,
+			Path:   opvdr.SaveDID,
 			Method: http.MethodPost,
 		},
 		cmdvdr.ResolveDIDCommandMethod: {
-			Path:   opvdr.ResolveDIDPath,
+			Path:   opvdr.ResolveDID,
 			Method: http.MethodGet,
 		},
 		cmdvdr.CreateDIDCommandMethod: {
-			Path:   opvdr.CreateDIDPath,
+			Path:   opvdr.CreateDID,
 			Method: http.MethodPost,
 		},
 	}
@@ -345,31 +345,31 @@ func getVDREndpoints() map[string]*endpoint {
 func getMediatorEndpoints() map[string]*endpoint {
 	return map[string]*endpoint{
 		cmdmediator.RegisterCommandMethod: {
-			Path:   opmediator.RegisterPath,
+			Path:   opmediator.Register,
 			Method: http.MethodPost,
 		},
 		cmdmediator.UnregisterCommandMethod: {
-			Path:   opmediator.UnregisterPath,
+			Path:   opmediator.Unregister,
 			Method: http.MethodDelete,
 		},
 		cmdmediator.GetConnectionsCommandMethod: {
-			Path:   opmediator.GetConnectionsPath,
+			Path:   opmediator.GetConnections,
 			Method: http.MethodGet,
 		},
 		cmdmediator.ReconnectCommandMethod: {
-			Path:   opmediator.ReconnectPath,
+			Path:   opmediator.Reconnect,
 			Method: http.MethodPost,
 		},
 		cmdmediator.ReconnectAllCommandMethod: {
-			Path:   opmediator.ReconnectAllPath,
+			Path:   opmediator.ReconnectAll,
 			Method: http.MethodGet,
 		},
 		cmdmediator.StatusCommandMethod: {
-			Path:   opmediator.StatusPath,
+			Path:   opmediator.Status,
 			Method: http.MethodPost,
 		},
 		cmdmediator.BatchPickupCommandMethod: {
-			Path:   opmediator.BatchPickupPath,
+			Path:   opmediator.BatchPickup,
 			Method: http.MethodPost,
 		},
 	}
@@ -378,27 +378,27 @@ func getMediatorEndpoints() map[string]*endpoint {
 func getMessagingEndpoints() map[string]*endpoint {
 	return map[string]*endpoint{
 		cmdmessaging.RegisterMessageServiceCommandMethod: {
-			Path:   opmessaging.RegisterMsgService,
+			Path:   opmessaging.RegisterMessageService,
 			Method: http.MethodPost,
 		},
 		cmdmessaging.UnregisterMessageServiceCommandMethod: {
-			Path:   opmessaging.UnregisterMsgService,
+			Path:   opmessaging.UnregisterMessageService,
 			Method: http.MethodPost,
 		},
 		cmdmessaging.RegisteredServicesCommandMethod: {
-			Path:   opmessaging.MsgServiceList,
+			Path:   opmessaging.RegisteredServices,
 			Method: http.MethodGet,
 		},
 		cmdmessaging.SendNewMessageCommandMethod: {
-			Path:   opmessaging.SendNewMsg,
+			Path:   opmessaging.SendNewMessage,
 			Method: http.MethodPost,
 		},
 		cmdmessaging.SendReplyMessageCommandMethod: {
-			Path:   opmessaging.SendReplyMsg,
+			Path:   opmessaging.SendReplyMessage,
 			Method: http.MethodPost,
 		},
 		cmdmessaging.RegisterHTTPMessageServiceCommandMethod: {
-			Path:   opmessaging.RegisterHTTPOverDIDCommService,
+			Path:   opmessaging.RegisterHTTPMessageService,
 			Method: http.MethodPost,
 		},
 	}
@@ -432,11 +432,11 @@ func getOutOfBandEndpoints() map[string]*endpoint {
 func getKMSEndpoints() map[string]*endpoint {
 	return map[string]*endpoint{
 		cmdkms.CreateKeySetCommandMethod: {
-			Path:   opkms.CreateKeySetPath,
+			Path:   opkms.CreateKeySet,
 			Method: http.MethodPost,
 		},
 		cmdkms.ImportKeyCommandMethod: {
-			Path:   opkms.ImportKeyPath,
+			Path:   opkms.ImportKey,
 			Method: http.MethodPost,
 		},
 	}
@@ -445,27 +445,27 @@ func getKMSEndpoints() map[string]*endpoint {
 func getLDEndpoints() map[string]*endpoint {
 	return map[string]*endpoint{
 		cmdld.AddContextsCommandMethod: {
-			Path:   opld.AddContextsPath,
+			Path:   opld.AddContexts,
 			Method: http.MethodPost,
 		},
 		cmdld.AddRemoteProviderCommandMethod: {
-			Path:   opld.AddRemoteProviderPath,
+			Path:   opld.AddRemoteProvider,
 			Method: http.MethodPost,
 		},
 		cmdld.RefreshRemoteProviderCommandMethod: {
-			Path:   opld.RefreshRemoteProviderPath,
+			Path:   opld.RefreshRemoteProvider,
 			Method: http.MethodPost,
 		},
 		cmdld.DeleteRemoteProviderCommandMethod: {
-			Path:   opld.DeleteRemoteProviderPath,
+			Path:   opld.DeleteRemoteProvider,
 			Method: http.MethodDelete,
 		},
 		cmdld.GetAllRemoteProvidersCommandMethod: {
-			Path:   opld.GetAllRemoteProvidersPath,
+			Path:   opld.GetAllRemoteProviders,
 			Method: http.MethodGet,
 		},
 		cmdld.RefreshAllRemoteProvidersCommandMethod: {
-			Path:   opld.RefreshAllRemoteProvidersPath,
+			Path:   opld.RefreshAllRemoteProviders,
 			Method: http.MethodPost,
 		},
 	}
@@ -483,49 +483,49 @@ func getVCWalletEndpoints() map[string]*endpoint {
 			Path: opvcwallet.ProfileExistsPath, Method: http.MethodGet,
 		},
 		cmdvcwallet.OpenCommandMethod: {
-			Path: opvcwallet.OpenPath, Method: http.MethodPost,
+			Path: opvcwallet.Open, Method: http.MethodPost,
 		},
 		cmdvcwallet.CloseCommandMethod: {
-			Path: opvcwallet.ClosePath, Method: http.MethodPost,
+			Path: opvcwallet.Close, Method: http.MethodPost,
 		},
 		cmdvcwallet.AddCommandMethod: {
-			Path: opvcwallet.AddPath, Method: http.MethodPost,
+			Path: opvcwallet.Add, Method: http.MethodPost,
 		},
 		cmdvcwallet.RemoveCommandMethod: {
-			Path: opvcwallet.RemovePath, Method: http.MethodPost,
+			Path: opvcwallet.Remove, Method: http.MethodPost,
 		},
 		cmdvcwallet.GetCommandMethod: {
-			Path: opvcwallet.GetPath, Method: http.MethodPost,
+			Path: opvcwallet.Get, Method: http.MethodPost,
 		},
 		cmdvcwallet.GetAllCommandMethod: {
-			Path: opvcwallet.GetAllPath, Method: http.MethodPost,
+			Path: opvcwallet.GetAll, Method: http.MethodPost,
 		},
 		cmdvcwallet.QueryCommandMethod: {
-			Path: opvcwallet.QueryPath, Method: http.MethodPost,
+			Path: opvcwallet.Query, Method: http.MethodPost,
 		},
 		cmdvcwallet.IssueCommandMethod: {
-			Path: opvcwallet.IssuePath, Method: http.MethodPost,
+			Path: opvcwallet.Issue, Method: http.MethodPost,
 		},
 		cmdvcwallet.ProveCommandMethod: {
-			Path: opvcwallet.ProvePath, Method: http.MethodPost,
+			Path: opvcwallet.Prove, Method: http.MethodPost,
 		},
 		cmdvcwallet.VerifyCommandMethod: {
-			Path: opvcwallet.VerifyPath, Method: http.MethodPost,
+			Path: opvcwallet.Verify, Method: http.MethodPost,
 		},
 		cmdvcwallet.DeriveCommandMethod: {
-			Path: opvcwallet.DerivePath, Method: http.MethodPost,
+			Path: opvcwallet.Derive, Method: http.MethodPost,
 		},
 		cmdvcwallet.CreateKeyPairCommandMethod: {
-			Path: opvcwallet.CreateKeyPairPath, Method: http.MethodPost,
+			Path: opvcwallet.CreateKeyPair, Method: http.MethodPost,
 		},
 		cmdvcwallet.ConnectCommandMethod: {
-			Path: opvcwallet.ConnectPath, Method: http.MethodPost,
+			Path: opvcwallet.Connect, Method: http.MethodPost,
 		},
 		cmdvcwallet.ProposePresentationCommandMethod: {
-			Path: opvcwallet.ProposePresentationPath, Method: http.MethodPost,
+			Path: opvcwallet.ProposePresentation, Method: http.MethodPost,
 		},
 		cmdvcwallet.PresentProofCommandMethod: {
-			Path: opvcwallet.PresentProofPath, Method: http.MethodPost,
+			Path: opvcwallet.PresentProof, Method: http.MethodPost,
 		},
 	}
 }

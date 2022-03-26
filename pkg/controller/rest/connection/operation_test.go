@@ -115,7 +115,7 @@ func TestOperation_CreateConnectionV2(t *testing.T) {
 		op, err := New(prov)
 		require.NoError(t, err)
 
-		h := handlerLookup(t, op, CreateConnectionV2Path)
+		h := handlerLookup(t, op, CreateV2)
 
 		req := command.CreateConnectionRequest{
 			MyDID:    myDID,
@@ -125,7 +125,7 @@ func TestOperation_CreateConnectionV2(t *testing.T) {
 		reqBytes, err := json.Marshal(&req)
 		require.NoError(t, err)
 
-		body, code, err := sendRequestToHandler(h, bytes.NewReader(reqBytes), CreateConnectionV2Path)
+		body, code, err := sendRequestToHandler(h, bytes.NewReader(reqBytes), CreateV2)
 		require.NoError(t, err)
 		require.Equal(t, http.StatusOK, code)
 
@@ -149,14 +149,14 @@ func TestOperation_CreateConnectionV2(t *testing.T) {
 		op, err := New(prov)
 		require.NoError(t, err)
 
-		h := handlerLookup(t, op, CreateConnectionV2Path)
+		h := handlerLookup(t, op, CreateV2)
 
 		req := command.CreateConnectionRequest{}
 
 		reqBytes, err := json.Marshal(&req)
 		require.NoError(t, err)
 
-		_, code, err := sendRequestToHandler(h, bytes.NewReader(reqBytes), CreateConnectionV2Path)
+		_, code, err := sendRequestToHandler(h, bytes.NewReader(reqBytes), CreateV2)
 		require.NoError(t, err)
 		require.Equal(t, http.StatusBadRequest, code)
 	})
@@ -164,8 +164,8 @@ func TestOperation_CreateConnectionV2(t *testing.T) {
 
 func TestOperation_SetConnectionToDIDCommV2(t *testing.T) {
 	connID := "test-connection-id"
-	connPath := strings.ReplaceAll(SetConnectionToV2Path, "{id}", connID)
-	badPath := strings.ReplaceAll(SetConnectionToV2Path, "{id}", "")
+	connPath := strings.ReplaceAll(SetToV2, "{id}", connID)
+	badPath := strings.ReplaceAll(SetToV2, "{id}", "")
 
 	t.Parallel()
 
@@ -183,7 +183,7 @@ func TestOperation_SetConnectionToDIDCommV2(t *testing.T) {
 		op, err := New(prov)
 		require.NoError(t, err)
 
-		h := handlerLookup(t, op, SetConnectionToV2Path)
+		h := handlerLookup(t, op, SetToV2)
 
 		req := command.IDMessage{
 			ConnectionID: connID,
@@ -224,7 +224,7 @@ func TestOperation_SetConnectionToDIDCommV2(t *testing.T) {
 		op, err := New(prov)
 		require.NoError(t, err)
 
-		h := handlerLookup(t, op, SetConnectionToV2Path)
+		h := handlerLookup(t, op, SetToV2)
 
 		reqBytes := []byte("{}")
 
@@ -236,8 +236,8 @@ func TestOperation_SetConnectionToDIDCommV2(t *testing.T) {
 
 func TestOperation_RotateDID(t *testing.T) {
 	connID := "test-connection-id"
-	connPath := strings.ReplaceAll(RotateDIDPath, "{id}", connID)
-	badPath := strings.ReplaceAll(RotateDIDPath, "{id}", "")
+	connPath := strings.ReplaceAll(RotateDID, "{id}", connID)
+	badPath := strings.ReplaceAll(RotateDID, "{id}", "")
 
 	t.Parallel()
 
@@ -257,7 +257,7 @@ func TestOperation_RotateDID(t *testing.T) {
 		op, err := New(prov)
 		require.NoError(t, err)
 
-		h := handlerLookup(t, op, RotateDIDPath)
+		h := handlerLookup(t, op, RotateDID)
 
 		req := command.RotateDIDRequest{
 			ID:     connID,
@@ -300,7 +300,7 @@ func TestOperation_RotateDID(t *testing.T) {
 		op, err := New(prov)
 		require.NoError(t, err)
 
-		h := handlerLookup(t, op, RotateDIDPath)
+		h := handlerLookup(t, op, RotateDID)
 
 		reqBytes := []byte("{}")
 

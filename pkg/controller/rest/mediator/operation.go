@@ -18,14 +18,14 @@ import (
 
 // constants for the mediator operations.
 const (
-	RouteOperationID   = "/mediator"
-	RegisterPath       = RouteOperationID + "/register"
-	UnregisterPath     = RouteOperationID + "/unregister"
-	GetConnectionsPath = RouteOperationID + "/connections"
-	ReconnectPath      = RouteOperationID + "/reconnect"
-	StatusPath         = RouteOperationID + "/status"
-	BatchPickupPath    = RouteOperationID + "/batchpickup"
-	ReconnectAllPath   = RouteOperationID + "/reconnect-all"
+	OperationID    = "/mediator"
+	Register       = OperationID + "/register"
+	Unregister     = OperationID + "/unregister"
+	GetConnections = OperationID + "/connections"
+	Reconnect      = OperationID + "/reconnect"
+	Status         = OperationID + "/status"
+	BatchPickup    = OperationID + "/batchpickup"
+	ReconnectAll   = OperationID + "/reconnect-all"
 )
 
 // provider contains dependencies for the route protocol and is typically created by using aries.Context().
@@ -67,13 +67,13 @@ func (o *Operation) GetRESTHandlers() []rest.Handler {
 func (o *Operation) registerHandler() {
 	// Add more protocol endpoints here to expose them as controller API endpoints
 	o.handlers = []rest.Handler{
-		cmdutil.NewHTTPHandler(RegisterPath, http.MethodPost, o.Register),
-		cmdutil.NewHTTPHandler(UnregisterPath, http.MethodDelete, o.Unregister),
-		cmdutil.NewHTTPHandler(GetConnectionsPath, http.MethodGet, o.Connections),
-		cmdutil.NewHTTPHandler(ReconnectPath, http.MethodPost, o.Reconnect),
-		cmdutil.NewHTTPHandler(StatusPath, http.MethodPost, o.Status),
-		cmdutil.NewHTTPHandler(BatchPickupPath, http.MethodPost, o.BatchPickup),
-		cmdutil.NewHTTPHandler(ReconnectAllPath, http.MethodGet, o.ReconnectAll),
+		cmdutil.NewHTTPHandler(Register, http.MethodPost, o.Register),
+		cmdutil.NewHTTPHandler(Unregister, http.MethodDelete, o.Unregister),
+		cmdutil.NewHTTPHandler(GetConnections, http.MethodGet, o.Connections),
+		cmdutil.NewHTTPHandler(Reconnect, http.MethodPost, o.Reconnect),
+		cmdutil.NewHTTPHandler(Status, http.MethodPost, o.Status),
+		cmdutil.NewHTTPHandler(BatchPickup, http.MethodPost, o.BatchPickup),
+		cmdutil.NewHTTPHandler(ReconnectAll, http.MethodGet, o.ReconnectAll),
 	}
 }
 

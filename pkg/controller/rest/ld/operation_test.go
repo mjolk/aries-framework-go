@@ -44,8 +44,8 @@ func TestOperation_AddContexts(t *testing.T) {
 	})
 	require.NoError(t, err)
 
-	handler := lookupHandler(t, op, ldrest.AddContextsPath, http.MethodPost)
-	_, code := sendRequestToHandler(t, handler, bytes.NewBuffer(reqBytes), ldrest.AddContextsPath)
+	handler := lookupHandler(t, op, ldrest.AddContexts, http.MethodPost)
+	_, code := sendRequestToHandler(t, handler, bytes.NewBuffer(reqBytes), ldrest.AddContexts)
 
 	require.Equal(t, http.StatusOK, code)
 }
@@ -59,8 +59,8 @@ func TestOperation_AddRemoteProvider(t *testing.T) {
 	})
 	require.NoError(t, err)
 
-	handler := lookupHandler(t, op, ldrest.AddRemoteProviderPath, http.MethodPost)
-	respBody, code := sendRequestToHandler(t, handler, bytes.NewBuffer(reqBytes), ldrest.AddRemoteProviderPath)
+	handler := lookupHandler(t, op, ldrest.AddRemoteProvider, http.MethodPost)
+	respBody, code := sendRequestToHandler(t, handler, bytes.NewBuffer(reqBytes), ldrest.AddRemoteProvider)
 
 	require.Equal(t, http.StatusOK, code)
 
@@ -74,8 +74,8 @@ func TestOperation_RefreshRemoteProvider(t *testing.T) {
 	op := ldrest.New(&mockld.MockService{})
 	require.NotNil(t, op)
 
-	handler := lookupHandler(t, op, ldrest.RefreshRemoteProviderPath, http.MethodPost)
-	_, code := sendRequestToHandler(t, handler, nil, strings.Replace(ldrest.RefreshRemoteProviderPath, "{id}", "id", 1))
+	handler := lookupHandler(t, op, ldrest.RefreshRemoteProvider, http.MethodPost)
+	_, code := sendRequestToHandler(t, handler, nil, strings.Replace(ldrest.RefreshRemoteProvider, "{id}", "id", 1))
 
 	require.Equal(t, http.StatusOK, code)
 }
@@ -84,8 +84,8 @@ func TestOperation_DeleteRemoteProvider(t *testing.T) {
 	op := ldrest.New(&mockld.MockService{})
 	require.NotNil(t, op)
 
-	handler := lookupHandler(t, op, ldrest.DeleteRemoteProviderPath, http.MethodDelete)
-	_, code := sendRequestToHandler(t, handler, nil, strings.Replace(ldrest.DeleteRemoteProviderPath, "{id}", "id", 1))
+	handler := lookupHandler(t, op, ldrest.DeleteRemoteProvider, http.MethodDelete)
+	_, code := sendRequestToHandler(t, handler, nil, strings.Replace(ldrest.DeleteRemoteProvider, "{id}", "id", 1))
 
 	require.Equal(t, http.StatusOK, code)
 }
@@ -94,8 +94,8 @@ func TestOperation_GetRemoteProviders(t *testing.T) {
 	op := ldrest.New(&mockld.MockService{})
 	require.NotNil(t, op)
 
-	handler := lookupHandler(t, op, ldrest.GetAllRemoteProvidersPath, http.MethodGet)
-	respBody, code := sendRequestToHandler(t, handler, nil, ldrest.GetAllRemoteProvidersPath)
+	handler := lookupHandler(t, op, ldrest.GetAllRemoteProviders, http.MethodGet)
+	respBody, code := sendRequestToHandler(t, handler, nil, ldrest.GetAllRemoteProviders)
 
 	require.Equal(t, http.StatusOK, code)
 
@@ -109,8 +109,8 @@ func TestOperation_RefreshRemoteProviders(t *testing.T) {
 	op := ldrest.New(&mockld.MockService{})
 	require.NotNil(t, op)
 
-	handler := lookupHandler(t, op, ldrest.RefreshAllRemoteProvidersPath, http.MethodPost)
-	_, code := sendRequestToHandler(t, handler, nil, ldrest.RefreshAllRemoteProvidersPath)
+	handler := lookupHandler(t, op, ldrest.RefreshAllRemoteProviders, http.MethodPost)
+	_, code := sendRequestToHandler(t, handler, nil, ldrest.RefreshAllRemoteProviders)
 
 	require.Equal(t, http.StatusOK, code)
 }

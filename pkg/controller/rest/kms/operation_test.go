@@ -42,8 +42,8 @@ func TestCreateKeySet(t *testing.T) {
 		})
 		cmd.command = &mockKMSCommand{}
 
-		handler := lookupHandler(t, cmd, CreateKeySetPath)
-		err := getSuccessResponseFromHandler(handler, CreateKeySetPath)
+		handler := lookupHandler(t, cmd, CreateKeySet)
+		err := getSuccessResponseFromHandler(handler, CreateKeySet)
 		require.NoError(t, err)
 	})
 
@@ -53,7 +53,7 @@ func TestCreateKeySet(t *testing.T) {
 		})
 		require.NotNil(t, cmd)
 
-		handler := lookupHandler(t, cmd, CreateKeySetPath)
+		handler := lookupHandler(t, cmd, CreateKeySet)
 
 		req := createKeySetReq{CreateKeySetRequest: kms.CreateKeySetRequest{
 			KeyType: "ED25519",
@@ -61,7 +61,7 @@ func TestCreateKeySet(t *testing.T) {
 		reqBytes, err := json.Marshal(req)
 		require.NoError(t, err)
 
-		buf, code, err := sendRequestToHandler(handler, bytes.NewBuffer(reqBytes), CreateKeySetPath)
+		buf, code, err := sendRequestToHandler(handler, bytes.NewBuffer(reqBytes), CreateKeySet)
 		require.NoError(t, err)
 		require.NotEmpty(t, buf)
 
@@ -75,8 +75,8 @@ func TestImportKey(t *testing.T) {
 		cmd := New(&mockprovider.Provider{})
 		cmd.command = &mockKMSCommand{}
 
-		handler := lookupHandler(t, cmd, ImportKeyPath)
-		err := getSuccessResponseFromHandler(handler, ImportKeyPath)
+		handler := lookupHandler(t, cmd, ImportKey)
+		err := getSuccessResponseFromHandler(handler, ImportKey)
 		require.NoError(t, err)
 	})
 
@@ -87,13 +87,13 @@ func TestImportKey(t *testing.T) {
 		cmd.command = &mockKMSCommand{importKeyError: command.NewExecuteError(kms.ImportKeyError,
 			fmt.Errorf("failed to import key"))}
 
-		handler := lookupHandler(t, cmd, ImportKeyPath)
+		handler := lookupHandler(t, cmd, ImportKey)
 
 		req := importKeyReq{JSONWebKey: kms.JSONWebKey{Kid: "k1"}}
 		reqBytes, err := json.Marshal(req)
 		require.NoError(t, err)
 
-		buf, code, err := sendRequestToHandler(handler, bytes.NewBuffer(reqBytes), ImportKeyPath)
+		buf, code, err := sendRequestToHandler(handler, bytes.NewBuffer(reqBytes), ImportKey)
 		require.NoError(t, err)
 		require.NotEmpty(t, buf)
 

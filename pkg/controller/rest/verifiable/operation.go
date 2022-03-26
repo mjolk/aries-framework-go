@@ -27,27 +27,27 @@ import (
 // constants for the Verifiable protocol.
 const (
 	// roots.
-	VerifiableOperationID      = "/verifiable"
-	verifiableCredentialPath   = VerifiableOperationID + "/credential"
-	verifiablePresentationPath = VerifiableOperationID + "/presentation"
+	OperationID                = "/verifiable"
+	verifiableCredentialPath   = OperationID + "/credential"
+	verifiablePresentationPath = OperationID + "/presentation"
 
 	// credential paths.
-	ValidateCredentialPath     = verifiableCredentialPath + "/validate"
-	SaveCredentialPath         = verifiableCredentialPath
-	GetCredentialPath          = verifiableCredentialPath + "/{id}"
-	GetCredentialByNamePath    = verifiableCredentialPath + "/name" + "/{name}"
-	GetCredentialsPath         = VerifiableOperationID + "/credentials"
-	SignCredentialsPath        = VerifiableOperationID + "/signcredential"
-	DeriveCredentialPath       = VerifiableOperationID + "/derivecredential"
-	RemoveCredentialByNamePath = verifiableCredentialPath + "/remove/name" + "/{name}"
+	ValidateCredential     = verifiableCredentialPath + "/validate"
+	SaveCredential         = verifiableCredentialPath
+	GetCredential          = verifiableCredentialPath + "/{id}"
+	GetCredentialByName    = verifiableCredentialPath + "/name" + "/{name}"
+	GetCredentials         = OperationID + "/credentials"
+	SignCredential         = OperationID + "/signcredential"
+	DeriveCredential       = OperationID + "/derivecredential"
+	RemoveCredentialByName = verifiableCredentialPath + "/remove/name" + "/{name}"
 
 	// presentation paths.
-	GeneratePresentationPath     = verifiablePresentationPath + "/generate"
-	GeneratePresentationByIDPath = verifiablePresentationPath + "/generatebyid"
-	SavePresentationPath         = verifiablePresentationPath
-	GetPresentationPath          = verifiablePresentationPath + "/{id}"
-	GetPresentationsPath         = VerifiableOperationID + "/presentations"
-	RemovePresentationByNamePath = verifiablePresentationPath + "/remove/name" + "/{name}"
+	GeneratePresentation     = verifiablePresentationPath + "/generate"
+	GeneratePresentationByID = verifiablePresentationPath + "/generatebyid"
+	SavePresentation         = verifiablePresentationPath
+	GetPresentation          = verifiablePresentationPath + "/{id}"
+	GetPresentations         = OperationID + "/presentations"
+	RemovePresentationByName = verifiablePresentationPath + "/remove/name" + "/{name}"
 )
 
 // provider contains dependencies for the verifiable command and is typically created by using aries.Context().
@@ -86,20 +86,20 @@ func (o *Operation) GetRESTHandlers() []rest.Handler {
 // registerHandler register handlers to be exposed from this protocol service as REST API endpoints.
 func (o *Operation) registerHandler() {
 	o.handlers = []rest.Handler{
-		cmdutil.NewHTTPHandler(ValidateCredentialPath, http.MethodPost, o.ValidateCredential),
-		cmdutil.NewHTTPHandler(SaveCredentialPath, http.MethodPost, o.SaveCredential),
-		cmdutil.NewHTTPHandler(GetCredentialPath, http.MethodGet, o.GetCredential),
-		cmdutil.NewHTTPHandler(GetCredentialByNamePath, http.MethodGet, o.GetCredentialByName),
-		cmdutil.NewHTTPHandler(GetCredentialsPath, http.MethodGet, o.GetCredentials),
-		cmdutil.NewHTTPHandler(SignCredentialsPath, http.MethodPost, o.SignCredential),
-		cmdutil.NewHTTPHandler(DeriveCredentialPath, http.MethodPost, o.DeriveCredential),
-		cmdutil.NewHTTPHandler(GeneratePresentationPath, http.MethodPost, o.GeneratePresentation),
-		cmdutil.NewHTTPHandler(GeneratePresentationByIDPath, http.MethodPost, o.GeneratePresentationByID),
-		cmdutil.NewHTTPHandler(SavePresentationPath, http.MethodPost, o.SavePresentation),
-		cmdutil.NewHTTPHandler(GetPresentationPath, http.MethodGet, o.GetPresentation),
-		cmdutil.NewHTTPHandler(GetPresentationsPath, http.MethodGet, o.GetPresentations),
-		cmdutil.NewHTTPHandler(RemoveCredentialByNamePath, http.MethodPost, o.RemoveCredentialByName),
-		cmdutil.NewHTTPHandler(RemovePresentationByNamePath, http.MethodPost, o.RemovePresentationByName),
+		cmdutil.NewHTTPHandler(ValidateCredential, http.MethodPost, o.ValidateCredential),
+		cmdutil.NewHTTPHandler(SaveCredential, http.MethodPost, o.SaveCredential),
+		cmdutil.NewHTTPHandler(GetCredential, http.MethodGet, o.GetCredential),
+		cmdutil.NewHTTPHandler(GetCredentialByName, http.MethodGet, o.GetCredentialByName),
+		cmdutil.NewHTTPHandler(GetCredentials, http.MethodGet, o.GetCredentials),
+		cmdutil.NewHTTPHandler(SignCredential, http.MethodPost, o.SignCredential),
+		cmdutil.NewHTTPHandler(DeriveCredential, http.MethodPost, o.DeriveCredential),
+		cmdutil.NewHTTPHandler(GeneratePresentation, http.MethodPost, o.GeneratePresentation),
+		cmdutil.NewHTTPHandler(GeneratePresentationByID, http.MethodPost, o.GeneratePresentationByID),
+		cmdutil.NewHTTPHandler(SavePresentation, http.MethodPost, o.SavePresentation),
+		cmdutil.NewHTTPHandler(GetPresentation, http.MethodGet, o.GetPresentation),
+		cmdutil.NewHTTPHandler(GetPresentations, http.MethodGet, o.GetPresentations),
+		cmdutil.NewHTTPHandler(RemoveCredentialByName, http.MethodPost, o.RemoveCredentialByName),
+		cmdutil.NewHTTPHandler(RemovePresentationByName, http.MethodPost, o.RemovePresentationByName),
 	}
 }
 

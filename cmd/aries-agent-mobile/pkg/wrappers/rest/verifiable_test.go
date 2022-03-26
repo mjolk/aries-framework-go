@@ -121,7 +121,7 @@ func TestVerifiable_ValidateCredential(t *testing.T) {
 		mockResponse := emptyJSON
 		v.httpClient = &mockHTTPClient{
 			data:   mockResponse,
-			method: http.MethodPost, url: mockAgentURL + opverifiable.ValidateCredentialPath,
+			method: http.MethodPost, url: mockAgentURL + opverifiable.ValidateCredential,
 		}
 
 		reqData := fmt.Sprintf(`{"verifiableCredential": %s}`, strconv.Quote(mockVC))
@@ -141,7 +141,7 @@ func TestVerifiable_SaveCredential(t *testing.T) {
 		mockResponse := emptyJSON
 		v.httpClient = &mockHTTPClient{
 			data:   mockResponse,
-			method: http.MethodPost, url: mockAgentURL + opverifiable.SaveCredentialPath,
+			method: http.MethodPost, url: mockAgentURL + opverifiable.SaveCredential,
 		}
 
 		reqData := fmt.Sprintf(`{"verifiableCredential": %s, "name": "%s"}`,
@@ -162,7 +162,7 @@ func TestVerifiable_SavePresentation(t *testing.T) {
 		mockResponse := emptyJSON
 		v.httpClient = &mockHTTPClient{
 			data:   mockResponse,
-			method: http.MethodPost, url: mockAgentURL + opverifiable.SavePresentationPath,
+			method: http.MethodPost, url: mockAgentURL + opverifiable.SavePresentation,
 		}
 
 		req := &models.RequestEnvelope{Payload: []byte(mockVP)}
@@ -181,7 +181,7 @@ func TestVerifiable_GetCredential(t *testing.T) {
 		mockResponse := fmt.Sprintf(`{"verifiableCredential": %s}`, strconv.Quote(mockVC))
 		reqData := fmt.Sprintf(`{"id":"%s"}`, mockCredentialID)
 
-		mockURL, err := parseURL(mockAgentURL, opverifiable.GetCredentialPath, reqData)
+		mockURL, err := parseURL(mockAgentURL, opverifiable.GetCredential, reqData)
 		require.NoError(t, err, "failed to parse test url")
 
 		v.httpClient = &mockHTTPClient{
@@ -205,7 +205,7 @@ func TestVerifiable_SignCredential(t *testing.T) {
 		mockResponse := fmt.Sprintf(`{"verifiableCredential": %s}`, strconv.Quote(mockSignedVC))
 		v.httpClient = &mockHTTPClient{
 			data:   mockResponse,
-			method: http.MethodPost, url: mockAgentURL + opverifiable.SignCredentialsPath,
+			method: http.MethodPost, url: mockAgentURL + opverifiable.SignCredentials,
 		}
 
 		reqData := fmt.Sprintf(`{"credential": %s, "did": "%s", "signatureType": "%s"}`,
@@ -226,7 +226,7 @@ func TestVerifiable_GetPresentation(t *testing.T) {
 		mockResponse := fmt.Sprintf(`{"verifiablePresentation": %s}`, strconv.Quote(mockVP))
 		reqData := fmt.Sprintf(`{"id":"%s"}`, mockPresentationID)
 
-		mockURL, err := parseURL(mockAgentURL, opverifiable.GetPresentationPath, reqData)
+		mockURL, err := parseURL(mockAgentURL, opverifiable.GetPresentation, reqData)
 		require.NoError(t, err, "failed to parse test url")
 
 		v.httpClient = &mockHTTPClient{data: mockResponse, method: http.MethodGet, url: mockURL}
@@ -247,7 +247,7 @@ func TestVerifiable_GetCredentialByName(t *testing.T) {
 		mockResponse := fmt.Sprintf(`{"name": %s, "id": %s}`, mockCredentialName, mockCredentialID)
 		reqData := fmt.Sprintf(`{"name":"%s"}`, mockCredentialName)
 
-		mockURL, err := parseURL(mockAgentURL, opverifiable.GetCredentialByNamePath, reqData)
+		mockURL, err := parseURL(mockAgentURL, opverifiable.GetCredentialByName, reqData)
 		require.NoError(t, err, "failed to parse test url")
 
 		v.httpClient = &mockHTTPClient{data: mockResponse, method: http.MethodGet, url: mockURL}
@@ -269,7 +269,7 @@ func TestVerifiable_GetCredentials(t *testing.T) {
 			mockCredentialName, mockCredentialID, mockCredentialName, mockCredentialID)
 		v.httpClient = &mockHTTPClient{
 			data:   mockResponse,
-			method: http.MethodGet, url: mockAgentURL + opverifiable.GetCredentialsPath,
+			method: http.MethodGet, url: mockAgentURL + opverifiable.GetCredentials,
 		}
 
 		reqData := "{}"
@@ -290,7 +290,7 @@ func TestVerifiable_GetPresentations(t *testing.T) {
 			mockPresentationName, mockPresentationID, mockPresentationName, mockPresentationID)
 		v.httpClient = &mockHTTPClient{
 			data:   mockResponse,
-			method: http.MethodGet, url: mockAgentURL + opverifiable.GetPresentationsPath,
+			method: http.MethodGet, url: mockAgentURL + opverifiable.GetPresentations,
 		}
 
 		req := &models.RequestEnvelope{Payload: []byte("{}")}
@@ -309,7 +309,7 @@ func TestVerifiable_GeneratePresentation(t *testing.T) {
 		mockResponse := mockPresentationResponse
 		v.httpClient = &mockHTTPClient{
 			data:   mockResponse,
-			method: http.MethodPost, url: mockAgentURL + opverifiable.GeneratePresentationPath,
+			method: http.MethodPost, url: mockAgentURL + opverifiable.GeneratePresentation,
 		}
 
 		credList := fmt.Sprintf(`[%s, %s]`, mockVC, mockVC)
@@ -331,7 +331,7 @@ func TestVerifiable_GeneratePresentationByID(t *testing.T) {
 		mockResponse := mockPresentationResponse
 		v.httpClient = &mockHTTPClient{
 			data:   mockResponse,
-			method: http.MethodPost, url: mockAgentURL + opverifiable.GeneratePresentationByIDPath,
+			method: http.MethodPost, url: mockAgentURL + opverifiable.GeneratePresentationByID,
 		}
 
 		credList := fmt.Sprintf(`[%s, %s]`, mockVC, mockVC)
@@ -354,7 +354,7 @@ func TestVerifiable_RemoveCredentialByName(t *testing.T) {
 		mockResponse := ``
 		reqData := fmt.Sprintf(`{"name":"%s"}`, mockCredentialName)
 
-		mockURL, err := parseURL(mockAgentURL, opverifiable.RemoveCredentialByNamePath, reqData)
+		mockURL, err := parseURL(mockAgentURL, opverifiable.RemoveCredentialByName, reqData)
 		require.NoError(t, err, "failed to parse test url")
 
 		v.httpClient = &mockHTTPClient{data: mockResponse, method: http.MethodPost, url: mockURL}
@@ -375,7 +375,7 @@ func TestVerifiable_RemovePresentationByName(t *testing.T) {
 		mockResponse := ``
 		reqData := fmt.Sprintf(`{"name":"%s"}`, mockCredentialName)
 
-		mockURL, err := parseURL(mockAgentURL, opverifiable.RemovePresentationByNamePath, reqData)
+		mockURL, err := parseURL(mockAgentURL, opverifiable.RemovePresentationByName, reqData)
 		require.NoError(t, err, "failed to parse test url")
 
 		v.httpClient = &mockHTTPClient{data: mockResponse, method: http.MethodPost, url: mockURL}

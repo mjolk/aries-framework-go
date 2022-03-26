@@ -55,7 +55,7 @@ func TestLD_AddContexts(t *testing.T) {
 		mockResponse := emptyJSON
 		controller.httpClient = &mockHTTPClient{
 			data:   mockResponse,
-			method: http.MethodPost, url: mockAgentURL + ldrest.AddContextsPath,
+			method: http.MethodPost, url: mockAgentURL + ldrest.AddContexts,
 		}
 
 		contextJSON, err := json.Marshal(sampleContext)
@@ -87,7 +87,7 @@ func TestLD_AddRemoteProvider(t *testing.T) {
 		mockResponse := `"id":"provider_id"`
 		controller.httpClient = &mockHTTPClient{
 			data:   mockResponse,
-			method: http.MethodPost, url: mockAgentURL + ldrest.AddRemoteProviderPath,
+			method: http.MethodPost, url: mockAgentURL + ldrest.AddRemoteProvider,
 		}
 
 		b, err := json.Marshal(ldcmd.AddRemoteProviderRequest{Endpoint: "endpoint"})
@@ -111,7 +111,7 @@ func TestLD_RefreshRemoteProvider(t *testing.T) {
 		b, err := json.Marshal(ldcmd.ProviderID{ID: "id"})
 		require.NoError(t, err)
 
-		mockURL, err := parseURL(mockAgentURL, ldrest.RefreshRemoteProviderPath, string(b))
+		mockURL, err := parseURL(mockAgentURL, ldrest.RefreshRemoteProvider, string(b))
 		require.NoError(t, err, "failed to parse test url")
 
 		controller.httpClient = &mockHTTPClient{
@@ -137,7 +137,7 @@ func TestLD_DeleteRemoteProvider(t *testing.T) {
 		b, err := json.Marshal(ldcmd.ProviderID{ID: "id"})
 		require.NoError(t, err)
 
-		mockURL, err := parseURL(mockAgentURL, ldrest.DeleteRemoteProviderPath, string(b))
+		mockURL, err := parseURL(mockAgentURL, ldrest.DeleteRemoteProvider, string(b))
 		require.NoError(t, err, "failed to parse test url")
 
 		controller.httpClient = &mockHTTPClient{
@@ -161,7 +161,7 @@ func TestLD_GetAllRemoteProviders(t *testing.T) {
 		mockResponse := `{"providers": [{"id": "id", "endpoint": "endpoint"}]"}`
 		controller.httpClient = &mockHTTPClient{
 			data:   mockResponse,
-			method: http.MethodGet, url: mockAgentURL + ldrest.GetAllRemoteProvidersPath,
+			method: http.MethodGet, url: mockAgentURL + ldrest.GetAllRemoteProviders,
 		}
 
 		req := &models.RequestEnvelope{Payload: []byte("{}")}
@@ -180,7 +180,7 @@ func TestLD_RefreshAllRemoteProviders(t *testing.T) {
 		mockResponse := emptyJSON
 		controller.httpClient = &mockHTTPClient{
 			data:   mockResponse,
-			method: http.MethodPost, url: mockAgentURL + ldrest.RefreshAllRemoteProvidersPath,
+			method: http.MethodPost, url: mockAgentURL + ldrest.RefreshAllRemoteProviders,
 		}
 
 		req := &models.RequestEnvelope{Payload: []byte("{}")}

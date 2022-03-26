@@ -311,7 +311,7 @@ func TestValidateVC(t *testing.T) {
 		jsonStr, err := json.Marshal(vcReq)
 		require.NoError(t, err)
 
-		handler := lookupHandler(t, cmd, ValidateCredentialPath, http.MethodPost)
+		handler := lookupHandler(t, cmd, ValidateCredential, http.MethodPost)
 		buf, err := getSuccessResponseFromHandler(handler, bytes.NewBuffer(jsonStr), handler.Path())
 		require.NoError(t, err)
 
@@ -333,7 +333,7 @@ func TestValidateVC(t *testing.T) {
 		jsonStr := []byte(`{
 		}`)
 
-		handler := lookupHandler(t, cmd, ValidateCredentialPath, http.MethodPost)
+		handler := lookupHandler(t, cmd, ValidateCredential, http.MethodPost)
 		buf, code, err := sendRequestToHandler(handler, bytes.NewBuffer(jsonStr), handler.Path())
 		require.NoError(t, err)
 		require.NotEmpty(t, buf)
@@ -362,7 +362,7 @@ func TestSaveVC(t *testing.T) {
 		jsonStr, err := json.Marshal(vcReq)
 		require.NoError(t, err)
 
-		handler := lookupHandler(t, cmd, SaveCredentialPath, http.MethodPost)
+		handler := lookupHandler(t, cmd, SaveCredential, http.MethodPost)
 		buf, err := getSuccessResponseFromHandler(handler, bytes.NewBuffer(jsonStr), handler.Path())
 		require.NoError(t, err)
 
@@ -385,7 +385,7 @@ func TestSaveVC(t *testing.T) {
 			"name" : "sample"
 		}`)
 
-		handler := lookupHandler(t, cmd, SaveCredentialPath, http.MethodPost)
+		handler := lookupHandler(t, cmd, SaveCredential, http.MethodPost)
 		buf, code, err := sendRequestToHandler(handler, bytes.NewBuffer(jsonStr), handler.Path())
 		require.NoError(t, err)
 		require.NotEmpty(t, buf)
@@ -410,7 +410,7 @@ func TestGetVC(t *testing.T) {
 		require.NoError(t, err)
 		require.NotNil(t, cmd)
 
-		handler := lookupHandler(t, cmd, GetCredentialPath, http.MethodGet)
+		handler := lookupHandler(t, cmd, GetCredential, http.MethodGet)
 		buf, err := getSuccessResponseFromHandler(handler, nil, fmt.Sprintf(`%s/%s`,
 			verifiableCredentialPath, base64.StdEncoding.EncodeToString([]byte("http://example.edu/credentials/1989"))))
 		require.NoError(t, err)
@@ -433,7 +433,7 @@ func TestGetVC(t *testing.T) {
 		require.NoError(t, err)
 		require.NotNil(t, cmd)
 
-		handler := lookupHandler(t, cmd, GetCredentialPath, http.MethodGet)
+		handler := lookupHandler(t, cmd, GetCredential, http.MethodGet)
 		buf, code, err := sendRequestToHandler(handler, nil, fmt.Sprintf(`%s/%s`, verifiableCredentialPath, "abc"))
 		require.NoError(t, err)
 		require.NotEmpty(t, buf)
@@ -462,12 +462,12 @@ func TestGetCredentialByName(t *testing.T) {
 		jsonStr, err := json.Marshal(vcReq)
 		require.NoError(t, err)
 
-		handler := lookupHandler(t, cmd, SaveCredentialPath, http.MethodPost)
+		handler := lookupHandler(t, cmd, SaveCredential, http.MethodPost)
 		buf, err := getSuccessResponseFromHandler(handler, bytes.NewBuffer(jsonStr), handler.Path())
 		require.NoError(t, err)
 		require.NotEmpty(t, buf)
 
-		handler = lookupHandler(t, cmd, GetCredentialByNamePath, http.MethodGet)
+		handler = lookupHandler(t, cmd, GetCredentialByName, http.MethodGet)
 		buf, err = getSuccessResponseFromHandler(handler, nil, fmt.Sprintf(`%s/name/%s`,
 			verifiableCredentialPath, sampleCredentialName))
 		require.NoError(t, err)
@@ -489,7 +489,7 @@ func TestGetCredentialByName(t *testing.T) {
 		require.NoError(t, err)
 		require.NotNil(t, cmd)
 
-		handler := lookupHandler(t, cmd, GetCredentialByNamePath, http.MethodGet)
+		handler := lookupHandler(t, cmd, GetCredentialByName, http.MethodGet)
 		buf, code, err := sendRequestToHandler(handler, nil, fmt.Sprintf(`%s/name/%s`,
 			verifiableCredentialPath, sampleCredentialName))
 		require.NoError(t, err)
@@ -519,13 +519,13 @@ func TestGetCredentials(t *testing.T) {
 		jsonStr, err := json.Marshal(vcReq)
 		require.NoError(t, err)
 
-		handler := lookupHandler(t, cmd, SaveCredentialPath, http.MethodPost)
+		handler := lookupHandler(t, cmd, SaveCredential, http.MethodPost)
 		buf, err := getSuccessResponseFromHandler(handler, bytes.NewBuffer(jsonStr), handler.Path())
 		require.NoError(t, err)
 		require.NotEmpty(t, buf)
 
-		handler = lookupHandler(t, cmd, GetCredentialsPath, http.MethodGet)
-		buf, err = getSuccessResponseFromHandler(handler, nil, GetCredentialsPath)
+		handler = lookupHandler(t, cmd, GetCredentials, http.MethodGet)
+		buf, err = getSuccessResponseFromHandler(handler, nil, GetCredentials)
 		require.NoError(t, err)
 
 		var response credentialRecordResult
@@ -581,7 +581,7 @@ func TestGeneratePresentation(t *testing.T) {
 		presReqBytes, err := json.Marshal(presReq)
 		require.NoError(t, err)
 
-		handler := lookupHandler(t, cmd, GeneratePresentationPath, http.MethodPost)
+		handler := lookupHandler(t, cmd, GeneratePresentation, http.MethodPost)
 		buf, err := getSuccessResponseFromHandler(handler, bytes.NewBuffer(presReqBytes), handler.Path())
 		require.NoError(t, err, err)
 
@@ -607,7 +607,7 @@ func TestGeneratePresentation(t *testing.T) {
 		presReqBytes, err := json.Marshal(presReq)
 		require.NoError(t, err)
 
-		handler := lookupHandler(t, cmd, GeneratePresentationPath, http.MethodPost)
+		handler := lookupHandler(t, cmd, GeneratePresentation, http.MethodPost)
 		buf, code, err := sendRequestToHandler(handler, bytes.NewBuffer(presReqBytes), handler.Path())
 		require.NoError(t, err)
 		require.NotEmpty(t, buf)
@@ -651,7 +651,7 @@ func TestGeneratePresentation(t *testing.T) {
 		presReqBytes, err := json.Marshal(presReq)
 		require.NoError(t, err)
 
-		handler := lookupHandler(t, cmd, GeneratePresentationPath, http.MethodPost)
+		handler := lookupHandler(t, cmd, GeneratePresentation, http.MethodPost)
 		buf, err := getSuccessResponseFromHandler(handler, bytes.NewBuffer(presReqBytes), handler.Path())
 		require.NoError(t, err)
 
@@ -696,7 +696,7 @@ func TestGeneratePresentation(t *testing.T) {
 		presReqBytes, err := json.Marshal(presReq)
 		require.NoError(t, err)
 
-		handler := lookupHandler(t, cmd, GeneratePresentationPath, http.MethodPost)
+		handler := lookupHandler(t, cmd, GeneratePresentation, http.MethodPost)
 		buf, err := getSuccessResponseFromHandler(handler, bytes.NewBuffer(presReqBytes), handler.Path())
 		require.NoError(t, err)
 
@@ -730,7 +730,7 @@ func TestGeneratePresentation(t *testing.T) {
             "did"  : "did:peer:21tDAKCERh95uGgKbJNHYp"
 		}`)
 
-		handler := lookupHandler(t, cmd, GeneratePresentationPath, http.MethodPost)
+		handler := lookupHandler(t, cmd, GeneratePresentation, http.MethodPost)
 		buf, code, err := sendRequestToHandler(handler, bytes.NewBuffer(jsonStr), handler.Path())
 		require.NoError(t, err)
 		require.NotEmpty(t, buf)
@@ -781,7 +781,7 @@ func TestGeneratePresentationByID(t *testing.T) {
 		presReqBytes, err := json.Marshal(presReqByID)
 		require.NoError(t, err)
 
-		handler := lookupHandler(t, cmd, GeneratePresentationByIDPath, http.MethodPost)
+		handler := lookupHandler(t, cmd, GeneratePresentationByID, http.MethodPost)
 		buf, err := getSuccessResponseFromHandler(handler, bytes.NewBuffer(presReqBytes), handler.Path())
 		require.NoError(t, err)
 
@@ -800,7 +800,7 @@ func TestGeneratePresentationByID(t *testing.T) {
      		"did": "testDID"
 		}`)
 
-		handler := lookupHandler(t, cmd, GeneratePresentationByIDPath, http.MethodPost)
+		handler := lookupHandler(t, cmd, GeneratePresentationByID, http.MethodPost)
 		buf, code, err := sendRequestToHandler(handler, bytes.NewBuffer(jsonStr), handler.Path())
 		require.NoError(t, err)
 		require.NotEmpty(t, buf)
@@ -815,7 +815,7 @@ func TestGeneratePresentationByID(t *testing.T) {
      		"dids": "testDID"
 		}`)
 
-		handler := lookupHandler(t, cmd, GeneratePresentationByIDPath, http.MethodPost)
+		handler := lookupHandler(t, cmd, GeneratePresentationByID, http.MethodPost)
 		buf, code, err := sendRequestToHandler(handler, bytes.NewBuffer(jsonStr), handler.Path())
 		require.NoError(t, err)
 		require.NotEmpty(t, buf)
@@ -838,7 +838,7 @@ func TestSaveVP(t *testing.T) {
 		require.NotNil(t, cmd)
 
 		presentations := []string{udPresentation, udVerifiablePresentation}
-		handler := lookupHandler(t, cmd, SavePresentationPath, http.MethodPost)
+		handler := lookupHandler(t, cmd, SavePresentation, http.MethodPost)
 
 		for i, presentation := range presentations {
 			vpReq := verifiable.PresentationExt{
@@ -871,7 +871,7 @@ func TestSaveVP(t *testing.T) {
 			"name" : "sample"
 		}`)
 
-		handler := lookupHandler(t, cmd, SavePresentationPath, http.MethodPost)
+		handler := lookupHandler(t, cmd, SavePresentation, http.MethodPost)
 		buf, code, err := sendRequestToHandler(handler, bytes.NewBuffer(jsonStr), handler.Path())
 		require.NoError(t, err)
 		require.NotEmpty(t, buf)
@@ -896,7 +896,7 @@ func TestGetVP(t *testing.T) {
 		require.NoError(t, err)
 		require.NotNil(t, cmd)
 
-		handler := lookupHandler(t, cmd, SavePresentationPath, http.MethodPost)
+		handler := lookupHandler(t, cmd, SavePresentation, http.MethodPost)
 
 		vpReq := verifiable.PresentationExt{
 			Presentation: verifiable.Presentation{VerifiablePresentation: stringToJSONRaw(udPresentation)},
@@ -915,7 +915,7 @@ func TestGetVP(t *testing.T) {
 		// verify response
 		require.Empty(t, response)
 
-		handler = lookupHandler(t, cmd, GetPresentationPath, http.MethodGet)
+		handler = lookupHandler(t, cmd, GetPresentation, http.MethodGet)
 
 		buf, err = getSuccessResponseFromHandler(handler, nil, fmt.Sprintf(`%s/%s`,
 			verifiablePresentationPath, base64.StdEncoding.EncodeToString([]byte(sampleVPID))))
@@ -939,7 +939,7 @@ func TestGetVP(t *testing.T) {
 		require.NoError(t, err)
 		require.NotNil(t, cmd)
 
-		handler := lookupHandler(t, cmd, GetPresentationPath, http.MethodGet)
+		handler := lookupHandler(t, cmd, GetPresentation, http.MethodGet)
 		buf, code, err := sendRequestToHandler(handler, nil, fmt.Sprintf(`%s/%s`, verifiablePresentationPath, "abc"))
 		require.NoError(t, err)
 		require.NotEmpty(t, buf)
@@ -962,7 +962,7 @@ func TestGetPresentations(t *testing.T) {
 		require.NotNil(t, cmd)
 
 		presentations := []string{udPresentation, udVerifiablePresentation}
-		handler := lookupHandler(t, cmd, SavePresentationPath, http.MethodPost)
+		handler := lookupHandler(t, cmd, SavePresentation, http.MethodPost)
 
 		for i, presentation := range presentations {
 			vpReq := verifiable.PresentationExt{
@@ -983,8 +983,8 @@ func TestGetPresentations(t *testing.T) {
 			require.Empty(t, response)
 		}
 
-		handler = lookupHandler(t, cmd, GetPresentationsPath, http.MethodGet)
-		buf, err := getSuccessResponseFromHandler(handler, nil, GetPresentationsPath)
+		handler = lookupHandler(t, cmd, GetPresentations, http.MethodGet)
+		buf, err := getSuccessResponseFromHandler(handler, nil, GetPresentations)
 		require.NoError(t, err)
 
 		var response presentationRecordResult
@@ -1039,7 +1039,7 @@ func TestSignCredential(t *testing.T) {
 		reqBytes, err := json.Marshal(req)
 		require.NoError(t, err)
 
-		handler := lookupHandler(t, cmd, SignCredentialsPath, http.MethodPost)
+		handler := lookupHandler(t, cmd, SignCredential, http.MethodPost)
 		buf, err := getSuccessResponseFromHandler(handler, bytes.NewBuffer(reqBytes), handler.Path())
 		require.NoError(t, err, err)
 
@@ -1068,7 +1068,7 @@ func TestSignCredential(t *testing.T) {
 		reqBytes, err := json.Marshal(req)
 		require.NoError(t, err)
 
-		handler := lookupHandler(t, cmd, SignCredentialsPath, http.MethodPost)
+		handler := lookupHandler(t, cmd, SignCredential, http.MethodPost)
 		buf, err := getSuccessResponseFromHandler(handler, bytes.NewBuffer(reqBytes), handler.Path())
 		require.NoError(t, err)
 
@@ -1110,7 +1110,7 @@ func TestSignCredential(t *testing.T) {
 		reqBytes, err := json.Marshal(req)
 		require.NoError(t, err)
 
-		handler := lookupHandler(t, cmd, SignCredentialsPath, http.MethodPost)
+		handler := lookupHandler(t, cmd, SignCredential, http.MethodPost)
 		buf, err := getSuccessResponseFromHandler(handler, bytes.NewBuffer(reqBytes), handler.Path())
 		require.NoError(t, err)
 
@@ -1142,7 +1142,7 @@ func TestSignCredential(t *testing.T) {
             "did"  : "did:peer:21tDAKCERh95uGgKbJNHYp"
 		}`)
 
-		handler := lookupHandler(t, cmd, SignCredentialsPath, http.MethodPost)
+		handler := lookupHandler(t, cmd, SignCredential, http.MethodPost)
 		buf, code, err := sendRequestToHandler(handler, bytes.NewBuffer(jsonStr), handler.Path())
 		require.NoError(t, err)
 		require.NotEmpty(t, buf)
@@ -1213,7 +1213,7 @@ func TestDeriveCredential(t *testing.T) {
 		nonce := uuid.New().String()
 
 		// call derive credential
-		handler := lookupHandler(t, cmd, DeriveCredentialPath, http.MethodPost)
+		handler := lookupHandler(t, cmd, DeriveCredential, http.MethodPost)
 		buf, err := getSuccessResponseFromHandler(handler, getRequest(r, &verifiable.DeriveCredentialRequest{
 			Credential: json.RawMessage(requestVC),
 			Frame:      frameDoc,
@@ -1258,7 +1258,7 @@ func TestDeriveCredential(t *testing.T) {
 		nonce := uuid.New().String()
 
 		// call derive credential
-		handler := lookupHandler(t, cmd, DeriveCredentialPath, http.MethodPost)
+		handler := lookupHandler(t, cmd, DeriveCredential, http.MethodPost)
 		buf, code, err := sendRequestToHandler(handler, getRequest(r, &verifiable.DeriveCredentialRequest{
 			Credential: json.RawMessage(vcWithDIDNotAvailble),
 			Frame:      frameDoc,
@@ -1294,12 +1294,12 @@ func TestRemoveVCByName(t *testing.T) {
 		jsonStr, err := json.Marshal(vcReq)
 		require.NoError(t, err)
 
-		handler := lookupHandler(t, cmd, SaveCredentialPath, http.MethodPost)
+		handler := lookupHandler(t, cmd, SaveCredential, http.MethodPost)
 		buf, err := getSuccessResponseFromHandler(handler, bytes.NewBuffer(jsonStr), handler.Path())
 		require.NoError(t, err)
 		require.NotEmpty(t, buf)
 
-		handler = lookupHandler(t, cmd, RemoveCredentialByNamePath, http.MethodPost)
+		handler = lookupHandler(t, cmd, RemoveCredentialByName, http.MethodPost)
 		_, err = getSuccessResponseFromHandler(handler, nil, fmt.Sprintf(`%s/remove/name/%s`,
 			verifiableCredentialPath, sampleCredentialName))
 		require.NoError(t, err)
@@ -1312,7 +1312,7 @@ func TestRemoveVCByName(t *testing.T) {
 		require.NoError(t, err)
 		require.NotNil(t, cmd)
 
-		handler := lookupHandler(t, cmd, RemoveCredentialByNamePath, http.MethodPost)
+		handler := lookupHandler(t, cmd, RemoveCredentialByName, http.MethodPost)
 		buf, code, err := sendRequestToHandler(handler, nil, fmt.Sprintf(`%s/remove/name/%s`,
 			verifiableCredentialPath, sampleCredentialName))
 		require.NoError(t, err)
@@ -1338,7 +1338,7 @@ func TestRemoveVPByName(t *testing.T) {
 		require.NoError(t, err)
 		require.NotNil(t, cmd)
 
-		handler := lookupHandler(t, cmd, SavePresentationPath, http.MethodPost)
+		handler := lookupHandler(t, cmd, SavePresentation, http.MethodPost)
 
 		vpReq := verifiable.PresentationExt{
 			Presentation: verifiable.Presentation{VerifiablePresentation: stringToJSONRaw(udPresentation)},
@@ -1357,7 +1357,7 @@ func TestRemoveVPByName(t *testing.T) {
 		// verify response
 		require.Empty(t, response)
 
-		handler = lookupHandler(t, cmd, RemovePresentationByNamePath, http.MethodPost)
+		handler = lookupHandler(t, cmd, RemovePresentationByName, http.MethodPost)
 
 		_, err = getSuccessResponseFromHandler(handler, nil, fmt.Sprintf(`%s/remove/name/%s`,
 			verifiablePresentationPath, samplePresentationName))
@@ -1374,7 +1374,7 @@ func TestRemoveVPByName(t *testing.T) {
 		require.NoError(t, err)
 		require.NotNil(t, cmd)
 
-		handler := lookupHandler(t, cmd, RemovePresentationByNamePath, http.MethodPost)
+		handler := lookupHandler(t, cmd, RemovePresentationByName, http.MethodPost)
 		buf, code, err := sendRequestToHandler(handler, nil,
 			fmt.Sprintf(`%s/remove/name/%s`, verifiablePresentationPath, samplePresentationName))
 		require.NoError(t, err)

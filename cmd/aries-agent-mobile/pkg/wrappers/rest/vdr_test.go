@@ -48,7 +48,7 @@ func TestVDR_GetDID(t *testing.T) {
 		vdrController := getVDRController(t)
 
 		reqData := mockDIDReq
-		mockURL, err := parseURL(mockAgentURL, opvdr.GetDIDPath, reqData)
+		mockURL, err := parseURL(mockAgentURL, opvdr.GetDID, reqData)
 		require.NoError(t, err, "failed to parse test url")
 
 		mockResponse := mockDocument
@@ -75,7 +75,7 @@ func TestVDR_GetDIDRecords(t *testing.T) {
 		mockResponse := `{"result":[{"name":"sampleDIDName","id":"did:peer:21tDAKCERh95uGgKbJNHYp"}]}`
 		vdrController.httpClient = &mockHTTPClient{
 			data:   mockResponse,
-			method: http.MethodGet, url: mockAgentURL + opvdr.GetDIDRecordsPath,
+			method: http.MethodGet, url: mockAgentURL + opvdr.GetDIDRecords,
 		}
 
 		req := &models.RequestEnvelope{Payload: []byte(reqData)}
@@ -96,7 +96,7 @@ func TestVDR_CreateDID(t *testing.T) {
 		reqData, err := json.Marshal(reqCreate)
 		require.NoError(t, err)
 
-		mockURL, err := parseURL(mockAgentURL, opvdr.CreateDIDPath, string(reqData))
+		mockURL, err := parseURL(mockAgentURL, opvdr.CreateDID, string(reqData))
 		require.NoError(t, err, "failed to parse test url")
 
 		mockResponse := mockDocument
@@ -119,7 +119,7 @@ func TestVDR_ResolveDID(t *testing.T) {
 		vdrController := getVDRController(t)
 
 		reqData := mockDIDReq
-		mockURL, err := parseURL(mockAgentURL, opvdr.ResolveDIDPath, reqData)
+		mockURL, err := parseURL(mockAgentURL, opvdr.ResolveDID, reqData)
 		require.NoError(t, err, "failed to parse test url")
 
 		mockResponse := mockDocument
@@ -147,7 +147,7 @@ func TestVDR_SaveDID(t *testing.T) {
 "publicKeyBase58":"H3C2AVvLMv6gmMNam3uVAjZpfkcJCwDwnZn6z3wXmqPV"},
 {"id":"did:peer:123456789abcdefghw#key2","type":"RsaVerificationKey2018","controller":"did:peer:123456789abcdefghw",
 "publicKeyPem":"pem_content_goes_here"}]},"name":"sampleDIDName"}`
-		mockURL, err := parseURL(mockAgentURL, opvdr.SaveDIDPath, reqData)
+		mockURL, err := parseURL(mockAgentURL, opvdr.SaveDID, reqData)
 		require.NoError(t, err, "failed to parse test url")
 
 		mockResponse := emptyJSON
